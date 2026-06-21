@@ -18,10 +18,17 @@ import json
 from urllib.parse import urlparse, parse_qs
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
+try:
+    from dotenv import load_dotenv
+    load_dotenv()  # pick up USE_REDIS / REDIS_URL from .env so `python api_server.py` uses Redis
+except Exception:
+    pass
+
 import hive_state
 import godfather
 import explain as explain_mod
 from src.store import get_store
+from src.agentspan import hive_doctor
 
 PORT = int(os.getenv("PORT", "8000"))
 
@@ -70,8 +77,46 @@ class Handler(BaseHTTPRequestHandler):
             self._handle_similar(parse_qs(parsed.query))
         elif path == "/api/events":   # Redis Pub/Sub -> SSE stream of live updates
             self._handle_events()
+        elif path == "/api/treatments":  # HiveDoctor (Agentspan) runs for the dashboard
+            self._send(200, {"treatments": hive_doctor.runs.list_runs()})
+        elif path == "/api/treatment":   # one run by id: /api/treatment?id=hd_A3_xxxx
+            rid = (parse_qs(parsed.query).get("id") or [""])[0]
+            run = hive_doctor.runs.get_run(rid)
+            self._send(200 if run else 404, run or {"error": "no such treatment run"})
         else:
             self._send(404, {"error": "not found", "try": "/api/status, /api/apiary, /api/explain?q=..."})
+
+    def do_POST(self):
+        """HiveDoctor control plane: start a VoI-gated run, or answer its durable
+        human-in-the-loop approval gate."""
+        path = urlparse(self.path).path.rstrip("/")
+        try:
+            length = int(self.headers.get("Content-Length") or 0)
+            body = json.loads(self.rfile.read(length) or b"{}") if length else {}
+        except (ValueError, json.JSONDecodeError):
+            self._send(400, {"error": "invalid JSON body"})
+            return
+
+        if path == "/api/treatment/start":
+            hive = body.get("hive") or body.get("hive_id")
+            if not hive:
+                self._send(400, {"error": "missing 'hive'"})
+                return
+            self._send(200, hive_doctor.start(str(hive)))
+        elif path == "/api/treatment/respond":
+            rid = body.get("id")
+            if not rid:
+                self._send(400, {"error": "missing 'id'"})
+                return
+            try:
+                run = hive_doctor.respond(str(rid), bool(body.get("approve")),
+                                          str(body.get("note", "")))
+                self._send(200, run)
+            except KeyError:
+                self._send(404, {"error": "no such treatment run"})
+        else:
+            self._send(404, {"error": "not found",
+                             "try": "/api/treatment/start, /api/treatment/respond"})
 
     def _handle_similar(self, qs):
         """GET /api/similar?hive=A3&k=5 -> readings most similar to that hive's latest."""

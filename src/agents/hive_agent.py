@@ -20,8 +20,8 @@ from uagents import Agent, Context
 from .schema import Verdict, HumanFeedback
 from . import tools, reasoning, feed
 
-# Redis-backed multimodal memory (vector search + stego packing). All of this is
-# optional: get_store() returns a Redis backend only when USE_REDIS=1 and Redis is
+# Redis-backed multimodal memory (one fused vector per reading + vector k-NN). All of this
+# is optional: get_store() returns a Redis backend only when USE_REDIS=1 and Redis is
 # reachable, otherwise store.available() is False and every block below is skipped.
 from src.store import get_store
 
@@ -48,6 +48,14 @@ def create_hive_agent(hive_id, seed, coordinator_address, position=None,
     position = position or [0.0, 0.0]
     agent = Agent(name=f"hive_{hive_id}", seed=seed)
     rng = random.Random(hash(seed) & 0xFFFFFFFF)
+
+    # --- ISOLATION BOUNDARY (do not cross) ---
+    # This agent talks to exactly ONE address: coordinator_address (the Godfather). It is
+    # never given another hive's address, so the 7 hives are mutually blind by construction.
+    # Its only memory is ctx.storage (private to this agent) plus its OWN slice of the
+    # optional Redis store (reads/writes are scoped by hive=hive_id). No hive can read or
+    # influence another's state; only the Godfather sees the whole apiary. Never pass in a
+    # sibling's address or a shared mutable dict here - that would defeat the isolation.
 
     @agent.on_interval(period=period)
     async def cycle(ctx: Context):
@@ -110,17 +118,15 @@ def create_hive_agent(hive_id, seed, coordinator_address, position=None,
         if rec["needs_human"]:
             ctx.logger.warning(f"[{hive_id}] NEEDS HUMAN: {rec['reason']}")
 
-        # 4. record the searchable multimodal reading: embedding (for k-NN) + the stego
-        #    blob (acoustic features packed into one image -> ONE Redis key, both modalities)
+        # 5. record the searchable reading as ONE fused multimodal vector -> one Redis HNSW
+        #    index -> one k-NN query retrieves similar past states (the RAG in step 2). A
+        #    single fused vector (early fusion) is the honest "unimodal" representation of a
+        #    reading; src/imagebind_embed.py is the real bound-space (ImageBind) upgrade.
         if emb is not None:
             try:
-                from src import embedding
-                import stego
                 vd = verdict.model_dump()
                 vd["vision_source"] = vision_source
-                payload = embedding.to_bytes(embedding.acoustic_features(sample))
-                blob = stego.encode(stego.solid_carrier(), payload)
-                store.record_reading(hive_id, vd, emb, image_blob=blob)
+                store.record_reading(hive_id, vd, emb)
             except Exception:
                 ctx.logger.debug("record_reading skipped", exc_info=True)
 

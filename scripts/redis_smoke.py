@@ -15,11 +15,14 @@ import os
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+try:
+    from dotenv import load_dotenv
+    load_dotenv()  # pick up REDIS_URL / USE_REDIS from .env
+except Exception:
+    pass
 os.environ.setdefault("USE_REDIS", "1")
 
-import numpy as np  # noqa: E402
 from src import embedding  # noqa: E402
-import stego  # noqa: E402
 
 HIVE = "SMOKE"
 
@@ -56,24 +59,16 @@ def main():
     series = rs.ts_range(HIVE, "acoustic_stress")
     check("RedisTimeSeries acoustic_stress has points", len(series) >= 3)
 
-    # 3. Vector reading + k-NN + stego blob (one key, both modalities)
+    # 3. One fused multimodal vector per reading -> RediSearch HNSW k-NN
     sample = {"acoustic_stress": 0.8, "vision_mite_rate": 0.05, "net_traffic": 5}
     emb, src = embedding.embed_sample(sample)
-    payload = embedding.to_bytes(embedding.acoustic_features(sample))
-    blob = stego.encode(stego.solid_carrier(), payload)
     key = rs.record_reading(HIVE, {"hive_id": HIVE, "varroa_status": "alert",
                                    "acoustic_stress": 0.8, "vision_ran": True,
-                                   "vision_source": src, "timestamp": "2026-06-21T00:01:00"},
-                            emb, image_blob=blob)
+                                   "vision_source": src, "timestamp": "2026-06-21T00:01:00"}, emb)
     check("record_reading returned a key", bool(key))
     hits = rs.search_similar(emb, k=3)
     check("vector k-NN returns the reading", any(h["key"] == key for h in hits))
     check("filtered k-NN (@hive:SMOKE)", len(rs.search_similar(emb, k=3, hive=HIVE)) >= 1)
-
-    # 4. stego blob survives the Redis round-trip (atomic multimodal read)
-    back = rs.get_blob(key)
-    check("stego blob recovered from the single key", back is not None and
-          stego.decode(back) == payload)
 
     # cleanup
     rr = rs.r

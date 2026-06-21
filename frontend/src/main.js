@@ -1,4 +1,4 @@
-import { pollCoordinator, subscribeEvents } from "./api.js";
+import { pollCoordinator, subscribeEvents, startTreatment, respondTreatment, listTreatments } from "./api.js";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "@geoman-io/leaflet-geoman-free";
@@ -75,7 +75,7 @@ const APIARY = {
   name: "UC DAVIS · LAIDLAW APIARY",
   // Centred on an OPEN research field (clean, uncluttered ground) so the colony
   // markers read clearly. The hives on the map are our own markers on a satellite
-  // backdrop — legibility is a property of the markers, not the orbital imagery.
+  // backdrop - legibility is a property of the markers, not the orbital imagery.
   lat: 38.5384, lon: -121.7884,
   bbox: [-121.78927, 38.53786, -121.78753, 38.53894], // [W,S,E,N] ~ the yard
 };
@@ -119,7 +119,7 @@ let armedSensor = null;              // sensor id currently being drawn for
    Real clips served from /media (public/). Videos are REUSED across hives (only 3
    tunnel recordings exist); audio is UNIQUE to each hive (no clip repeats). Seven
    hives have a live feed; the two whose sensor is offline (B1=S-04, C2=S-08) show
-   no feed. No model/inference values are attached here — just raw playback. */
+   no feed. No model/inference values are attached here - just raw playback. */
 const MEDIA_BASE = "/media/";
 const MEDIA = {
   A1: { video: "tunnel_free", audio: "ent_01" },
@@ -129,7 +129,7 @@ const MEDIA = {
   B2: { video: "tunnel_free", audio: "ent_05" },
   B3: { video: "tunnel_inf2", audio: "ent_06" },
   C1: { video: "tunnel_free", audio: "ent_07" },
-  // C2, C3 have no feed — their sensors (S-08, S-09) are offline.
+  // C2, C3 have no feed - their sensors (S-08, S-09) are offline.
 };
 const sensorForHive = code => (SENSORS.find(s => s.hive === code) || {}).id || "none";
 function mediaBlock(h) {
@@ -204,7 +204,7 @@ function siteDecor() {
 let satMap = null, satTag = {}, satTiles = null;
 const colorOf = st => st === "crit" ? "#d65a52" : st === "watch" ? "#d9913f" : "#4caf7d";
 
-// Basemap: Esri World Imagery only — properly licensed and reliable for demo day.
+// Basemap: Esri World Imagery only - properly licensed and reliable for demo day.
 // (Scraped Google tiles are kept out of the live dashboard for ToU + reliability.)
 // maxNativeZoom = deepest level with REAL imagery; we allow OVERZOOM levels past it
 // for fine box placement, where only the last level is mildly CSS-upscaled.
@@ -217,7 +217,7 @@ function setBasemap() {
   if (!satMap || satTiles) return;
   const maxZ = ESRI.maxNativeZoom + OVERZOOM;
   satMap.setMaxZoom(maxZ);
-  // NOTE: tileLayer's own maxZoom defaults to 18 — must raise it or tiles vanish above z18.
+  // NOTE: tileLayer's own maxZoom defaults to 18 - must raise it or tiles vanish above z18.
   satTiles = L.tileLayer(ESRI.url, { maxZoom: maxZ, maxNativeZoom: ESRI.maxNativeZoom, attribution: ESRI.attribution }).addTo(satMap);
   satTiles.bringToBack();
 }
@@ -227,7 +227,7 @@ function boxBounds(lat, lon, half = 0.9) {
   const dLat = half / 110574, dLon = half / (111320 * Math.cos(lat * Math.PI / 180));
   return [[lat - dLat, lon - dLon], [lat + dLat, lon + dLon]];
 }
-// Large, legible colony marker — a status-coloured hive badge with a pointer, drawn
+// Large, legible colony marker - a status-coloured hive badge with a pointer, drawn
 // in screen space so it stays clear at every zoom. THIS is what the judges read.
 const HEX = '<svg class="hx" viewBox="0 0 24 24"><path d="M12 2l8.7 5v10L12 22l-8.7-5V7z"/></svg>';
 function hiveMarkIcon(h) {
@@ -364,8 +364,8 @@ function renderSensorPanel() {
       + '<span class="sid">' + s.id + '</span>'
       + '<span class="smeta">' + s.type + ' · ' + s.hive + '</span>'
       + '<span class="sbound ' + (has ? 'mapped' : '') + '">' + (has ? 'boundary set' : 'no boundary') + '</span>'
-      + '<button class="sdraw" data-draw="' + s.id + '">' + (armed ? 'drawing…' : (has ? 'redraw' : 'draw')) + '</button>'
-      + (has ? '<button class="sclear" data-clear="' + s.id + '" title="clear boundary">✕</button>' : '')
+      + '<button class="sdraw" data-draw="' + s.id + '">' + (armed ? 'drawing...' : (has ? 'redraw' : 'draw')) + '</button>'
+      + (has ? '<button class="sclear" data-clear="' + s.id + '" title="clear boundary">x</button>' : '')
       + '</div>';
   }).join("");
   el.querySelectorAll("[data-draw]").forEach(b => b.onclick = () => setArmed(armedSensor === b.dataset.draw ? null : b.dataset.draw));
@@ -567,7 +567,81 @@ function orkesBlock(h) {
     + '<button class="askadvisor" data-hive="' + c + '">Ask the advisor</button>'
     + '</div>'
     + '<div class="advisorout" id="advisor-' + c + '"></div>'
+    + '<div class="hivedoctor" id="hd-' + c + '"><div class="hd-load">Consulting HiveDoctor...</div></div>'
     + '</div>';
+}
+/* ---- HiveDoctor (Orkes Agentspan) - the agent that knows when NOT to ask ----
+   A Value-of-Information gate decides, per hive, whether the beekeeper's input is worth
+   the interruption. It acts on its own when confident (treat or just watch) and only
+   pauses on Agentspan's durable approval gate for genuine close calls. The gate maths
+   sit behind a small "why" toggle. */
+function hdGateRow(g) {
+  const tag = g.needs_human ? "ask you" : (g.action === "act" ? "act" : "watch");
+  const cls = g.needs_human ? "ask" : (g.action === "act" ? "act" : "hold");
+  return '<div class="hd-row"><span class="hd-field">' + g.condition
+    + (g.coarse ? ' <em>(coarse)</em>' : '') + '</span>'
+    + '<span class="hd-val">p=' + (g.p != null ? g.p.toFixed(2) : "-")
+    + ' · value of asking $' + (g.evpi != null ? g.evpi.toFixed(2) : "-")
+    + ' vs $' + g.c_ask + ' to ask <b class="hd-' + cls + '">' + tag + '</b></span></div>';
+}
+function hdWhy(plan) {
+  const gates = plan.gates || [];
+  if (!gates.length) return "";
+  return '<details class="hd-sci"><summary>why - value-of-information maths</summary>'
+    + '<div class="hd-grid">' + gates.map(hdGateRow).join("") + '</div>'
+    + '<div class="hd-foot-note">Ask only when the value of your input (EVPI) beats the '
+    + 'cost of interrupting you. Grounded in Value of Information (arXiv 2601.06407, 2026).</div>'
+    + '</details>';
+}
+function hdRender(run) {
+  const el = document.getElementById("hd-" + S.sel);
+  if (!el) return;
+  if (!run || run.error) { el.innerHTML = '<div class="hd-load">HiveDoctor offline (is api_server running?)</div>'; return; }
+  const plan = run.plan || {}, st = run.status;
+  let foot = "";
+  if (st === "awaiting_approval") {
+    foot = '<div class="hd-gate"><span class="hd-pending">Close call. Agentspan is holding this until you decide.</span>'
+      + '<div class="hd-btns"><button class="hd-approve" data-id="' + run.id + '">Treat the hive</button>'
+      + '<button class="hd-reject" data-id="' + run.id + '">Don\'t treat</button></div></div>';
+  } else if (st === "auto_treated") {
+    foot = '<div class="hd-done ok">Handled automatically. Confident it needed treating, so it did not interrupt you.</div>';
+  } else if (st === "auto_monitor") {
+    foot = '<div class="hd-done watch">Watching quietly. Confident all is calm, nothing for you to do.</div>';
+  } else if (st === "approved") {
+    foot = '<div class="hd-done ok">Approved. Treatment applied.</div>';
+  } else if (st === "denied") {
+    foot = '<div class="hd-done no">You chose not to treat. Left alone, still monitoring.</div>';
+  } else {
+    foot = '<div class="hd-load">Assessing...</div>';
+  }
+  el.innerHTML = '<div class="hd-tag"><span class="d"></span>HIVEDOCTOR · ORKES AGENTSPAN · knows when to ask</div>'
+    + '<div class="hd-head">' + (plan.headline || "Assessing colony...") + '</div>'
+    + hdWhy(plan) + foot;
+  el.querySelectorAll(".hd-approve").forEach(b => b.onclick = () => hdDecide(run, true));
+  el.querySelectorAll(".hd-reject").forEach(b => b.onclick = () => hdDecide(run, false));
+}
+async function hdDecide(run, approve) {
+  const el = document.getElementById("hd-" + S.sel);
+  if (el) { const g = el.querySelector(".hd-gate"); if (g) g.innerHTML = '<span class="hd-pending">' + (approve ? "Approving..." : "Saving...") + '</span>'; }
+  const updated = await respondTreatment(run.id, approve, approve ? "approved from dashboard" : "declined from dashboard");
+  hdRender(updated);
+  EVENTS.unshift(ev("ORKES", approve ? "watch" : "info", S.sel,
+    "HiveDoctor: you " + (approve ? "approved treatment" : "declined treatment") + " for hive " + S.sel + " at the Agentspan approval gate.", 1));
+  if (EVENTS.length > 400) EVENTS.length = 400;
+  if (S.view === "orch") renderLog();
+}
+async function loadHiveDoctor(h) {
+  const code = h.code;
+  try {
+    // reuse an existing awaiting/recent run for this hive, else start a fresh one
+    const runs = await listTreatments();
+    let run = runs.find(r => r.hive_id === code && r.status === "awaiting_approval")
+      || runs.find(r => r.hive_id === code);
+    if (!run) run = await startTreatment(code);
+    if (S.sel === code) hdRender(run);   // ignore if the user already switched hives
+  } catch {
+    if (S.sel === code) hdRender(null);
+  }
 }
 // Every value here is backed by the live verdict (acoustic stress, vision mite-rate,
 // net entrance flow, queen/swarm flags). Signals the verdict does not carry are not shown.
@@ -649,6 +723,7 @@ function renderDetail() {
       if (out) out.textContent = j.advice || "No advice available.";
     } catch { if (out) out.textContent = "Could not reach the advisor. Is api_server running?"; }
   });
+  loadHiveDoctor(h);   // async: fills the HiveDoctor (Agentspan) panel with a live run
 }
 
 // Entrance view is now a real tunnel video + audio (see mediaBlock); the old
@@ -708,7 +783,7 @@ function logRow(e) {
 async function explainLine(q) {
   const box = $("#explainbox"); if (!box) return;
   box.style.display = "block";
-  box.innerHTML = '<div class="exp-line">' + q + '</div><div class="exp-ans">explaining…</div>';
+  box.innerHTML = '<div class="exp-line">' + q + '</div><div class="exp-ans">explaining...</div>';
   try {
     const r = await fetch("/api/explain?q=" + encodeURIComponent(q));
     const j = await r.json();
@@ -764,7 +839,7 @@ function buildFilterBar() {
     + '<button class="fchip sev-alert on" data-sev="alert">Alerts</button>'
     + '<span class="fdiv"></span>'
     + '<select class="fsel" id="fhive"><option value="ALL">All hives</option>' + HIVES.map(h => '<option value="' + h.code + '">' + h.code + ' · ' + h.name + '</option>').join("") + '</select>'
-    + '<input class="fsearch" id="fq" placeholder="search…">'
+    + '<input class="fsearch" id="fq" placeholder="search...">'
     + '<button class="livebtn" id="livebtn"><span class="d"></span><span id="livetxt">LIVE</span></button>';
   fb.innerHTML = html;
   fb.querySelectorAll("[data-sev]").forEach(b => b.onclick = () => { const s = b.dataset.sev; if (LF.sev.has(s)) { LF.sev.delete(s); b.classList.remove("on"); } else { LF.sev.add(s); b.classList.add("on"); } renderLog(); });
@@ -784,7 +859,7 @@ function renderFleet() {
         + '<div class="needtop"><b>' + h.code + ' · ' + h.name + '</b><span class="chip ' + h.st + '">' + STWORD[h.st] + '</span></div>'
         + '<div class="needact">' + a.t + '</div>'
         + (a.c && !ap ? '<button class="approve" data-hive="' + h.code + '">Approve plan</button>'
-          : ap ? '<span class="approved">✓ approved</span>' : '')
+          : ap ? '<span class="approved">approved</span>' : '')
         + '</div>';
     }).join("") : '<div class="allgood">All colonies look healthy. Nothing needs you right now.</div>';
     needs.querySelectorAll(".approve").forEach(b => b.onclick = () => { WFAPPROVED[b.dataset.hive] = true; renderFleet(); if (S.sel) renderDetail(); });

@@ -452,6 +452,35 @@ body.command .corner{display:block}
 .askadvisor:hover{background:rgba(245,200,74,.10)}
 .advisorout:not(:empty){margin-top:10px;background:rgba(245,200,74,.06);border-left:3px solid var(--honey,#f5c84a);padding:10px 12px;border-radius:6px;font-size:13px;line-height:1.65;color:var(--ink,#eee)}
 
+/* ---- HiveDoctor (Orkes Agentspan) durable HITL panel ---- */
+.hivedoctor{margin-top:12px;border:1px solid var(--line2);border-radius:8px;background:rgba(224,169,60,.035);overflow:hidden}
+.hd-load{padding:12px;font-size:12px;color:var(--muted)}
+.hd-tag{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:8.5px;letter-spacing:.7px;text-transform:uppercase;color:var(--honey);padding:7px 11px;border-bottom:1px solid var(--line2);background:rgba(224,169,60,.07)}
+.hd-tag .d{width:5px;height:5px;border-radius:50%;background:var(--honey);box-shadow:0 0 6px var(--honey)}
+.hd-head{padding:10px 12px 4px;font-size:13px;line-height:1.55;color:var(--ink)}
+.hd-grid{padding:2px 12px 8px}
+.hd-row{display:flex;justify-content:space-between;gap:12px;padding:5px 0;border-bottom:1px dashed var(--line);font-size:11.5px}
+.hd-row:last-child{border-bottom:none}
+.hd-field{color:var(--muted)}.hd-field em{color:var(--faint);font-style:normal;font-size:10px}
+.hd-val{color:var(--ink);text-align:right;font-family:var(--mono);font-size:11px}
+.hd-gate{padding:10px 12px;border-top:1px solid var(--line2);background:rgba(217,145,63,.06)}
+.hd-pending{display:block;font-size:11.5px;color:var(--watch);margin-bottom:8px}
+.hd-btns{display:flex;gap:8px}
+.hd-approve{flex:1;background:var(--honey);color:#1a1407;border:none;border-radius:6px;padding:7px 12px;cursor:pointer;font-size:12px;font-weight:600}
+.hd-approve:hover{filter:brightness(1.08)}
+.hd-reject{background:transparent;border:1px solid var(--crit);color:var(--crit);border-radius:6px;padding:7px 12px;cursor:pointer;font-size:12px}
+.hd-reject:hover{background:rgba(214,90,82,.12)}
+.hd-done{padding:10px 12px;border-top:1px solid var(--line2);font-size:12px;line-height:1.5}
+.hd-done.ok{color:var(--ok)}.hd-done.no{color:var(--crit)}.hd-done.watch{color:var(--muted)}
+/* VoI decision tags + footnote */
+.hd-ask{color:var(--watch)}.hd-act{color:var(--ok)}.hd-hold{color:var(--muted)}
+.hd-foot-note{padding:6px 0 2px;font-size:10px;color:var(--faint);line-height:1.5}
+/* "why" toggle keeps the VoI maths out of the beekeeper's way until they want it */
+.hd-sci{margin:4px 12px 2px}
+.hd-sci summary{font-size:10.5px;color:var(--faint);cursor:pointer;list-style:none;text-transform:uppercase;letter-spacing:.5px}
+.hd-sci summary:hover{color:var(--muted)}
+.hd-sci .hd-grid{padding:6px 0 2px}
+
 /* ---- drawn (non-geographic) yard surroundings + zoom ---- */
 .m-bg{fill:#080b0f}
 .m-field{fill:rgba(120,150,120,.035); stroke:rgba(150,170,200,.10); stroke-width:1}

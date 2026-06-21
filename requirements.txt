@@ -17,3 +17,7 @@ uagents-core>=0.4.7
 # Only needed when running with USE_REDIS=1; the file-store demo path needs none of these.
 redis>=5.0.0
 Pillow>=10.0.0   # LSB steganography carrier (unimodal packing)
+# Orkes Agentspan: durable, human-in-the-loop runtime for the HiveDoctor agent
+# (src/agentspan). Optional - the Value-of-Information gate runs without it; with the
+# server up (`agentspan server start`) the approval pause executes on the durable engine.
+agentspan>=0.1.0

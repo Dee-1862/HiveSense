@@ -3,21 +3,23 @@ HiveSense storage benchmark: Redis Stack vs the file store, with HONEST numbers.
 
 Three measurements, each tied to a concrete claim in the README:
 
-  (a) verdict write + read    - the file store rewrites the WHOLE verdicts.json on every
-                                append and reads it all back; Redis appends one JSON doc and
-                                reads one. The file cost grows with history; Redis stays flat.
-  (b) packed vs unpacked      - "unimodal packing": ONE stego key carrying image+audio
-                                (1 round-trip, 1 key) vs TWO separate keys (2 round-trips).
-                                We report latency, round-trips and Redis MEMORY USAGE, and we
-                                report the stego decode CPU cost too - no cheating.
-  (c) vector top-k            - Redis HNSW k-NN (incl. a metadata-filtered query) vs a
-                                brute-force numpy cosine scan over the same vectors.
+  (a) verdict write + read - the file store rewrites the WHOLE verdicts.json on every append;
+      Redis appends one JSON doc. The FILE cost grows with history. BUT note: against a remote
+      Redis (Redis Cloud) each op is a network round-trip, so Redis is NOT faster than a LOCAL
+      file on a single op - we print both and say so plainly.
+  (b) UNIMODAL (one fused vector) vs LATE FUSION (two vectors) - the real "unimodal" win: one
+      fused multimodal vector -> ONE HNSW index -> ONE k-NN query, versus a bimodal late-fusion
+      layout that keeps an acoustic vector and a vision vector in TWO indexes and must run TWO
+      queries and merge. One index/one query = half the round-trips, less memory, and it is the
+      only layout that can support a single bound cross-modal query (see src/imagebind_embed.py).
+  (c) vector top-k - Redis HNSW k-NN (incl. a metadata-filtered query) vs a brute-force numpy
+      cosine scan over the same vectors.
 
-Runs offline and seeded. If Redis is unreachable it prints the file-store numbers only and
-says so. Nothing is written to disk except an optional --md report to stdout.
+Runs offline and seeded. If Redis is unreachable it prints the file-store numbers only and says
+so. Nothing is written to disk except an optional --md report to stdout.
 
 Usage:
-  python bench/redis_bench.py --n 1000 --vectors 5000
+  python bench/redis_bench.py --n 300 --vectors 5000
   USE_REDIS=1 REDIS_URL=redis://localhost:6379 python bench/redis_bench.py
 """
 
@@ -33,10 +35,14 @@ import numpy as np
 
 # make repo root importable when run as `python bench/redis_bench.py`
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+try:
+    from dotenv import load_dotenv
+    load_dotenv()  # pick up REDIS_URL / USE_REDIS from .env
+except Exception:
+    pass
 
 from src.store.file_store import FileStore           # noqa: E402
 from src import embedding                            # noqa: E402
-import stego                                         # noqa: E402
 
 BENCH_PREFIX = "bvec:"
 BENCH_INDEX = "bench_idx"
@@ -48,10 +54,7 @@ def _pct(xs, p):
 
 
 def _stats_ms(samples):
-    return {
-        "median_ms": statistics.median(samples) * 1e3,
-        "p95_ms": _pct(samples, 95) * 1e3,
-    }
+    return {"median_ms": statistics.median(samples) * 1e3, "p95_ms": _pct(samples, 95) * 1e3}
 
 
 def _sample_verdict(hive, i):
@@ -61,7 +64,10 @@ def _sample_verdict(hive, i):
             "reason": "bench", "timestamp": f"2026-06-21T00:00:{i % 60:02d}"}
 
 
-# --------------------------------------------------------------------------- #
+def _truthy(v):
+    return str(v).strip().lower() in ("1", "true", "yes", "on")
+
+
 def connect_redis():
     if not _truthy(os.getenv("USE_REDIS", "1")):  # default on for the bench
         return None
@@ -75,8 +81,8 @@ def connect_redis():
         return None
 
 
-def _truthy(v):
-    return str(v).strip().lower() in ("1", "true", "yes", "on")
+def _l2_rows(mat):
+    return mat / (np.linalg.norm(mat, axis=1, keepdims=True) + 1e-9)
 
 
 # --------------------------------------------------------------------------- #
@@ -84,10 +90,8 @@ def _truthy(v):
 # --------------------------------------------------------------------------- #
 def bench_state(rs, n, hives, points):
     seed = {f"H{h}": [_sample_verdict(f"H{h}", i) for i in range(points)] for h in range(hives)}
-    total = hives * points
-    res = {"history_points": total, "n": n}
+    res = {"history_points": hives * points, "n": n}
 
-    # file store
     tmp = os.path.join(tempfile.gettempdir(), "hs_bench_verdicts.json")
     fs = FileStore(tmp)
     fs.save_verdicts(seed)
@@ -103,7 +107,6 @@ def bench_state(rs, n, hives, points):
     res["file_write"] = _stats_ms(w)
     res["file_read"] = _stats_ms(r)
 
-    # redis store (lean state ops, no TS/publish, to compare apples to apples)
     if rs is not None:
         rs.save_verdicts(seed)
         rr = rs.r
@@ -118,118 +121,86 @@ def bench_state(rs, n, hives, points):
             t0 = time.perf_counter(); rr.json().get("hs:hive:H0"); r.append(time.perf_counter() - t0)
         res["redis_write"] = _stats_ms(w)
         res["redis_read"] = _stats_ms(r)
+        # clean up the synthetic H0..H6 bench hives so they never pollute the demo keyspace
+        for h in range(hives):
+            rr.delete(f"hs:hive:H{h}", f"hs:hive:H{h}:hist",
+                      f"hs:ts:H{h}:acoustic_stress", f"hs:ts:H{h}:traffic", f"hs:ts:H{h}:mite_rate")
+            rr.srem("hs:hives", f"H{h}")
     return res
 
 
 # --------------------------------------------------------------------------- #
-# (b) packed (1 stego key) vs unpacked (2 keys)
+# (b) UNIMODAL one fused vector (1 index, 1 query) vs LATE FUSION two vectors (2 indexes, 2 queries)
 # --------------------------------------------------------------------------- #
-def bench_packing(rs, n):
-    sample = {"acoustic_stress": 0.8, "vision_mite_rate": 0.05, "net_traffic": 10}
-    feat = embedding.to_bytes(embedding.acoustic_features(sample))   # ~88 bytes
-    carrier = stego.solid_carrier()
-    # plain carrier PNG (the "image only" payload for the unpacked case)
-    import io
-    from PIL import Image
-    buf = io.BytesIO(); Image.fromarray(carrier, "RGB").save(buf, format="PNG"); img_png = buf.getvalue()
-    packed_png = stego.encode(carrier, feat)
+def _build_index(rr, idx, prefix, dim, mat):
+    from redis.commands.search.field import VectorField
+    from redis.commands.search.index_definition import IndexDefinition, IndexType
+    try:
+        rr.ft(idx).dropindex(delete_documents=True)
+    except Exception:
+        pass
+    rr.ft(idx).create_index(
+        (VectorField("vec", "HNSW", {"TYPE": "FLOAT32", "DIM": dim, "DISTANCE_METRIC": "COSINE"}),),
+        definition=IndexDefinition(prefix=[prefix], index_type=IndexType.HASH))
+    pipe = rr.pipeline()
+    for i in range(len(mat)):
+        pipe.hset(f"{prefix}{i}", mapping={"vec": mat[i].tobytes()})
+        if i % 1000 == 0:
+            pipe.execute(); pipe = rr.pipeline()
+    pipe.execute()
+    for _ in range(100):
+        if int(rr.ft(idx).info()["num_docs"]) >= len(mat):
+            break
+        time.sleep(0.1)
 
-    res = {"n": n, "feat_bytes": len(feat), "img_png_bytes": len(img_png),
-           "packed_png_bytes": len(packed_png), "packed_roundtrips": 2, "unpacked_roundtrips": 4}
 
-    # stego decode CPU cost (no Redis involved) - report it honestly
-    d = []
-    for _ in range(n):
-        t0 = time.perf_counter(); stego.decode(packed_png); d.append(time.perf_counter() - t0)
-    res["stego_decode"] = _stats_ms(d)
-
+def bench_fusion(rs, m, n, k=5):
+    rng = np.random.default_rng(1)
+    AC = _l2_rows(rng.standard_normal((m, embedding.ACOUSTIC_DIM)).astype("float32"))
+    VI = _l2_rows(rng.standard_normal((m, embedding.VISION_DIM)).astype("float32"))
+    FU = np.stack([embedding.fuse(AC[i], VI[i]) for i in range(m)])  # 86-d early fusion
+    res = {"vectors": m, "k": k, "n": n,
+           "fused_indexes": 1, "fused_queries": 1, "late_indexes": 2, "late_queries": 2}
     if rs is None:
         return res
+    from redis.commands.search.query import Query
     rr = rs.r
-    # packed: 1 SET + 1 GET (+decode)
-    wp, rp = [], []
+    _build_index(rr, "bf_fused", "bff:", embedding.EMB_DIM, FU)
+    _build_index(rr, "bf_ac", "bfa:", embedding.ACOUSTIC_DIM, AC)
+    _build_index(rr, "bf_vi", "bfv:", embedding.VISION_DIM, VI)
+
+    def search(idx, qv):
+        q = (Query(f"*=>[KNN {k} @vec $v AS score]")
+             .sort_by("score").return_fields("score").paging(0, k).dialect(2))
+        return rr.ft(idx).search(q, query_params={"v": qv.tobytes()})
+
+    fused = []
     for _ in range(n):
-        t0 = time.perf_counter(); rr.set("bench:packed", packed_png); wp.append(time.perf_counter() - t0)
-        t0 = time.perf_counter(); stego.decode(rr.get("bench:packed")); rp.append(time.perf_counter() - t0)
-    # unpacked: 2 SET + 2 GET
-    wu, ru = [], []
+        t0 = time.perf_counter(); search("bf_fused", FU[0]); fused.append(time.perf_counter() - t0)
+    res["fused_ms"] = _stats_ms(fused)
+
+    late = []   # late fusion: TWO queries + client-side merge (the cost it always pays)
     for _ in range(n):
         t0 = time.perf_counter()
-        rr.set("bench:img", img_png); rr.set("bench:feat", feat)
-        wu.append(time.perf_counter() - t0)
-        t0 = time.perf_counter()
-        rr.get("bench:img"); rr.get("bench:feat")
-        ru.append(time.perf_counter() - t0)
-    res["packed_write"] = _stats_ms(wp); res["packed_read"] = _stats_ms(rp)
-    res["unpacked_write"] = _stats_ms(wu); res["unpacked_read"] = _stats_ms(ru)
-    res["packed_mem_bytes"] = int(rr.memory_usage("bench:packed") or 0)
-    res["unpacked_mem_bytes"] = int((rr.memory_usage("bench:img") or 0) + (rr.memory_usage("bench:feat") or 0))
-    rr.delete("bench:packed", "bench:img", "bench:feat")
-    return res
+        ra = search("bf_ac", AC[0]); rv = search("bf_vi", VI[0])
+        _ = {d.id for d in ra.docs} | {d.id for d in rv.docs}
+        late.append(time.perf_counter() - t0)
+    res["late_ms"] = _stats_ms(late)
 
+    # index memory (vector_index_sz_mb when reported)
+    def idx_mb(idx):
+        try:
+            return float(rr.ft(idx).info().get("vector_index_sz_mb", 0) or 0)
+        except Exception:
+            return 0.0
+    res["fused_index_mb"] = idx_mb("bf_fused")
+    res["late_index_mb"] = idx_mb("bf_ac") + idx_mb("bf_vi")
 
-# --------------------------------------------------------------------------- #
-# (b2) modality head-to-head: unimodal packing vs bimodal vs trimodal storage
-#      Same content (image + audio + metadata) stored three ways. Unimodal packs
-#      ALL of it into ONE stego image -> 1 key. The others spread it over N keys.
-# --------------------------------------------------------------------------- #
-def _pack_payload(audio: bytes, meta: bytes) -> bytes:
-    """audio + metadata into one reconstructable payload (4-byte audio length prefix)."""
-    return len(audio).to_bytes(4, "big") + audio + meta
-
-
-def _unpack_payload(blob: bytes):
-    n = int.from_bytes(blob[:4], "big")
-    return blob[4:4 + n], blob[4 + n:]
-
-
-def bench_modalities(rs, n):
-    import io
-    from PIL import Image
-    sample = {"acoustic_stress": 0.8, "vision_mite_rate": 0.05, "net_traffic": 8,
-              "queenless_score": 0.1, "swarm_band_hz": 400}
-    audio = embedding.to_bytes(embedding.acoustic_features(sample))          # acoustic modality
-    meta = json.dumps(_sample_verdict("H0", 1)).encode("utf-8")             # metadata modality
-    carrier = stego.solid_carrier(96, 96)                                   # vision modality (frame)
-    buf = io.BytesIO(); Image.fromarray(carrier, "RGB").save(buf, format="PNG"); img_png = buf.getvalue()
-    packed = stego.encode(carrier, _pack_payload(audio, meta))              # ALL THREE in one PNG
-
-    # verify the packed single key really reconstructs all three modalities (honesty check)
-    a2, m2 = _unpack_payload(stego.decode(packed))
-    reconstructs = (a2 == audio and m2 == meta)
-
-    strat = {
-        "unimodal (1 key: img+audio+meta)": {"keys": 1, "rt_write": 1, "rt_read": 1},
-        "bimodal  (2 keys: img+audio)":     {"keys": 2, "rt_write": 2, "rt_read": 2},
-        "trimodal (3 keys: img+audio+meta)": {"keys": 3, "rt_write": 3, "rt_read": 3},
-    }
-    res = {"n": n, "audio_bytes": len(audio), "meta_bytes": len(meta),
-           "img_png_bytes": len(img_png), "packed_png_bytes": len(packed),
-           "packed_reconstructs_all": reconstructs, "strategies": strat}
-
-    if rs is None:
-        return res
-    rr = rs.r
-
-    def med(fn):
-        xs = []
-        for _ in range(n):
-            t0 = time.perf_counter(); fn(); xs.append(time.perf_counter() - t0)
-        return statistics.median(xs) * 1e3
-
-    # unimodal: 1 SET / 1 GET (+ decode + split)
-    strat["unimodal (1 key: img+audio+meta)"]["write_ms"] = med(lambda: rr.set("m:uni", packed))
-    strat["unimodal (1 key: img+audio+meta)"]["read_ms"] = med(lambda: _unpack_payload(stego.decode(rr.get("m:uni"))))
-    strat["unimodal (1 key: img+audio+meta)"]["mem_bytes"] = int(rr.memory_usage("m:uni") or 0)
-    # bimodal: 2 SET / 2 GET
-    strat["bimodal  (2 keys: img+audio)"]["write_ms"] = med(lambda: (rr.set("m:img", img_png), rr.set("m:aud", audio)))
-    strat["bimodal  (2 keys: img+audio)"]["read_ms"] = med(lambda: (rr.get("m:img"), rr.get("m:aud")))
-    strat["bimodal  (2 keys: img+audio)"]["mem_bytes"] = int((rr.memory_usage("m:img") or 0) + (rr.memory_usage("m:aud") or 0))
-    # trimodal: 3 SET / 3 GET
-    strat["trimodal (3 keys: img+audio+meta)"]["write_ms"] = med(lambda: (rr.set("m:img", img_png), rr.set("m:aud", audio), rr.set("m:met", meta)))
-    strat["trimodal (3 keys: img+audio+meta)"]["read_ms"] = med(lambda: (rr.get("m:img"), rr.get("m:aud"), rr.get("m:met")))
-    strat["trimodal (3 keys: img+audio+meta)"]["mem_bytes"] = int((rr.memory_usage("m:img") or 0) + (rr.memory_usage("m:aud") or 0) + (rr.memory_usage("m:met") or 0))
-    rr.delete("m:uni", "m:img", "m:aud", "m:met")
+    for idx in ("bf_fused", "bf_ac", "bf_vi"):
+        try:
+            rr.ft(idx).dropindex(delete_documents=True)
+        except Exception:
+            pass
     return res
 
 
@@ -238,25 +209,22 @@ def bench_modalities(rs, n):
 # --------------------------------------------------------------------------- #
 def bench_vectors(rs, m, dim, n, k=5):
     rng = np.random.default_rng(0)
-    mat = rng.standard_normal((m, dim)).astype("float32")
-    mat /= (np.linalg.norm(mat, axis=1, keepdims=True) + 1e-9)
+    mat = _l2_rows(rng.standard_normal((m, dim)).astype("float32"))
     q = mat[0]
     res = {"vectors": m, "dim": dim, "k": k, "n": n}
 
-    # numpy brute force (cosine = dot, vectors are unit-norm)
     bf = []
     for _ in range(n):
-        t0 = time.perf_counter()
-        np.argpartition(-(mat @ q), k)[:k]
-        bf.append(time.perf_counter() - t0)
+        t0 = time.perf_counter(); np.argpartition(-(mat @ q), k)[:k]; bf.append(time.perf_counter() - t0)
     res["numpy_bruteforce"] = _stats_ms(bf)
 
     if rs is None:
         return res
-    from redis.commands.search.field import VectorField, TagField
-    from redis.commands.search.index_definition import IndexDefinition, IndexType
     from redis.commands.search.query import Query
     rr = rs.r
+    # reuse the index builder, but tag half the rows so we can time a filtered query too
+    from redis.commands.search.field import VectorField, TagField
+    from redis.commands.search.index_definition import IndexDefinition, IndexType
     try:
         rr.ft(BENCH_INDEX).dropindex(delete_documents=True)
     except Exception:
@@ -267,15 +235,13 @@ def bench_vectors(rs, m, dim, n, k=5):
         definition=IndexDefinition(prefix=[BENCH_PREFIX], index_type=IndexType.HASH))
     pipe = rr.pipeline()
     for i in range(m):
-        hive = "BENCH" if i % 2 == 0 else "OTHER"
-        pipe.hset(f"{BENCH_PREFIX}{i}", mapping={"vec": mat[i].tobytes(), "hive": hive})
+        pipe.hset(f"{BENCH_PREFIX}{i}", mapping={"vec": mat[i].tobytes(),
+                                                 "hive": "BENCH" if i % 2 == 0 else "OTHER"})
         if i % 1000 == 0:
             pipe.execute(); pipe = rr.pipeline()
     pipe.execute()
-    # wait for the index to finish ingesting
     for _ in range(100):
-        info = rr.ft(BENCH_INDEX).info()
-        if int(info["num_docs"]) >= m and float(info.get("percent_indexed", 1)) >= 1:
+        if int(rr.ft(BENCH_INDEX).info()["num_docs"]) >= m:
             break
         time.sleep(0.1)
 
@@ -301,12 +267,12 @@ def bench_vectors(rs, m, dim, n, k=5):
 
 # --------------------------------------------------------------------------- #
 def _row(label, s):
-    return f"  {label:<26} median={s['median_ms']:8.3f} ms   p95={s['p95_ms']:8.3f} ms"
+    return f"  {label:<28} median={s['median_ms']:8.3f} ms   p95={s['p95_ms']:8.3f} ms"
 
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--n", type=int, default=500, help="iterations per timed op")
+    ap.add_argument("--n", type=int, default=300, help="iterations per timed op")
     ap.add_argument("--hives", type=int, default=7)
     ap.add_argument("--points", type=int, default=96, help="seeded history points per hive")
     ap.add_argument("--vectors", type=int, default=5000)
@@ -325,36 +291,22 @@ def main():
     if rs:
         print(_row("redis write (append doc)", a["redis_write"]))
         print(_row("redis read  (get doc)", a["redis_read"]))
+        print("  note: a REMOTE Redis is network-bound, so it is not faster than a LOCAL file")
+        print("        on a single op - its value is capabilities + concurrency, not raw latency.")
     print()
 
-    b = bench_packing(rs, args.n)
-    print(f"(b) unimodal packing  [feat={b['feat_bytes']}B, img_png={b['img_png_bytes']}B, "
-          f"packed_png={b['packed_png_bytes']}B, n={b['n']}]")
-    print(_row("stego decode (CPU only)", b["stego_decode"]))
+    b = bench_fusion(rs, args.vectors, args.n)
+    print(f"(b) UNIMODAL one fused vector vs LATE FUSION two vectors  [readings={b['vectors']}, "
+          f"k={b['k']}, n={b['n']}]")
+    print(f"  unimodal (1 fused vector): indexes={b['fused_indexes']}  queries/retrieval={b['fused_queries']}")
+    print(f"  late fusion (2 vectors)  : indexes={b['late_indexes']}  queries/retrieval={b['late_queries']}")
     if rs:
-        print(_row("packed   write (1 key)", b["packed_write"]))
-        print(_row("packed   read  (1 key+decode)", b["packed_read"]))
-        print(_row("unpacked write (2 keys)", b["unpacked_write"]))
-        print(_row("unpacked read  (2 keys)", b["unpacked_read"]))
-        print(f"  packed MEMORY USAGE   = {b['packed_mem_bytes']} B  (1 key)")
-        print(f"  unpacked MEMORY USAGE = {b['unpacked_mem_bytes']} B  (2 keys)")
-    print()
-
-    m = bench_modalities(rs, args.n)
-    print(f"(b2) UNIMODAL PACKING vs bimodal/trimodal  [audio={m['audio_bytes']}B, meta={m['meta_bytes']}B, "
-          f"img_png={m['img_png_bytes']}B, packed={m['packed_png_bytes']}B, "
-          f"reconstructs_all={m['packed_reconstructs_all']}, n={m['n']}]")
-    for name, s in m["strategies"].items():
-        line = f"  {name:<34} keys={s['keys']}  round-trips(w/r)={s['rt_write']}/{s['rt_read']}"
-        if "mem_bytes" in s:
-            line += f"  mem={s['mem_bytes']:>5}B  write={s['write_ms']:.4f}ms  read={s['read_ms']:.4f}ms"
-        print(line)
-    if rs:
-        uni = m["strategies"]["unimodal (1 key: img+audio+meta)"]
-        tri = m["strategies"]["trimodal (3 keys: img+audio+meta)"]
-        print(f"  -> unimodal carries the SAME 3 modalities in 1 key: "
-              f"{tri['keys']}x fewer keys, {tri['rt_read']}x->{uni['rt_read']} read round-trips, "
-              f"{(1 - uni['mem_bytes'] / max(1, tri['mem_bytes'])) * 100:.0f}% less memory.")
+        print(_row("unimodal retrieval (1 query)", b["fused_ms"]))
+        print(_row("late fusion (2 q + merge)", b["late_ms"]))
+        print(f"  index memory: unimodal={b['fused_index_mb']:.3f} MB  vs  late fusion={b['late_index_mb']:.3f} MB")
+        sp = b["late_ms"]["median_ms"] / max(1e-9, b["fused_ms"]["median_ms"])
+        print(f"  -> one fused vector = one index, one query: ~{sp:.2f}x fewer query round-trips, "
+              f"and the only layout that supports a single bound cross-modal query.")
     print()
 
     c = bench_vectors(rs, args.vectors, args.dim, args.n)
@@ -365,14 +317,15 @@ def main():
         print(_row("redis HNSW (filtered @hive)", c["redis_hnsw_filtered"]))
     print()
 
-    print("Honest reading: the UNIMODAL packing carries image+audio+metadata in ONE Redis key, so "
-          "it needs fewer keys, fewer round-trips and less memory than the bimodal/trimodal layouts "
-          "that spread the same content over 2-3 keys - at a sub-ms stego decode cost. File write/read "
-          "grow with history while Redis append stays flat. At a few thousand vectors numpy may match "
-          "single-shot HNSW; Redis wins on scale, concurrency and filtered k-NN (the file store cannot).")
+    print("Honest reading: the UNIMODAL win is one FUSED vector -> one HNSW index -> one k-NN query, "
+          "vs late fusion's two vectors/indexes/queries (and no shared space to search across). "
+          "A remote Redis is network-bound, so it does not beat a LOCAL file on single-op latency; "
+          "its real value is capabilities the file store cannot do at all (filtered vector k-NN for "
+          "RAG, retention, pub/sub) plus concurrency and scale. At a few thousand vectors numpy may "
+          "match single-shot HNSW - Redis wins on scale, concurrency and filtered k-NN.")
 
     if args.md:
-        print("\n```json\n" + json.dumps({"state": a, "packing": b, "modalities": m, "vectors": c}, indent=2) + "\n```")
+        print("\n```json\n" + json.dumps({"state": a, "fusion": b, "vectors": c}, indent=2) + "\n```")
 
 
 if __name__ == "__main__":

@@ -10,15 +10,17 @@ store cannot meet:
   RedisTimeSeries hs:ts:{id}:{metric} acoustic_stress / traffic / mite_rate,
                   RETENTION 24h  -> the rolling window is enforced by Redis, not by
                   rewriting a file. TS.MRANGE reads every hive in one call.
-  RediSearch      hs:reading:{id}:{ts} HASH {vec, hive, ts, ...metadata, blob},
+  RediSearch      hs:reading:{id}:{ts} HASH {vec, hive, ts, ...metadata},
                   HNSW vector index hs:idx -> filtered k-NN ("find past states like
-                  this one") powering retrieval-augmented reasoning.
+                  this one") powering retrieval-augmented reasoning. ONE fused vector
+                  per reading -> ONE index -> ONE query (vs late fusion's two indexes).
   Pub/Sub         hs:events           live push to the dashboard (SSE bridge).
 
-Honest framing: none of this makes Redis magically faster than a file - the wins are
-(1) appending one document vs rewriting the whole JSON store each time, (2) built-in
-retention, (3) vector k-NN the file store simply cannot do, and (4) one key + one
-round-trip per multimodal reading via the stego blob. See bench/redis_bench.py.
+Honest framing: against a remote Redis (e.g. Redis Cloud) raw single-op latency is
+network-bound, so Redis does NOT beat a local file on a single op. The real wins are
+(1) capabilities the file store cannot do at all - filtered vector k-NN for RAG, time-series
+retention, pub/sub; (2) one fused vector -> one index -> one query (half the round-trips of
+late-fusion two-index retrieval); (3) concurrency and scale. See bench/redis_bench.py.
 
 Construction pings Redis; if it is unreachable the constructor raises and the factory
 (src/store/__init__.py) falls back to the file store.
@@ -69,7 +71,10 @@ class RedisStore(Store):
         # socket timeouts are the safety net for the agent loop: a slow/dead Redis fails
         # fast (caught + logged) instead of blocking a hive agent's async cycle.
         timeout = float(os.getenv("REDIS_TIMEOUT", "2.0"))
-        self.r = redis.Redis.from_url(self.url, decode_responses=False,
+        # protocol=2 (RESP2): RediSearch FT.SEARCH returns the classic Result object that
+        # redis-py parses reliably. Under RESP3 (the redis-py 8 / Redis Cloud default) the
+        # high-level search() parser yields 0 docs for KNN queries. JSON/TS work on both.
+        self.r = redis.Redis.from_url(self.url, decode_responses=False, protocol=2,
                                       socket_timeout=timeout, socket_connect_timeout=timeout)
         self.r.ping()  # raises if Redis is unreachable -> factory falls back
         # Require Redis Stack: a plain redis would accept ping then fail every JSON/search
@@ -211,10 +216,9 @@ class RedisStore(Store):
             if "Index already exists" not in str(e):
                 raise
 
-    def record_reading(self, hive_id: str, verdict: dict, embedding=None,
-                        image_blob: bytes | None = None) -> str | None:
-        """Store one searchable multimodal reading: the fused embedding (indexed for
-        k-NN) plus metadata and the stego blob (one key carries both modalities)."""
+    def record_reading(self, hive_id: str, verdict: dict, embedding=None) -> str | None:
+        """Store one searchable reading: the fused multimodal embedding (indexed for k-NN)
+        plus filterable metadata. One vector per reading -> one HNSW index -> one query."""
         if embedding is None:
             return None
         ts_ms = self._ts_ms(verdict)
@@ -230,8 +234,6 @@ class RedisStore(Store):
             "acoustic_stress": float(verdict.get("acoustic_stress", 0.0) or 0.0),
             "vision_source": verdict.get("vision_source", "") or "",
         }
-        if image_blob:
-            mapping["blob"] = image_blob
         try:
             self.r.hset(key, mapping=mapping)
             return key
@@ -265,13 +267,6 @@ class RedisStore(Store):
                 "score": float(_dec(getattr(d, "score", 1.0)) or 1.0),  # cosine distance
             })
         return out
-
-    def get_blob(self, reading_key: str) -> bytes | None:
-        """Fetch the packed multimodal blob for a reading (single key, single round-trip)."""
-        try:
-            return self.r.hget(reading_key, "blob")
-        except Exception:
-            return None
 
     # ------------------------------------------------------------------ #
     # Pub/Sub

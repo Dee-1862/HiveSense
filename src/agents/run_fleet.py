@@ -33,6 +33,9 @@ def main():
     bureau.add(godfather)
     print(f"Godfather: {godfather.address}")
 
+    # Each hive is wired to the Godfather ONLY (coordinator_address=godfather.address). No
+    # hive is ever told another hive's address, so the 7 stay mutually blind; the Godfather
+    # is the single node with apiary-wide visibility (fan-in, not a shared blackboard).
     for i, (code, pos) in enumerate(POSITIONS.items()):
         agent = create_hive_agent(
             hive_id=code,

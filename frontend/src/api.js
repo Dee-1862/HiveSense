@@ -33,6 +33,33 @@ export function subscribeEvents(onEvent) {
   return () => es.close();
 }
 
+/* ---- HiveDoctor (Orkes Agentspan) - VoI-gated treatment runs ----
+ * The agent that knows when not to ask. start runs the Value-of-Information gate: it
+ * acts on its own when confident and only pauses at the durable approval gate on a
+ * close call. respond resumes a paused run with the beekeeper's decision. Each returns
+ * the run record { id, status, plan, steps, result }. */
+export async function startTreatment(hive) {
+  const r = await fetch('/api/treatment/start', {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ hive }),
+  });
+  return r.json();
+}
+export async function respondTreatment(id, approve, note = '') {
+  const r = await fetch('/api/treatment/respond', {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ id, approve, note }),
+  });
+  return r.json();
+}
+export async function listTreatments() {
+  try {
+    const r = await fetch('/api/treatments');
+    if (!r.ok) return [];
+    return (await r.json()).treatments || [];
+  } catch { return []; }
+}
+
 export async function pollCoordinator() {
   const t0 = performance.now();
   try {
