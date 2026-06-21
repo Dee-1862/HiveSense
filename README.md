@@ -288,23 +288,6 @@ tunnel, output = a single sigmoid logit = P(Varroa). Loader: [`src/vit4v_infer.p
 - **Image-only fallbacks** (for a per-frame detector instead of the video model): VarroaDataset
   (Zenodo `10.5281/zenodo.4085044`, healthy vs infested bee crops) and Roboflow varroa sets.
 
-### Mite localization: why a classifier, not a detector
-
-Vit4V is a clip **classifier** (32 frames in, one P(Varroa) out); it **cannot draw a box on the mite**.
-True localization needs a separate **object detector** (YOLO-style) trained on **bounding-box-annotated**
-mite data (e.g. VarroaDataset, Zenodo 4085044) - a new model trained from scratch, *not* a fine-tune
-of Vit4V. We deliberately keep the classifier because:
-
-- the operational question is "**is this bee infested?**", which the classifier answers and the fleet
-  acts on;
-- localization only earns its cost if you need per-bee mite **counts / infestation rate** (mites per
-  100 bees) - a separate, post-hackathon effort;
-- for an explainability visual ("where did the model look?"), use **ViViT attention-rollout / Grad-CAM**
-  on the bee crop - a heatmap that needs **no new data or training**.
-
-The only *fine-tune* that would help is **domain adaptation** of the classifier on labelled clips from
-your own rig, and only if its optics differ noticeably from VD2.
-
 ## Citations & benchmarks
 
 ### Datasets & models
@@ -478,22 +461,6 @@ not a trained joint encoder - true cross-modal retrieval/arithmetic need the bou
 the ViViT half is an honest CLS projection (labelled `vision_source`); a **remote** Redis is
 network-bound, so it does *not* beat a local file on single-op latency (its value is capabilities +
 concurrency); and the apiary feed is still simulated.
-
-### Multimodal embedding & vector storage
-
-- Girdhar, R., et al. (2023). *ImageBind: One Embedding Space To Bind Them All.* CVPR 2023.
-  arXiv:2305.05665 (bound multimodal space; cross-modal retrieval; embedding arithmetic).
-- *FuseLIP: Multimodal Embeddings via Early Fusion of Discrete Tokens.* arXiv:2506.03096 (early fusion
-  into one vector beats late fusion).
-- *MM-Embed: Universal Multimodal Retrieval with Multimodal LLMs.* ICLR 2025.
-- *Joint Fusion and Encoding: Advancing Multimodal Retrieval from the Ground Up.* arXiv:2502.20008
-- Malkov, Y., & Yashunin, D. (2018). *Efficient and robust approximate nearest neighbor search using
-  Hierarchical Navigable Small World graphs.* IEEE TPAMI, 42(4), 824-836. arXiv:1603.09320 (the index
-  Redis uses).
-- *Redis vector search* (RediSearch / RedisVL / vector sets), redis.io docs, for single-index RAG.
-
-Cite FuseLIP and MM-Embed for the *direction*, and ImageBind for the *bound-space upgrade*: not as
-something this repo reproduces (the live fusion is a concat).
 
 ## Dashboard API
 
