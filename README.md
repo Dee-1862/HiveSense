@@ -131,6 +131,15 @@ act alone or pause for the beekeeper. The VoI decision flow is below in the Agen
    answering from the live verdicts plus the Godfather's summary. Its LLM brain is switchable
    (ASI:One / Gemini / Claude) and degrades to a deterministic, data-only answer if no key is set.
 
+The point of this layer is that the beekeeper never has to read sensor data: they get a plain-language
+morning report and can ask about any hive in their own words, like texting a knowledgeable friend.
+
+<p align="center">
+  <img src="images/image.png" alt="HiveSense plain-language chat: a morning report and follow-up questions about specific hives" width="320">
+</p>
+
+<p align="center"><em>Illustrative chat experience: a proactive morning summary plus natural-language answers about individual hives (A3 Varroa, B2 traffic, wasp at the entrance).</em></p>
+
 ### Why each hive agent has its own memory (isolation by design)
 
 The 7 hive agents are deliberately **mutually blind**. Each one talks only to the Godfather,
