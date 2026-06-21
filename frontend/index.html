@@ -1,0 +1,113 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HiveSense · Apiary Command</title>
+<link rel="stylesheet" href="/src/style.css">
+
+
+<div class="app">
+  <header>
+    <div class="brand">
+      <svg class="mark" viewBox="0 0 40 40"><path d="M20 2l16 9v18l-16 9L4 29V11z" fill="none" stroke="#f5c84a" stroke-width="2"/><path d="M20 11l8 4.5v9L20 29l-8-4.5v-9z" fill="#f5c84a" opacity=".22"/><circle cx="20" cy="20" r="3.4" fill="#f5c84a"/></svg>
+      <div><b>HIVESENSE</b><div class="sub">APIARY COMMAND · v0.4</div></div>
+    </div>
+    <div class="tabs">
+      <button class="tab on" data-view="map">SITE MAP</button>
+      <button class="tab" data-view="orch">ORCHESTRATOR</button>
+    </div>
+    <div class="summary">
+      <div class="sm"><div class="v" id="s-health">—</div><div class="l">Apiary Index</div></div>
+      <div class="sm"><div class="v" id="s-hives">—</div><div class="l">Hives</div></div>
+      <div class="sm"><div class="v" id="s-alerts" style="color:var(--crit)">—</div><div class="l">Open Alerts</div></div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;margin-left:6px">
+        <div class="uplink" data-state="offline"><span class="dot"></span><span id="link">LINK · INIT</span></div>
+        <div class="clock" id="clock">--:--:--</div>
+      </div>
+      <div class="modetoggle" title="Toggle interface skin">
+        <button id="m-field" class="on">FIELD</button>
+        <button id="m-cmd">COMMAND</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="threat"><span class="b"></span><span id="threat-txt">THREAT LEVEL: ELEVATED · 2 COLONIES FLAGGED · OPS WINDOW 7d</span></div>
+
+  <main>
+    <!-- ===== SITE MAP VIEW ===== -->
+    <div class="view on" id="view-map">
+      <section class="card" id="mapwrap">
+        <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+        <h2>Apiary Site Map<span class="pin" id="site-pin">UC DAVIS · LAIDLAW APIARY · 38.5367, -121.7889</span></h2>
+        <div class="maptoolbar">
+          <div class="mtoggle"><button id="mv-schem" class="on">Schematic</button><button id="mv-sat">Satellite</button></div>
+          <button class="mfchip on" data-mf="all">All</button>
+          <button class="mfchip" data-mf="watch">Watch+</button>
+          <button class="mfchip" data-mf="crit">Critical</button>
+          <button class="mfchip" id="sensors-btn" title="Field sensor roster + draw coverage boundaries">Sensors</button>
+          <div class="maplive"><span class="d"></span><span id="map-live">LIVE</span> · <span id="map-time"></span></div>
+        </div>
+        <div class="plot"><svg id="sitemap" viewBox="0 0 900 560" preserveAspectRatio="xMidYMid meet"></svg><div id="leaflet"></div>
+          <div id="mapsearch">
+            <input id="map-q" placeholder="search a place or paste lat,lng — fly anywhere with sharp imagery" autocomplete="off">
+            <div class="bmseg"><button data-bm="esri" class="on">Esri</button><button data-bm="google">Google</button></div>
+            <button id="map-home" title="Back to the demo apiary">⌂</button>
+          </div>
+          <div id="sensorpanel">
+            <div class="sp-head">FIELD SENSORS<span id="sensor-count">—</span></div>
+            <div class="sp-hint"><b>To map a sensor:</b> click <b>draw</b> on a row, then drag a box on the map — it auto-maps to that sensor. Or use the draw tools (top-right) and pick the sensor in the popup. Saved locally.</div>
+            <div id="sensorlist"></div>
+          </div>
+        </div>
+        <div class="mapscrub">
+          <button id="scrub-play">❚❚</button>
+          <span>LIVE</span>
+          <div class="track"><i></i><span class="pin"></span></div>
+          <span id="scrub-time">now</span>
+          <button id="scrub-arch">Archived</button>
+        </div>
+        <div class="legend">
+          <span style="color:var(--ok)"><i></i><span style="color:var(--muted)">Healthy</span></span>
+          <span style="color:var(--watch)"><i></i><span style="color:var(--muted)">Needs a look</span></span>
+          <span style="color:var(--crit)"><i></i><span style="color:var(--muted)">Action required</span></span>
+          <span style="margin-left:auto;color:var(--faint)">Hover to inspect · click to open readout</span>
+        </div>
+      </section>
+
+      <section class="card" id="detail">
+        <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+        <h2>Hive Readout<span class="pin" id="d-pin"></span></h2>
+        <div class="dscroll" id="dbody"></div>
+      </section>
+    </div>
+
+    <!-- ===== ORCHESTRATOR VIEW ===== -->
+    <div class="view" id="view-orch">
+      <section class="card" id="orchwrap">
+        <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+        <h2>Live Operations Log<span class="pin" id="log-pin">APIS-PRIME · streaming</span></h2>
+        <div class="logwrap">
+          <div class="filterbar" id="filterbar"></div>
+          <div class="logmeta" id="logmeta"></div>
+          <div class="loghead"><span>Time</span><span>Agent</span><span>Hive</span><span>Event</span><span>Conf</span></div>
+          <div class="log" id="log"></div>
+        </div>
+      </section>
+      <section class="card orchside">
+        <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+        <h2>Fleet &amp; State<span class="pin">supervisor + workers</span></h2>
+        <div class="oside-scroll">
+          <div><div class="eyebrow" style="margin-bottom:6px">Agent fleet</div><div id="fleet"></div></div>
+          <div><div class="eyebrow" style="margin-bottom:8px">Active workflows · Orkes</div><div id="workflows"></div></div>
+          <div><div class="eyebrow" style="margin-bottom:8px">Redis blackboard · live keys</div><div class="kv" id="redis"></div></div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <div class="ticker">
+    <div class="tk-lab">APIARY INTEL · LIVE</div>
+    <div class="run" id="ticker"></div>
+  </div>
+</div>
+
+<script type="module" src="/src/main.js"></script>
