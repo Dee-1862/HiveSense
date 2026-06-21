@@ -138,7 +138,7 @@ function mediaBlock(h){
     +'<span>Sensor '+sensorForHive(h.code)+' is down — no video or audio stream from this colony right now.</span></div>';
   return '<div class="media">'
     +'<div class="mediatag"><span class="d"></span>ENTRANCE TUNNEL · CAM-HIVE-'+h.code+'</div>'
-    +'<video class="tunnelvid" src="'+MEDIA_BASE+'video/'+m.video+'.mp4" poster="'+MEDIA_BASE+'video/'+m.video+'.jpg" controls loop muted playsinline preload="metadata"></video>'
+    +'<video class="tunnelvid" src="'+MEDIA_BASE+'video/'+m.video+'.mp4" poster="'+MEDIA_BASE+'video/'+m.video+'.jpg" controls loop muted playsinline preload="none"></video>'
     +'<div class="audiorow"><span class="aulbl">Hive acoustics · entrance mic</span>'
     +'<audio class="hiveaud" src="'+MEDIA_BASE+'audio/'+m.audio+'.mp3" controls preload="none"></audio></div>'
     +'</div>';
@@ -395,8 +395,9 @@ function showReticle(g){
 }
 function hideReticle(){ const r=$("#reticle"),t=$("#hovtag"); if(r)r.style.display="none"; if(t)t.style.display="none"; }
 function wireMapToolbar(){
-  $("#mv-schem").onclick=()=>{ S.mapmode="schem"; $("#mv-schem").classList.add("on"); $("#mv-sat").classList.remove("on"); setSensorPanel(false); renderMap(); };
-  $("#mv-sat").onclick=()=>{ S.mapmode="sat"; $("#mv-sat").classList.add("on"); $("#mv-schem").classList.remove("on"); renderMap(); };
+  S.mapmode="schem";  // satellite view removed - schematic yard map only
+  const _schem=$("#mv-schem"); if(_schem) _schem.onclick=()=>{ S.mapmode="schem"; renderMap(); };
+  const _sat=$("#mv-sat"); if(_sat) _sat.onclick=()=>{ S.mapmode="sat"; renderMap(); };
   // Sensors roster lives on the (satellite) map; opening it also switches there.
   const sb=$("#sensors-btn"); if(sb) sb.onclick=()=>{
     if(S.mapmode!=="sat"){ $("#mv-sat").click(); setSensorPanel(true); }
@@ -516,12 +517,12 @@ function orkesBlock(h){
     const s=t[2], info=ST[s];
     const approve = s==="wait" ? ' <button class="approve" data-hive="'+h.code+'">Approve</button>' : '';
     return '<div class="sp sp-'+s+'"><span class="spdot" style="background:'+info[1]+'"></span>'
-      +'<div><div class="spn">'+t[0]+' <span class="spt" style="color:'+info[1]+'">'+info[0]+'</span>'+approve+'</div>'
+      +'<div><div class="spn">'+t[0].replace(/[._]/g," ")+' <span class="spt" style="color:'+info[1]+'">'+info[0]+'</span>'+approve+'</div>'
       +'<div class="spnote">'+t[1]+' · '+t[3]+'</div></div></div>';
   }).join("");
-  return '<div class="wfhead"><span class="wfname">orkes · '+wf.name+'</span><span class="wfstat">durable · human-in-the-loop</span></div>'
+  return '<div class="wfhead"><span class="wfname">'+wf.name.replace(/-/g," ")+'</span><span class="wfstat">needs your approval</span></div>'
     +'<div class="span">'+rows+'</div>'
-    +'<div class="reco"><span class="recok">Claude recommendation</span>'+wf.reco+'</div>';
+    +'<div class="reco"><span class="recok">What we suggest</span>'+wf.reco+'</div>';
 }
 function pipeBlock(h){
   const f=fusion(h);
@@ -534,7 +535,7 @@ function pipeBlock(h){
       +'<div class="row"><span class="lab">Bees scanned</span><span class="num">'+h.scanned+'</span></div>'
       +'<div class="row"><span class="lab">Mites detected</span><span class="num">'+h.mites+'</span></div>'
       +'<div class="row"><span class="lab">Deformed-wing signs</span><span class="'+(h.dwv?"tag r":"tag g")+'">'+(h.dwv?"present":"none")+'</span></div>'
-      +'<div class="row"><span class="lab">YOLOv8 confidence</span><span class="num">0.9'+(h.st==="crit"?"1":"4")+'</span></div></div>';
+      +'<div class="row"><span class="lab">Detection confidence</span><span class="num">'+(h.st==="crit"?"91%":"94%")+'</span></div></div>';
   }
   if(S.pipe==="acoustic"){
     const s=h.stress;
@@ -544,7 +545,7 @@ function pipeBlock(h){
       +'<div class="row"><span class="lab">Dominant signature</span><span class="num" style="font-size:11px">'+h.freq+'</span></div>'
       +'<div class="row"><span class="lab">Queenless roar</span><span class="'+(h.roar?"tag r":"tag g")+'">'+(h.roar?"detected":"absent")+'</span></div>'
       +'<div class="row"><span class="lab">Swarm low-freq spike</span><span class="'+(h.swarm?"tag a":"tag g")+'">'+(h.swarm?"detected":"absent")+'</span></div>'
-      +'<div class="row"><span class="lab">Model</span><span class="num" style="font-size:11px">RandomForest · MFCC+SSD</span></div></div>';
+      +'<div class="row"><span class="lab">Method</span><span class="num" style="font-size:11px">colony sound analysis</span></div></div>';
   }
   if(S.pipe==="behavior"){
     return '<div class="pipe">'
@@ -554,14 +555,12 @@ function pipeBlock(h){
       +(h.netflow!=null
         ? '<div class="row"><span class="lab">Net entrance flow <span class="livedot"></span></span><span class="'+(h.flowLabel==="outflux"?"tag r":h.flowLabel==="influx"?"tag a":"num")+'">'+(h.netflow>0?"+":"")+h.netflow+' /cycle'+(h.flowLabel!=="balanced"?" · "+h.flowLabel:"")+'</span></div>'
         : '')
-      +'<div class="row"><span class="lab">Source</span><span class="num" style="font-size:11px">'+(h.live?"uAgent verdict · live":"Overshoot AI vision")+'</span></div></div>';
+      +'<div class="row"><span class="lab">Source</span><span class="num" style="font-size:11px">'+(h.live?"live sensor":"entrance camera")+'</span></div></div>';
   }
   return '<div class="pipe">'
-    +'<div class="mline"><div><span class="v" style="color:var(--honey)">'+(f.conf*100).toFixed(0)+'%</span> <span class="u">cross-modal confidence</span></div></div>'
-    +'<div style="font-family:var(--mono);font-size:10.5px;background:#0a0e14;border:1px solid var(--line);border-radius:6px;padding:9px 10px;color:var(--honey);margin:2px 0 8px;line-height:1.6">'+f.rule+'</div>'
-    +'<div class="row"><span class="lab">Contributing agents</span><span class="num" style="font-size:10.5px">'+f.sig.join(" · ")+'</span></div>'
-    +'<div class="row"><span class="lab">Decided by</span><span class="num" style="font-size:11px">Deterministic fusion core</span></div>'
-    +'<div class="row"><span class="lab">Alert authored by</span><span class="num" style="font-size:11px;color:var(--link)">Claude alert layer</span></div></div>';
+    +'<div class="mline"><div><span class="v" style="color:var(--honey)">'+(f.conf*100).toFixed(0)+'%</span> <span class="u">overall confidence</span></div></div>'
+    +'<div class="subnote">This combines the sound and camera checks into one read of the colony, so a single noisy signal does not raise a false alarm.</div>'
+    +'<div class="row"><span class="lab">Based on</span><span class="num" style="font-size:11px">'+f.sig.join(" · ")+'</span></div></div>';
 }
 function renderDetail(){
   const h=get(S.sel);
@@ -581,10 +580,10 @@ function renderDetail(){
     +'<div class="eyebrow">Colony vitality · this hive vs yard</div>'
     +radarBlock(h)
     +'<div class="divider"></div>'
-    +'<div class="eyebrow">Response · Orkes workflow</div>'
+    +'<div class="eyebrow">Recommended plan</div>'
     +orkesBlock(h)
     +'<div class="divider"></div>'
-    +'<div class="eyebrow">Detection signals</div>'
+    +'<div class="eyebrow">What the sensors see</div>'
     +'<div class="seg">'+seg("vision")+seg("acoustic")+seg("behavior")+seg("fusion")+'</div>'
     +pipeBlock(h);
   $("#dbody").querySelectorAll(".seg button").forEach(b=>b.onclick=()=>{S.pipe=b.dataset.pipe; renderDetail();});
@@ -631,12 +630,30 @@ function makeEvent(){
 function agentLabel(a){ return a==="APIS"?"APIS-PRIME":a==="VISION"?"VISION-W":a==="ACOUSTIC"?"ACOUSTIC-W":a==="BEHAVIOR"?"BEHAVIOR-W":a; }
 function logRow(e){
   const conf = (e.conf!=null && e.conf<1) ? (e.conf*100|0)+"%" : "";
-  return '<div class="logrow sev-'+e.sev+(e.real?' real':'')+'">'
+  const q = e.msg.replace(/"/g,"&quot;");
+  return '<div class="logrow clickrow sev-'+e.sev+(e.real?' real':'')+'" data-q="'+q+'" title="Click for a plain-English explanation">'
     +'<span class="lt">'+e.t.toLocaleTimeString([], {hour12:false})+'</span>'
     +'<span class="la a-'+e.agent+'">'+agentLabel(e.agent)+'</span>'
     +'<span class="lh">'+e.hive+'</span>'
     +'<span class="lm">'+e.msg+'</span>'
     +'<span class="lc">'+conf+'</span></div>';
+}
+// Click a log line -> ask the explainer agent (/api/explain) for plain English.
+async function explainLine(q){
+  const box=$("#explainbox"); if(!box) return;
+  box.style.display="block";
+  box.innerHTML='<div class="exp-line">'+q+'</div><div class="exp-ans">explaining…</div>';
+  try{
+    const r=await fetch("/api/explain?q="+encodeURIComponent(q));
+    const j=await r.json();
+    box.innerHTML='<div class="exp-head">In plain terms</div>'
+      +'<div class="exp-line">'+q+'</div>'
+      +'<div class="exp-ans">'+(j.explanation||"No explanation available.")+'</div>'
+      +'<button class="exp-close">close</button>';
+  }catch{
+    box.innerHTML='<div class="exp-ans">Could not reach the explainer. Is api_server running?</div><button class="exp-close">close</button>';
+  }
+  const c=box.querySelector(".exp-close"); if(c) c.onclick=()=>{ box.style.display="none"; };
 }
 function filtered(){
   return EVENTS.filter(e=>{
@@ -658,6 +675,7 @@ function renderLog(){
     } else {
       log.innerHTML=f.slice(0,200).map(logRow).join("");
     }
+    log.querySelectorAll(".clickrow").forEach(r=>r.onclick=()=>explainLine(r.dataset.q));
   }
   const m=$("#logmeta");
   if(m){ const al=EVENTS.filter(e=>e.sev==="alert").length, w=EVENTS.filter(e=>e.sev==="watch").length;
@@ -668,42 +686,52 @@ function renderLog(){
 }
 function buildFilterBar(){
   const fb=$("#filterbar"); if(!fb || fb.dataset.built) return; fb.dataset.built="1";
-  let html=AGENT_CHIPS.map(a=>'<button class="fchip on" data-agent="'+a+'">'+a+'</button>').join("");
-  html+='<span class="fdiv"></span>'
-    +'<button class="fchip on" data-sev="info">INFO</button>'
-    +'<button class="fchip sev-watch on" data-sev="watch">WATCH</button>'
-    +'<button class="fchip sev-alert on" data-sev="alert">ALERT</button>'
+  // Beekeeper-simple filters: importance + which hive + search. (The technical
+  // per-agent chips were removed; click any log line for a plain explanation.)
+  let html='<span class="flabel">Show</span>'
+    +'<button class="fchip on" data-sev="info">Routine</button>'
+    +'<button class="fchip sev-watch on" data-sev="watch">Watch</button>'
+    +'<button class="fchip sev-alert on" data-sev="alert">Alerts</button>'
     +'<span class="fdiv"></span>'
-    +'<select class="fsel" id="fhive"><option value="ALL">ALL HIVES</option>'+HIVES.map(h=>'<option value="'+h.code+'">'+h.code+'</option>').join("")+'</select>'
+    +'<select class="fsel" id="fhive"><option value="ALL">All hives</option>'+HIVES.map(h=>'<option value="'+h.code+'">'+h.code+' · '+h.name+'</option>').join("")+'</select>'
     +'<input class="fsearch" id="fq" placeholder="search…">'
-    +'<button class="fchip" id="grpbtn">Group: agent</button>'
     +'<button class="livebtn" id="livebtn"><span class="d"></span><span id="livetxt">LIVE</span></button>';
   fb.innerHTML=html;
-  fb.querySelectorAll("[data-agent]").forEach(b=>b.onclick=()=>{ const a=b.dataset.agent; if(LF.agents.has(a)){LF.agents.delete(a);b.classList.remove("on");}else{LF.agents.add(a);b.classList.add("on");} renderLog(); });
   fb.querySelectorAll("[data-sev]").forEach(b=>b.onclick=()=>{ const s=b.dataset.sev; if(LF.sev.has(s)){LF.sev.delete(s);b.classList.remove("on");}else{LF.sev.add(s);b.classList.add("on");} renderLog(); });
-  $("#grpbtn").onclick=function(){ LF.group=!LF.group; this.classList.toggle("on",LF.group); renderLog(); };
   $("#fhive").onchange=e=>{ LF.hive=e.target.value; renderLog(); };
   $("#fq").oninput=e=>{ LF.q=e.target.value; renderLog(); };
   $("#livebtn").onclick=function(){ LF.live=!LF.live; this.classList.toggle("paused",!LF.live); $("#livetxt").textContent=LF.live?"LIVE":"PAUSED"; };
 }
+// Beekeeper-friendly side panel: what needs you, colonies at a glance, monitoring status.
 function renderFleet(){
-  const fleet=[
-    ["APIS-PRIME","supervisor · fleet coordinator", jit(60,20)+" msg/s"],
-    ["VISION-W","YOLOv8 · mites + DWV", jit(90,30)+" fps"],
-    ["ACOUSTIC-VARROA-W","MFCC + SSD · RandomForest", jit(40,12)+" win/s"],
-    ["ACOUSTIC-COLONY-W","queenless · swarm", jit(38,10)+" win/s"],
-    ["BEHAVIOR-W","Overshoot · entrance", jit(55,15)+" fps"],
-    ["FUSION-CORE","deterministic cross-modal", jit(20,6)+" dec/s"],
-    ["CLAUDE-LAYER","alerts + actions", flaggedCount()+" open"]
-  ];
-  const fl=$("#fleet");
-  if(fl) fl.innerHTML=fleet.map(x=>'<div class="flrow"><div class="fn"><span class="hb"></span>'+x[0]+'</div><div class="fm">'+x[2]+'</div><div class="fr">'+x[1]+'</div></div>').join("");
-  const wf=$("#workflows");
-  if(wf){ const cs=critHives();
-    wf.innerHTML = cs.length ? cs.map(c=>'<div class="wf"><div class="wt">'+c.code+' · '+(c.queen==="Queenless"?"requeen":"Varroa treatment")+'</div><div class="wp">step '+(1+Math.floor(Math.random()*4))+'/5 · awaiting beekeeper approval</div></div>').join("")
-      : '<div class="wf" style="border-left-color:var(--ok)"><div class="wt">no active treatments</div><div class="wp">fleet nominal</div></div>'; }
-  const rd=$("#redis");
-  if(rd) rd.innerHTML=[["hive:*:state","9 keys"],["hive:*:vector","9 × 128d"],["fusion:decisions","streaming"],["alerts:open",flaggedCount()],["fleet:heartbeat","OK"],["mem:baselines","9 colonies"]].map(kv=>'<span class="k">'+kv[0]+'</span><span class="v">'+kv[1]+'</span>').join("");
+  const flagged=HIVES.filter(h=>h.st!=="ok")
+    .sort((a,b)=>(a.st==="crit"?0:1)-(b.st==="crit"?0:1));
+  const needs=$("#needs");
+  if(needs){
+    needs.innerHTML = flagged.length ? flagged.map(h=>{
+      const a=action(h), ap=WFAPPROVED[h.code];
+      return '<div class="needrow '+h.st+'">'
+        +'<div class="needtop"><b>'+h.code+' · '+h.name+'</b><span class="chip '+h.st+'">'+STWORD[h.st]+'</span></div>'
+        +'<div class="needact">'+a.t+'</div>'
+        +(a.c && !ap ? '<button class="approve" data-hive="'+h.code+'">Approve plan</button>'
+          : ap ? '<span class="approved">✓ approved</span>' : '')
+        +'</div>';
+    }).join("") : '<div class="allgood">All colonies look healthy. Nothing needs you right now.</div>';
+    needs.querySelectorAll(".approve").forEach(b=>b.onclick=()=>{ WFAPPROVED[b.dataset.hive]=true; renderFleet(); if(S.sel)renderDetail(); });
+  }
+  const glance=$("#glance");
+  if(glance) glance.innerHTML=HIVES.map(h=>
+    '<div class="glrow" data-code="'+h.code+'"><span class="gldot '+h.st+'"></span>'
+    +'<span class="glname">'+h.code+' · '+h.name+'</span>'
+    +'<span class="glst '+h.st+'">'+STWORD[h.st]+'</span></div>').join("");
+  if(glance) glance.querySelectorAll(".glrow").forEach(r=>r.onclick=()=>{ S.sel=r.dataset.code; setView("map"); renderDetail(); });
+
+  const sys=$("#sysline");
+  if(sys) sys.innerHTML=[
+    ["Colonies monitored",HIVES.length],
+    ["Need attention",flagged.length],
+    ["Live data link", LINK.state==="live"?"connected":LINK.state==="standby"?"standby":"demo data"]
+  ].map(kv=>'<span class="k">'+kv[0]+'</span><span class="v">'+kv[1]+'</span>').join("");
 }
 function seedLog(){
   EVENTS=[]; const now=Date.now();

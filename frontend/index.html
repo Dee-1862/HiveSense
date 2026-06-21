@@ -39,11 +39,10 @@
         <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
         <h2>Apiary Site Map<span class="pin" id="site-pin">UC DAVIS · LAIDLAW APIARY · 38.5367, -121.7889</span></h2>
         <div class="maptoolbar">
-          <div class="mtoggle"><button id="mv-schem" class="on">Schematic</button><button id="mv-sat">Satellite</button></div>
+          <div class="mtoggle"><button id="mv-schem" class="on">Yard Map</button></div>
           <button class="mfchip on" data-mf="all">All</button>
           <button class="mfchip" data-mf="watch">Watch+</button>
-          <button class="mfchip" data-mf="crit">Critical</button>
-          <button class="mfchip" id="sensors-btn" title="Field sensor roster + draw coverage boundaries">Sensors</button>
+          <button class="mfchip" data-mf="crit">Needs action</button>
           <div class="maplive"><span class="d"></span><span id="map-live">LIVE</span> · <span id="map-time"></span></div>
         </div>
         <div class="plot"><svg id="sitemap" viewBox="0 0 900 560" preserveAspectRatio="xMidYMid meet"></svg><div id="leaflet"></div>
@@ -87,17 +86,18 @@
         <div class="logwrap">
           <div class="filterbar" id="filterbar"></div>
           <div class="logmeta" id="logmeta"></div>
-          <div class="loghead"><span>Time</span><span>Agent</span><span>Hive</span><span>Event</span><span>Conf</span></div>
+          <div class="explainbox" id="explainbox" style="display:none"></div>
+          <div class="loghead"><span>Time</span><span>Agent</span><span>Hive</span><span>Event (click any line to explain)</span><span>Conf</span></div>
           <div class="log" id="log"></div>
         </div>
       </section>
       <section class="card orchside">
         <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
-        <h2>Fleet &amp; State<span class="pin">supervisor + workers</span></h2>
+        <h2>What needs you<span class="pin">your apiary, in plain terms</span></h2>
         <div class="oside-scroll">
-          <div><div class="eyebrow" style="margin-bottom:6px">Agent fleet</div><div id="fleet"></div></div>
-          <div><div class="eyebrow" style="margin-bottom:8px">Active workflows · Orkes</div><div id="workflows"></div></div>
-          <div><div class="eyebrow" style="margin-bottom:8px">Redis blackboard · live keys</div><div class="kv" id="redis"></div></div>
+          <div><div class="eyebrow" style="margin-bottom:6px">Needs attention</div><div id="needs"></div></div>
+          <div><div class="eyebrow" style="margin-bottom:8px">Colonies at a glance</div><div id="glance"></div></div>
+          <div><div class="eyebrow" style="margin-bottom:8px">Monitoring</div><div class="kv" id="sysline"></div></div>
         </div>
       </section>
     </div>

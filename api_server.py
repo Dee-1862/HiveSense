@@ -15,10 +15,12 @@ Only run ONE thing on 8000 (this OR the uAgents coordinator OR the frontend mock
 
 import os
 import json
+from urllib.parse import urlparse, parse_qs
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 import hive_state
 import godfather
+import explain as explain_mod
 
 PORT = int(os.getenv("PORT", "8000"))
 
@@ -34,13 +36,17 @@ class Handler(BaseHTTPRequestHandler):
         self.wfile.write(payload)
 
     def do_GET(self):
-        path = self.path.rstrip("/")
+        parsed = urlparse(self.path)
+        path = parsed.path.rstrip("/")
         if path == "/api/status":
             self._send(200, {"hives": hive_state.load_verdicts()})
         elif path == "/api/apiary":   # the godfather's apiary-wide read
             self._send(200, godfather.apiary_analysis(hive_state.load_verdicts()))
+        elif path == "/api/explain":  # plain-English explanation of a log line / term
+            q = (parse_qs(parsed.query).get("q") or [""])[0]
+            self._send(200, {"line": q, "explanation": explain_mod.explain(q)})
         else:
-            self._send(404, {"error": "not found", "try": "/api/status or /api/apiary"})
+            self._send(404, {"error": "not found", "try": "/api/status, /api/apiary, /api/explain?q=..."})
 
     def log_message(self, *args):
         pass  # quiet
