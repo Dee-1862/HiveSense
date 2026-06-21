@@ -1,0 +1,20 @@
+# Datasets (Do not push other people's massive datasets or clones)
+dataset/
+urban_repo/
+
+# Models
+models/*.pt
+models/*.pkl
+models/*.pth
+
+# Python Caches
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Environment Variables
+.env
+.venv/
+venv/
+papers/
+github/
