@@ -35,7 +35,7 @@ function action(h){
   if(h.st==="crit" && h.dwv) return {k:"Treat this week",c:true,t:"Mite load is 4.6 per 100 bees, above the 3 per 100 line. Brood is low right now, which is a high-efficacy window. Oxalic acid vapor or an approved miticide, then re-test in 14 days. Watch for more deformed wings."};
   if(h.wasp==="high")        return {k:"Recommended action",c:false,t:"Reduce the entrance to a single bee-width to help guards repel wasps. Remove nearby exposed comb or syrup that draws robbers."};
   if(h.mtrend==="rising")    return {k:"Watch closely",c:false,t:"Re-test mite load in 7 days. No treatment yet, but plan one if it crosses 3 per 100 bees."};
-  return {k:"No action needed",c:false,t:"Keep on the normal inspection cadence. Next acoustic re-baseline in 3 days."};
+  return {k:"No action needed",c:false,t:"This colony looks strong, so there is nothing to do right now. Just keep it on your normal inspection schedule."};
 }
 function fusion(h){
   if(h.queen==="Queenless") return {conf:0.88, rule:"acoustic.roar=TRUE  +  behavior.foragers↓>30%  →  QUEENLESS", sig:["Acoustic colony worker","Behavior worker"]};
@@ -46,7 +46,7 @@ function fusion(h){
 }
 
 /* ---------------- state + render ---------------- */
-const S={view:"map", sel:HIVES[3].code, pipe:"vision", mode:"field", mapmode:"schem", mapfilter:"all"};
+const S={view:"map", sel:HIVES[3].code, pipe:"vision", mode:"field", mapmode:"schem", mapfilter:"all", mapzoom:1};
 const $=s=>document.querySelector(s);
 const get=c=>HIVES.find(h=>h.code===c);
 
@@ -59,11 +59,11 @@ function renderSummary(){
   $("#threat-txt").textContent="THREAT LEVEL: "+(crit?"ELEVATED":"NOMINAL")+" · "+crit+" CRITICAL · "+watch+" WATCH · OPS WINDOW 7d";
 }
 // organic layout: pallet clusters + a loose row, with slight per-hive rotation (viewBox 900x560)
+// Clean, evenly spaced 3x3 grid (no rotation, no decorative yard) for legibility.
 const POS={
-  A1:[235,180,-5], A2:[300,222,4], A3:[372,182,-3],
-  B1:[610,205,6],  B2:[678,250,-4],
-  B3:[470,320,2],
-  C1:[240,408,-6], C2:[318,440,5], C3:[404,406,-2]
+  A1:[230,150,0], A2:[450,150,0], A3:[670,150,0],
+  B1:[230,305,0], B2:[450,305,0], B3:[670,305,0],
+  C1:[230,460,0], C2:[450,460,0], C3:[670,460,0]
 };
 /* ---- REAL apiary geography (satellite mode) ----
    UC Davis · Harry H. Laidlaw Jr. Honey Bee Research Facility, 225 Bee Biology Rd.
@@ -131,16 +131,15 @@ const MEDIA = {
   C1:{video:"tunnel_free", audio:"ent_07"},
   // C2, C3 have no feed — their sensors (S-08, S-09) are offline.
 };
-const sensorForHive = code => (SENSORS.find(s=>s.hive===code)||{}).id || "—";
+const sensorForHive = code => (SENSORS.find(s=>s.hive===code)||{}).id || "none";
 function mediaBlock(h){
   const m=MEDIA[h.code];
   if(!m) return '<div class="media-off"><b>Entrance tunnel feed offline</b>'
-    +'<span>Sensor '+sensorForHive(h.code)+' is down — no video or audio stream from this colony right now.</span></div>';
+    +'<span>The sensor for this colony is offline, so there is no live video or audio right now.</span></div>';
   return '<div class="media">'
     +'<div class="mediatag"><span class="d"></span>ENTRANCE TUNNEL · CAM-HIVE-'+h.code+'</div>'
-    +'<video class="tunnelvid" src="'+MEDIA_BASE+'video/'+m.video+'.mp4" poster="'+MEDIA_BASE+'video/'+m.video+'.jpg" controls loop muted playsinline preload="none"></video>'
-    +'<div class="audiorow"><span class="aulbl">Hive acoustics · entrance mic</span>'
-    +'<audio class="hiveaud" src="'+MEDIA_BASE+'audio/'+m.audio+'.mp3" controls preload="none"></audio></div>'
+    +'<video class="tunnelvid" src="'+MEDIA_BASE+'video/'+m.video+'.mp4" poster="'+MEDIA_BASE+'video/'+m.video+'.jpg" autoplay loop muted playsinline preload="auto"></video>'
+    +'<span class="aulive"><span class="d"></span>listening</span></div>'
     +'</div>';
 }
 // map a hive's real geo position to a [lat,lon] readout for the HUD.
@@ -170,19 +169,26 @@ function hiveSVG(h){
     +'</g>';
 }
 function siteDecor(){
-  let grid=''; for(let gx=40;gx<880;gx+=44) grid+='<line class="m-grid" x1="'+gx+'" y1="30" x2="'+gx+'" y2="525"/>';
-  for(let gy=30;gy<525;gy+=44) grid+='<line class="m-grid" x1="40" y1="'+gy+'" x2="880" y2="'+gy+'"/>';
-  const parcel='60,40 850,62 824,520 78,500';
-  let hatch=''; for(let hx=80;hx<820;hx+=15) hatch+='<line x1="'+hx+'" y1="44" x2="'+(hx-10)+'" y2="66"/>';
-  return '<g>'+grid+'</g>'
-    +'<polygon class="m-parcel" points="'+parcel+'"/><polygon class="m-fence" points="'+parcel+'"/>'
-    +'<g class="m-hatch">'+hatch+'</g><text class="m-lbl s" x="82" y="38">WINDBREAK / TREELINE</text>'
-    +'<path class="m-path" d="M120,500 C160,430 150,360 300,320 S520,300 690,250"/>'
-    +'<rect class="m-struct" x="700" y="430" width="74" height="46" rx="2"/><text class="m-lbl s" x="737" y="457" text-anchor="middle">EQUIP</text>'
-    +'<rect class="m-struct" x="556" y="452" width="24" height="18" rx="2"/><text class="m-lbl s" x="568" y="484" text-anchor="middle">H2O</text>'
-    +'<text class="m-lbl" x="60" y="24">UC DAVIS · LAIDLAW APIARY · SCHEMATIC · 9 colonies · 38.5367, -121.7889</text>'
-    +'<g transform="translate(815,96)"><line style="stroke:var(--muted)" x1="0" y1="13" x2="0" y2="-13"/><path d="M0,-17 L5,-8 L-5,-8 Z" fill="var(--muted)"/><text class="m-lbl s" x="0" y="26" text-anchor="middle">N</text></g>'
-    +'<g transform="translate(90,535)"><line x1="0" y1="0" x2="80" y2="0" stroke="var(--faint)" stroke-width="1.5"/><line x1="0" y1="-3" x2="0" y2="3" stroke="var(--faint)"/><line x1="80" y1="-3" x2="80" y2="3" stroke="var(--faint)"/><text class="m-lbl s" x="0" y="13">0</text><text class="m-lbl s" x="72" y="13">10 m</text></g>'
+  // Drawn (NON-geographic) surroundings: the apiary parcel where the hives sit, plus a few
+  // asymmetric roads and neighbouring fields laid out in a wider coordinate space, so when
+  // you zoom OUT the land and the roads around it come into view. Hives stay on a clean grid.
+  const parcel="30,46 874,32 896,540 22,526";  // expanded outward (more land around the hives)
+  let s='';
+  s+='<rect class="m-bg" x="-500" y="-340" width="1900" height="1240"/>';
+  // neighbouring fields, tucked into the far corners (clear of the parcel and the roads)
+  s+='<polygon class="m-field" points="-460,-320 -180,-320 -180,-60 -460,-30"/>';
+  s+='<polygon class="m-field" points="980,-320 1340,-320 1340,-80 980,-60"/>';
+  // roads sit only in the outer margins: they never cross the parcel or each other
+  s+='<path class="m-road" d="M-500,648 C150,612 760,690 1400,604"/>';   // main road below the yard
+  s+='<path class="m-roadline" d="M-500,648 C150,612 760,690 1400,604"/>';
+  s+='<path class="m-road" d="M-150,-340 C-130,80 -120,340 -110,560"/>';  // lane down the left side
+  // the apiary parcel + a faint internal grid for structure
+  s+='<polygon class="m-parcel" points="'+parcel+'"/>';
+  s+='<text class="m-lbl" x="80" y="40">APIARY YARD</text>';
+  let grid=''; for(let gx=180;gx<760;gx+=130) grid+='<line class="m-grid" x1="'+gx+'" y1="80" x2="'+gx+'" y2="488"/>';
+  for(let gy=130;gy<470;gy+=120) grid+='<line class="m-grid" x1="120" y1="'+gy+'" x2="800" y2="'+gy+'"/>';
+  s+='<g opacity="0.5">'+grid+'</g>';
+  return s
     +'<g class="reticle" id="reticle" style="display:none"><line id="rv" x1="0" y1="0" x2="0" y2="0"/><line id="rh" x1="0" y1="0" x2="0" y2="0"/></g>'
     +'<text class="hovtag" id="hovtag" style="display:none"></text>';
 }
@@ -381,7 +387,20 @@ function renderMap(){
       g.addEventListener("mouseenter",()=>showReticle(g));
       g.addEventListener("mouseleave",hideReticle);
     });
+    applyMapZoom();
   }
+}
+// Limited zoom for the schematic yard: the viewBox grows/shrinks around the yard centre.
+// At 1x you see the parcel; zoom out reveals the surrounding land and roads; zoom in goes closer.
+const ZOOM_MIN=0.62, ZOOM_MAX=1.6, CX=450, CY=280, BASE_W=900, BASE_H=560;
+function applyMapZoom(){
+  const svg=$("#sitemap"); if(!svg||S.mapmode==="sat") return;
+  const z=S.mapzoom, w=BASE_W/z, h=BASE_H/z;
+  svg.setAttribute("viewBox", (CX-w/2)+" "+(CY-h/2)+" "+w+" "+h);
+}
+function zoomMap(step){
+  S.mapzoom=Math.min(ZOOM_MAX, Math.max(ZOOM_MIN, S.mapzoom*step));
+  applyMapZoom();
 }
 function showReticle(g){
   const cx=+g.dataset.cx, cy=+g.dataset.cy, h=get(g.dataset.code);
@@ -404,6 +423,10 @@ function wireMapToolbar(){
     else setSensorPanel(!document.body.classList.contains("sensorson"));
   };
   document.querySelectorAll("[data-mf]").forEach(b=>b.onclick=()=>{ S.mapfilter=b.dataset.mf; document.querySelectorAll("[data-mf]").forEach(x=>x.classList.toggle("on",x===b)); renderMap(); });
+  const zi=$("#mz-in"); if(zi) zi.onclick=()=>zoomMap(1.25);
+  const zo=$("#mz-out"); if(zo) zo.onclick=()=>zoomMap(1/1.25);
+  const plot=document.querySelector(".plot");
+  if(plot) plot.addEventListener("wheel",e=>{ if(S.mapmode==="sat")return; e.preventDefault(); zoomMap(e.deltaY<0?1.12:1/1.12); },{passive:false});
   const pb=$("#scrub-play"); if(pb) pb.onclick=function(){ this.textContent=this.textContent==="❚❚"?"▶":"❚❚"; };
   const ab=$("#scrub-arch"); if(ab) ab.onclick=function(){ const live=$("#map-live"); const on=this.style.color==="var(--honey)"; this.style.color=on?"var(--muted)":"var(--honey)"; if(live) live.textContent=on?"LIVE":"ARCHIVED"; };
 }
@@ -448,20 +471,21 @@ function radarSVG(h){
           +'<text class="rax pct" x="'+lx.toFixed(0)+'" y="'+(ly+dy+11).toFixed(0)+'" text-anchor="'+anch+'">'+Math.round(cur[i]*100)+'%</text>';
     dots+='<circle cx="'+(cx+R*cur[i]*Math.cos(a)).toFixed(1)+'" cy="'+(cy+R*cur[i]*Math.sin(a)).toFixed(1)+'" r="2.5" fill="#fff"/>';
   }
+  // single calm status colour (matches the theme) instead of a warm rainbow blob
+  const col = h.st==="crit" ? "#d65a52" : h.st==="watch" ? "#d9913f" : "#4caf7d";
   return '<svg viewBox="0 0 300 272">'
-    +'<defs><radialGradient id="'+id+'" gradientUnits="userSpaceOnUse" cx="'+cx+'" cy="'+cy+'" r="'+R+'">'
-    +'<stop offset="0%" stop-color="#b3261e"/><stop offset="40%" stop-color="#ad7d2b"/><stop offset="72%" stop-color="#6f9c34"/><stop offset="100%" stop-color="#3f9a52"/></radialGradient></defs>'
     +rings+spokes
-    +'<polygon points="'+poly(avg,cx,cy,R)+'" fill="none" stroke="#6b7689" stroke-width="1.2" opacity=".75"/>'
-    +'<polygon points="'+poly(prev,cx,cy,R)+'" fill="none" stroke="var(--honey)" stroke-width="1" stroke-dasharray="3 3" opacity=".5"/>'
-    +'<polygon points="'+poly(cur,cx,cy,R)+'" fill="url(#'+id+')" fill-opacity="0.82" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/>'
+    +'<polygon points="'+poly(avg,cx,cy,R)+'" fill="none" stroke="#6b7689" stroke-width="1.2" opacity=".7"/>'
+    +'<polygon points="'+poly(prev,cx,cy,R)+'" fill="none" stroke="var(--honey)" stroke-width="1" stroke-dasharray="3 3" opacity=".45"/>'
+    +'<polygon points="'+poly(cur,cx,cy,R)+'" fill="'+col+'" fill-opacity="0.18" stroke="'+col+'" stroke-width="1.8" stroke-linejoin="round"/>'
     +dots+labels+'</svg>';
 }
 function radarBlock(h){
   const cur=vitals(h); let mi=0; cur.forEach((v,i)=>{if(v<cur[mi])mi=i;});
+  const col = h.st==="crit" ? "#d65a52" : h.st==="watch" ? "#d9913f" : "#4caf7d";
   return '<div class="radar">'+radarSVG(h)
     +'<div class="rlegend">'
-    +'<span><i style="background:linear-gradient(135deg,#3f9a52,#b3261e)"></i>This hive</span>'
+    +'<span><i style="background:'+col+'"></i>This hive</span>'
     +'<span><i class="ln" style="border-color:#6b7689"></i>Yard avg</span>'
     +'<span><i class="ln" style="border-color:var(--honey)"></i>7d ago</span></div>'
     +'<div class="subnote" style="text-align:center;margin:0">Weakest signal: <b style="color:var(--ink)">'+AXIS[mi]+'</b> at '+Math.round(cur[mi]*100)+'%</div>'
@@ -510,63 +534,63 @@ function workflow(h){
       ["fuse.baseline","cross-modal check","running","live"],
       ["schedule.scan","next scan +3d","pending","3 days"]] };
 }
+// Data-driven plan: the recommendation comes from THIS hive's real readings (action()),
+// with an agentic "Ask the advisor" button that asks the LLM for tailored detail.
 function orkesBlock(h){
-  const wf=workflow(h);
-  const ST={done:["done","var(--ok)"],running:["running","var(--watch)"],wait:["awaiting approval","var(--watch)"],pending:["pending","var(--faint)"]};
-  const rows=wf.tasks.map(t=>{
-    const s=t[2], info=ST[s];
-    const approve = s==="wait" ? ' <button class="approve" data-hive="'+h.code+'">Approve</button>' : '';
-    return '<div class="sp sp-'+s+'"><span class="spdot" style="background:'+info[1]+'"></span>'
-      +'<div><div class="spn">'+t[0].replace(/[._]/g," ")+' <span class="spt" style="color:'+info[1]+'">'+info[0]+'</span>'+approve+'</div>'
-      +'<div class="spnote">'+t[1]+' · '+t[3]+'</div></div></div>';
-  }).join("");
-  return '<div class="wfhead"><span class="wfname">'+wf.name.replace(/-/g," ")+'</span><span class="wfstat">needs your approval</span></div>'
-    +'<div class="span">'+rows+'</div>'
-    +'<div class="reco"><span class="recok">What we suggest</span>'+wf.reco+'</div>';
+  const a=action(h), ap=WFAPPROVED[h.code], c=h.code;
+  return '<div class="planbox">'
+    +'<div class="planwhat">'+a.t+'</div>'
+    +'<div class="planrow">'
+    +(a.c && !ap ? '<button class="approve" data-hive="'+c+'">Approve this plan</button>'
+       : ap ? '<span class="approved">&#10003; you approved this plan</span>' : '')
+    +'<button class="askadvisor" data-hive="'+c+'">Ask the advisor</button>'
+    +'</div>'
+    +'<div class="advisorout" id="advisor-'+c+'"></div>'
+    +'</div>';
 }
+// Every value here is backed by the live verdict (acoustic stress, vision mite-rate,
+// net entrance flow, queen/swarm flags). Signals the verdict does not carry are not shown.
 function pipeBlock(h){
   const f=fusion(h);
+  const src = h.live ? "live verdict" : "latest reading";
   if(S.pipe==="vision"){
-    const pct=h.mite, over=pct>3, w=Math.min(100,(pct/6)*100), thr=(3/6)*100;
+    const pct=h.mite||0, over=pct>3, w=Math.min(100,(pct/6)*100), thr=(3/6)*100;
     return '<div class="pipe">'
-      +'<div class="mline"><div><span class="v" style="color:'+(over?"var(--crit)":"var(--ink)")+'">'+pct.toFixed(1)+'</span> <span class="u">mites / 100 bees</span></div><span class="tag '+(over?"r":pct>2?"a":"g")+'">'+(over?"over line":"under line")+'</span></div>'
+      +'<div class="mline"><div><span class="v" style="color:'+(over?"var(--crit)":"var(--ink)")+'">'+pct.toFixed(1)+'</span> <span class="u">mites per 100 bees</span></div><span class="tag '+(over?"r":pct>2?"a":"g")+'">'+(over?"over the line":"under the line")+'</span></div>'
       +'<div class="bar"><i style="width:'+w+'%;background:'+(over?"var(--crit)":pct>2?"var(--watch)":"var(--ok)")+'"></i><span class="thr" style="left:'+thr+'%"></span></div>'
-      +'<div class="subnote">Treatment line 3.0 (white mark). '+h.scanned+' bees scanned live at the tunnel. The alcohol wash kills ~300 bees for the same number.</div>'
-      +'<div class="row"><span class="lab">Bees scanned</span><span class="num">'+h.scanned+'</span></div>'
-      +'<div class="row"><span class="lab">Mites detected</span><span class="num">'+h.mites+'</span></div>'
+      +'<div class="subnote">The treatment line is 3 mites per 100 bees (white mark). This count comes from the tunnel camera, with no bees harmed.</div>'
+      +'<div class="row"><span class="lab">Camera check this cycle</span><span class="'+(h.vision_ran?"tag g":"num")+'">'+(h.vision_ran?"ran":"not needed")+'</span></div>'
       +'<div class="row"><span class="lab">Deformed-wing signs</span><span class="'+(h.dwv?"tag r":"tag g")+'">'+(h.dwv?"present":"none")+'</span></div>'
-      +'<div class="row"><span class="lab">Detection confidence</span><span class="num">'+(h.st==="crit"?"91%":"94%")+'</span></div></div>';
+      +'<div class="row"><span class="lab">Reading from</span><span class="num" style="font-size:11px">'+src+'</span></div></div>';
   }
   if(S.pipe==="acoustic"){
-    const s=h.stress;
+    const s=h.stress||0;
     return '<div class="pipe">'
-      +'<div class="mline"><div><span class="v" style="color:'+(s>60?"var(--crit)":s>40?"var(--watch)":"var(--ok)")+'">'+s+'</span> <span class="u">/ 100 stress index</span></div><span class="tag '+(s>60?"r":s>40?"a":"g")+'">'+(s>60?"high":s>40?"raised":"calm")+'</span></div>'
+      +'<div class="mline"><div><span class="v" style="color:'+(s>60?"var(--crit)":s>40?"var(--watch)":"var(--ok)")+'">'+s+'</span> <span class="u">out of 100 stress</span></div><span class="tag '+(s>60?"r":s>40?"a":"g")+'">'+(s>60?"high":s>40?"raised":"calm")+'</span></div>'
       +'<div class="bar"><i style="width:'+s+'%;background:'+(s>60?"var(--crit)":s>40?"var(--watch)":"var(--ok)")+'"></i></div>'
-      +'<div class="row"><span class="lab">Dominant signature</span><span class="num" style="font-size:11px">'+h.freq+'</span></div>'
-      +'<div class="row"><span class="lab">Queenless roar</span><span class="'+(h.roar?"tag r":"tag g")+'">'+(h.roar?"detected":"absent")+'</span></div>'
-      +'<div class="row"><span class="lab">Swarm low-freq spike</span><span class="'+(h.swarm?"tag a":"tag g")+'">'+(h.swarm?"detected":"absent")+'</span></div>'
-      +'<div class="row"><span class="lab">Method</span><span class="num" style="font-size:11px">colony sound analysis</span></div></div>';
+      +'<div class="subnote">Stress is read from the colony sound inside the hive.</div>'
+      +'<div class="row"><span class="lab">Queenless roar</span><span class="'+(h.roar?"tag r":"tag g")+'">'+(h.roar?"heard":"not heard")+'</span></div>'
+      +'<div class="row"><span class="lab">Swarm sound</span><span class="'+(h.swarm?"tag a":"tag g")+'">'+(h.swarm?"detected":"none")+'</span></div>'
+      +'<div class="row"><span class="lab">Reading from</span><span class="num" style="font-size:11px">'+src+'</span></div></div>';
   }
   if(S.pipe==="behavior"){
+    const nf=(h.netflow!=null)?h.netflow:0;
+    const lbl=nf>=50?"heavy inflow":nf<=-50?"heavy outflow":"normal";
     return '<div class="pipe">'
-      +'<div class="mline"><div><span class="v">'+h.bpm+'</span> <span class="u">bees / min · '+h.btrend+'</span></div><span class="tag '+(h.wasp==="high"?"r":h.wasp==="med"?"a":"g")+'">wasp '+h.wasp+'</span></div>'
-      +'<div class="row"><span class="lab">Bearding at entrance</span><span class="'+(h.beard?"tag a":"tag g")+'">'+(h.beard?"yes":"no")+'</span></div>'
-      +'<div class="row"><span class="lab">Entrance congestion</span><span class="num">'+h.cong+'%</span></div>'
-      +(h.netflow!=null
-        ? '<div class="row"><span class="lab">Net entrance flow <span class="livedot"></span></span><span class="'+(h.flowLabel==="outflux"?"tag r":h.flowLabel==="influx"?"tag a":"num")+'">'+(h.netflow>0?"+":"")+h.netflow+' /cycle'+(h.flowLabel!=="balanced"?" · "+h.flowLabel:"")+'</span></div>'
-        : '')
-      +'<div class="row"><span class="lab">Source</span><span class="num" style="font-size:11px">'+(h.live?"live sensor":"entrance camera")+'</span></div></div>';
+      +'<div class="mline"><div><span class="v">'+(nf>0?"+":"")+nf+'</span> <span class="u">net bees per cycle at the entrance</span></div><span class="tag '+(Math.abs(nf)>=50?(nf<0?"r":"a"):"g")+'">'+lbl+'</span></div>'
+      +'<div class="subnote">Net flow is how many more bees are entering than leaving (or the reverse) at the tunnel. A heavy outflow can mean swarming or robbing.</div>'
+      +'<div class="row"><span class="lab">Reading from</span><span class="num" style="font-size:11px">'+src+'</span></div></div>';
   }
   return '<div class="pipe">'
     +'<div class="mline"><div><span class="v" style="color:var(--honey)">'+(f.conf*100).toFixed(0)+'%</span> <span class="u">overall confidence</span></div></div>'
-    +'<div class="subnote">This combines the sound and camera checks into one read of the colony, so a single noisy signal does not raise a false alarm.</div>'
-    +'<div class="row"><span class="lab">Based on</span><span class="num" style="font-size:11px">'+f.sig.join(" · ")+'</span></div></div>';
+    +'<div class="subnote">This combines the sound and the camera into one read of the colony, so a single noisy signal does not raise a false alarm.</div></div>';
 }
 function renderDetail(){
   const h=get(S.sel);
   const [hlat,hlon]=hiveLatLon(h.code);
   $("#d-pin").textContent="CAM-HIVE-"+h.code+" · "+hlat.toFixed(5)+", "+hlon.toFixed(5);
-  const seg=p=>'<button class="'+(S.pipe===p?"on":"")+'" data-pipe="'+p+'">'+p+'</button>';
+  const PIPELABEL={vision:"Camera", acoustic:"Sound", behavior:"Entrance", fusion:"Overall"};
+  const seg=p=>'<button class="'+(S.pipe===p?"on":"")+'" data-pipe="'+p+'">'+PIPELABEL[p]+'</button>';
   $("#dbody").innerHTML=
     '<div class="dhead"><div><div class="code">'+h.code+'</div><div class="name">'+h.name+'</div>'
       +'<div class="coord">'+hlat.toFixed(5)+', '+hlon.toFixed(5)+' · '+(h.lastSync?'verdict '+new Date(h.lastSync).toLocaleTimeString():'sync '+new Date().toLocaleTimeString())+'</div></div>'
@@ -589,9 +613,19 @@ function renderDetail(){
   $("#dbody").querySelectorAll(".seg button").forEach(b=>b.onclick=()=>{S.pipe=b.dataset.pipe; renderDetail();});
   $("#dbody").querySelectorAll(".approve").forEach(b=>b.onclick=()=>{
     WFAPPROVED[h.code]=true;
-    EVENTS.unshift(ev("OPERATOR","watch",h.code,"approved · "+workflow(h).name,1));
+    EVENTS.unshift(ev("OPERATOR","watch",h.code,"You approved the recommended plan for hive "+h.code+" ("+h.name+").",1));
     if(EVENTS.length>400)EVENTS.length=400;
     renderDetail(); if(S.view==="orch")renderLog();
+  });
+  $("#dbody").querySelectorAll(".askadvisor").forEach(b=>b.onclick=async()=>{
+    const hh=get(b.dataset.hive), out=$("#advisor-"+b.dataset.hive);
+    if(out) out.textContent="Asking the advisor...";
+    try{
+      const qs=new URLSearchParams({hive:hh.code, name:hh.name, status:hh.st, mite:hh.mite,
+        stress:hh.stress, queen:hh.queen, traffic:(hh.netflow!=null?hh.netflow:0)});
+      const r=await fetch("/api/advise?"+qs.toString()); const j=await r.json();
+      if(out) out.textContent=j.advice||"No advice available.";
+    }catch{ if(out) out.textContent="Could not reach the advisor. Is api_server running?"; }
   });
 }
 
@@ -609,25 +643,33 @@ const jit=(n,d)=>n+Math.floor(Math.random()*(2*(d||3)+1))-(d||3);
 function ev(agent,sev,hive,msg,conf,real){ return {id:++evtSeq, t:new Date(), agent, sev, hive, msg, conf, real:!!real}; }
 function makeEvent(){
   const h=HIVES[Math.floor(Math.random()*HIVES.length)], r=Math.random(), f=fusion(h);
+  const nm=h.code+" ("+h.name+")";
   if(h.st==="crit" && r<0.13){
-    if(h.queen==="Queenless") return ev("CLAUDE","alert",h.code,"alert authored · requeen within 72h",f.conf);
-    return ev("FUSION","alert",h.code,f.rule.split("→")[1].trim().toLowerCase(),f.conf);
+    if(h.queen==="Queenless") return ev("CLAUDE","alert",h.code,"Hive "+nm+" sounds queenless, so introduce a mated queen within 72 hours.",f.conf);
+    return ev("FUSION","alert",h.code,"Hive "+nm+" has Varroa mites above the treatment line, so plan a treatment this week.",f.conf);
   }
   if(h.st==="watch" && r<0.12){
-    if(h.queen==="Pre-swarm") return ev("FUSION","watch",h.code,"pre-swarm · inspect for queen cells",f.conf);
-    if(h.wasp==="high") return ev("BEHAVIOR","watch",h.code,"wasp pressure HIGH · robbing risk",0.79);
-    return ev("FUSION","watch",h.code,"mites trending up · re-test 7d",f.conf);
+    if(h.queen==="Pre-swarm") return ev("FUSION","watch",h.code,"Hive "+nm+" is showing pre-swarm signs, so inspect it for queen cells within the next 48 hours.",f.conf);
+    if(h.wasp==="high") return ev("BEHAVIOR","watch",h.code,"Hive "+nm+" has heavy wasp pressure at the entrance and may be getting robbed, so consider narrowing the entrance.",0.79);
+    return ev("FUSION","watch",h.code,"Hive "+nm+" has a mite load that is creeping toward the treatment line, so re-test it in about a week.",f.conf);
   }
-  if(r<0.22) return ev("VISION","info",h.code,"frame "+(frameN++)+" · "+jit(22,6)+" bees · "+(h.st==="crit"?(1+Math.floor(Math.random()*3)):0)+" mites",0.9);
-  if(r<0.38) return ev("ACOUSTIC","info",h.code,"5s window · stress "+jit(h.stress)+" · SSD vector pushed",0.87);
-  if(r<0.50) return ev("BEHAVIOR","info",h.code,"traffic "+jit(h.bpm,8)+" bees/min · "+h.btrend,0.84);
-  if(r<0.60) return ev("FUSION","info",h.code,"signals within baseline",f.conf);
-  if(r<0.72) return ev("REDIS","info",h.code,"SET hive:"+h.code+":state "+h.st,1);
-  if(r<0.80) return ev("APIS","info","—","fleet sync · 9 hives · "+flaggedCount()+" flagged",1);
-  if(r<0.90){ const c=critHives()[0]; if(c) return ev("ORKES","watch",c.code,"treatment wf step "+(1+Math.floor(Math.random()*4))+"/5 · awaiting approval",1); return ev("REDIS","info",h.code,"GET hive:"+h.code+":baseline",1); }
-  return ev("DEEPGRAM","info","—","field copilot · mic armed · idle",1);
+  if(r<0.22) return ev("VISION","info",h.code,"The camera scanned "+jit(22,6)+" bees at the "+nm+" entrance and found "+(h.st==="crit"?(1+Math.floor(Math.random()*3)):0)+" of them with visible mites.",0.9);
+  if(r<0.38) return ev("ACOUSTIC","info",h.code,"The sound check on hive "+nm+" found the colony "+(h.stress>60?"stressed":h.stress>40?"slightly raised":"calm")+" at a stress level of "+jit(h.stress)+" out of 100.",0.87);
+  if(r<0.50) return ev("BEHAVIOR","info",h.code,"About "+jit(h.bpm,8)+" bees a minute are moving at the "+nm+" entrance and traffic is trending "+h.btrend+".",0.84);
+  if(r<0.62) return ev("FUSION","info",h.code,"All of hive "+nm+"'s signals look normal, so nothing needs you here.",f.conf);
+  if(r<0.74) return ev("REDIS","info",h.code,"The overall status for hive "+nm+" was updated to "+STWORD[h.st].toLowerCase()+".",1);
+  if(r<0.86) return ev("APIS","info","yard","All "+HIVES.length+" hives were checked across the yard and "+flaggedCount()+" need your attention.",1);
+  const c=critHives()[0];
+  if(c) return ev("ORKES","watch",c.code,"The treatment plan for hive "+c.code+" ("+c.name+") is on step "+(1+Math.floor(Math.random()*4))+" of 5 and is waiting for your approval.",1);
+  return ev("FUSION","info",h.code,"All of hive "+nm+"'s signals look normal, so nothing needs you here.",f.conf);
 }
-function agentLabel(a){ return a==="APIS"?"APIS-PRIME":a==="VISION"?"VISION-W":a==="ACOUSTIC"?"ACOUSTIC-W":a==="BEHAVIOR"?"BEHAVIOR-W":a; }
+// Beekeeper-friendly source names (the underlying agent code still drives the colour).
+const SOURCE={VISION:"Camera", ACOUSTIC:"Sound", BEHAVIOR:"Entrance", FUSION:"Analysis",
+  REDIS:"System", CLAUDE:"Advisor", ORKES:"Plan", APIS:"Coordinator", DEEPGRAM:"Voice", OPERATOR:"You"};
+function agentLabel(a){ return SOURCE[a]||a; }
+// Live-tail: only auto-refresh the log while the reader is at the very top. Once they
+// scroll down to read, the view freezes so new rows don't shove their line away.
+function logAtTop(){ const l=$("#log"); return !l || l.scrollTop < 8; }
 function logRow(e){
   const conf = (e.conf!=null && e.conf<1) ? (e.conf*100|0)+"%" : "";
   const q = e.msg.replace(/"/g,"&quot;");
@@ -666,6 +708,7 @@ function filtered(){
 }
 function renderLog(){
   const f=filtered(), log=$("#log");
+  const prevTop = log ? log.scrollTop : 0;   // preserve the reader's position across re-renders
   if(log){
     if(LF.group){
       const groups={}; f.slice(0,300).forEach(e=>{(groups[e.agent]=groups[e.agent]||[]).push(e);});
@@ -676,6 +719,7 @@ function renderLog(){
       log.innerHTML=f.slice(0,200).map(logRow).join("");
     }
     log.querySelectorAll(".clickrow").forEach(r=>r.onclick=()=>explainLine(r.dataset.q));
+    log.scrollTop = prevTop;   // keep the reader where they were
   }
   const m=$("#logmeta");
   if(m){ const al=EVENTS.filter(e=>e.sev==="alert").length, w=EVENTS.filter(e=>e.sev==="watch").length;
@@ -743,15 +787,18 @@ function tickLog(){
   const n=1+(Math.random()<0.4?1:0);
   for(let i=0;i<n;i++){ EVENTS.unshift(makeEvent()); }
   if(EVENTS.length>400) EVENTS.length=400;
-  renderLog();
+  if(logAtTop()) renderLog();   // frozen while the reader has scrolled down
 }
 function renderTicker(){
   const items=HIVES.map(h=>{
-    const arrow=h.mtrend==="rising"?'<span class="dn">▲ rising</span>':'<span class="up">steady</span>';
-    return '<span><b>'+h.code+'</b> '+h.mite.toFixed(1)+'/100 '+arrow+' · stress '+h.stress+'</span>';
+    const trend = h.mtrend==="rising" ? ", mites rising" : "";
+    return '<span><b>'+h.code+' '+h.name+'</b>: '+STWORD[h.st].toLowerCase()+', '
+      +(h.mite||0).toFixed(1)+' mites per 100 bees'+trend+', stress '+(h.stress||0)+' out of 100</span>';
   });
-  const extra='<span><b>APIARY INDEX</b> live</span><span>SECURE UPLINK · Redis OK · Orkes workflows: 2 pending approval</span>';
-  $("#ticker").innerHTML=(items.join("")+extra).repeat(2);
+  const flagged=HIVES.filter(h=>h.st!=="ok").length;
+  const summary='<span><b>Apiary:</b> '+HIVES.length+' hives, '+(HIVES.length-flagged)
+    +' healthy, '+flagged+' need attention</span>';
+  $("#ticker").innerHTML=(summary+items.join("")).repeat(2);
 }
 
 /* ---------------- chrome ---------------- */
@@ -837,10 +884,15 @@ function applyVerdict(hive, v) {
   }
   if (Array.isArray(v.position) && v.position.length === 2) hive.pos = v.position;
 
+  // Real per-detector signals from the verdict (no hard-coded representative numbers).
+  if (typeof v.acoustic_stress === "number") hive.stress = Math.round(v.acoustic_stress * 100);
+  if (typeof v.vision_mite_rate === "number") hive.mite = Math.round(v.vision_mite_rate * 1000) / 10; // mites / 100 bees
+  hive.vision_ran = !!v.vision_ran;
+
   let st = "ok";
-  if (status === "alert") { st = "crit"; hive.mite = 4.6; hive.mtrend = "rising"; hive.dwv = true; }
-  else if (status === "watch") { st = "watch"; hive.mite = 2.8; hive.mtrend = "rising"; hive.dwv = false; }
-  else { hive.mite = Math.min(hive.mite, 1.2); hive.mtrend = "steady"; hive.dwv = false; }
+  if (status === "alert") { st = "crit"; hive.mtrend = "rising"; hive.dwv = hive.mite > 3; }
+  else if (status === "watch") { st = "watch"; hive.mtrend = "rising"; hive.dwv = false; }
+  else { hive.mtrend = "steady"; hive.dwv = false; }
 
   // Queenless / swarm are terminal acoustic alerts and outrank varroa for severity.
   if (v.queenless_alert) { st = "crit"; hive.queen = "Queenless"; hive.roar = true; hive.swarm = false; hive.beard = false; }
@@ -853,13 +905,14 @@ function applyVerdict(hive, v) {
 
 // Translate a brand-new verdict into a real ops-log line.
 function verdictEvent(code, v) {
-  if (v.queenless_alert) return ev("CLAUDE", "alert", code, "queenless confirmed · requeen within 72h", 0.88, true);
-  if (v.swarm_alert)     return ev("FUSION", "watch", code, "pre-swarm signature · inspect for queen cells", 0.83, true);
-  if (v.varroa_status === "alert") return ev("FUSION", "alert", code, "varroa confirmed · treat this week", 0.91, true);
-  if (v.varroa_status === "watch") return ev("FUSION", "watch", code, "varroa trending up · re-test 7d", 0.78, true);
+  const g=get(code); const nm = g&&g.name ? code+" ("+g.name+")" : code;
+  if (v.queenless_alert) return ev("CLAUDE", "alert", code, "Hive "+nm+" sounds queenless, so introduce a mated queen within 72 hours.", 0.88, true);
+  if (v.swarm_alert)     return ev("FUSION", "watch", code, "Hive "+nm+" is showing pre-swarm signs, so inspect it for queen cells soon.", 0.83, true);
+  if (v.varroa_status === "alert") return ev("FUSION", "alert", code, "Hive "+nm+" has Varroa confirmed above the treatment line, so plan a treatment this week.", 0.91, true);
+  if (v.varroa_status === "watch") return ev("FUSION", "watch", code, "Hive "+nm+" has a mite load creeping toward the line, so re-test it in about a week.", 0.78, true);
   if (typeof v.traffic === "number" && Math.abs(v.traffic) >= 50)
-    return ev("BEHAVIOR", "info", code, `net ${v.traffic > 0 ? "influx" : "outflux"} ${v.traffic} bees/cycle`, 0.84, true);
-  return ev("APIS", "info", code, "verdict received · signals within baseline", 1, true);
+    return ev("BEHAVIOR", "info", code, "There is a strong "+(v.traffic > 0 ? "inflow" : "outflow")+" of bees at the "+nm+" entrance at "+Math.abs(v.traffic)+" per cycle.", 0.84, true);
+  return ev("APIS", "info", code, "A new reading came in for hive "+nm+" and the signals look normal.", 1, true);
 }
 
 async function syncBackendData() {
@@ -867,7 +920,7 @@ async function syncBackendData() {
   setLink(res.state, res.latency);
   if (res.state === "offline" || !res.hives) return;
 
-  let changed = false;
+  let changed = false, selChanged = false;
   LINK.liveCodes = new Set();
 
   for (const [backendCode, history] of Object.entries(res.hives)) {
@@ -882,9 +935,10 @@ async function syncBackendData() {
     // Only log/repaint when this hive produced a NEW verdict (by timestamp).
     if (LINK.lastTs[code] !== latest.timestamp) {
       LINK.lastTs[code] = latest.timestamp;
+      if (code === S.sel) selChanged = true;   // only then will we rebuild the readout (keeps the video playing)
       EVENTS.unshift(verdictEvent(code, latest));
       if (EVENTS.length > 400) EVENTS.length = 400;
-      if (S.view === "orch") renderLog();
+      if (S.view === "orch" && logAtTop()) renderLog();
     }
     if (applyVerdict(hive, latest)) changed = true;
   }
@@ -892,8 +946,8 @@ async function syncBackendData() {
   if (changed || res.state === "live") {
     renderSummary(); renderMap(); renderTicker();
     if (S.view === "orch") renderFleet();
-    if (S.sel) renderDetail();
   }
+  if (selChanged) renderDetail();   // rebuild the readout (and its video) only on a real change for THIS hive
 }
 
 setLink("offline", null);

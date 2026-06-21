@@ -1,53 +1,36 @@
 """
-Shared apiary state for the ASI:One agent.
+Shared apiary state for the dashboard, fleet and ASI:One agent.
 
-The hive fleet / coordinator writes the latest verdicts to data/verdicts.json; the
-ASI:One agent reads them here and turns them into a short status string it can put in
-the LLM prompt (or return directly when no LLM is available). This file is the only
-coupling between the chat agent and the monitoring fleet - a simple shared store, no
-network needed.
+The hive fleet / coordinator writes the latest verdicts here; the dashboard API and
+the ASI:One agent read them back. This file is the only coupling between the chat
+agent and the monitoring fleet - a simple shared store, no network needed.
+
+The actual storage is now pluggable (see src/store): with USE_REDIS=1 it is backed
+by Redis Stack, otherwise by data/verdicts.json. The functions below keep their old
+signatures so every existing caller (coordinator, godfather, api_server, asi1_agent)
+works unchanged - they just delegate to the selected backend.
 """
 
 import os
-import json
+
+from src.store import get_store
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-VERDICTS_FILE = os.path.join(ROOT, "data", "verdicts.json")
 
 
 def load_verdicts():
     """Return {hive_id: [verdict, ...]} from the shared store, or {} if unavailable."""
-    try:
-        with open(VERDICTS_FILE, "r", encoding="utf-8") as f:
-            return json.load(f)
-    except Exception:
-        return {}
+    return get_store().load_verdicts()
 
 
 def save_verdicts(verdicts):
     """Write the verdicts store (called by the coordinator as verdicts arrive)."""
-    os.makedirs(os.path.dirname(VERDICTS_FILE), exist_ok=True)
-    with open(VERDICTS_FILE, "w", encoding="utf-8") as f:
-        json.dump(verdicts, f, indent=2)
+    return get_store().save_verdicts(verdicts)
 
 
 def append_verdict(verdict: dict, max_points: int = 96):
-    """Append one live verdict to its hive's rolling history (keeps the 24h seed).
-
-    Loads the existing store, appends to verdict['hive_id'], trims to the last
-    `max_points`, and saves. This lets the live fleet extend the history without
-    wiping the seeded 24 hours.
-    """
-    hive = verdict.get("hive_id")
-    if not hive:
-        return
-    verdicts = load_verdicts()
-    hist = verdicts.get(hive, [])
-    if not isinstance(hist, list):
-        hist = [hist]
-    hist.append(verdict)
-    verdicts[hive] = hist[-max_points:]
-    save_verdicts(verdicts)
+    """Append one live verdict to its hive's rolling history (keeps the 24h seed)."""
+    return get_store().append_verdict(verdict, max_points)
 
 
 def apiary_summary(verdicts=None):

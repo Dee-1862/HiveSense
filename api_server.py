@@ -45,6 +45,10 @@ class Handler(BaseHTTPRequestHandler):
         elif path == "/api/explain":  # plain-English explanation of a log line / term
             q = (parse_qs(parsed.query).get("q") or [""])[0]
             self._send(200, {"line": q, "explanation": explain_mod.explain(q)})
+        elif path == "/api/advise":   # agentic, data-driven recommendation for one hive
+            qs = parse_qs(parsed.query)
+            p = {k: (qs.get(k) or [""])[0] for k in ("hive", "name", "status", "mite", "stress", "queen", "traffic")}
+            self._send(200, {"hive": p["hive"], "advice": explain_mod.advise(p)})
         else:
             self._send(404, {"error": "not found", "try": "/api/status, /api/apiary, /api/explain?q=..."})
 

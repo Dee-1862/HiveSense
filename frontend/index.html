@@ -1,7 +1,7 @@
 <!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>HiveSense · Apiary Command</title>
+<title>HiveSense</title>
 <link rel="stylesheet" href="/src/style.css">
 
 
@@ -9,7 +9,7 @@
   <header>
     <div class="brand">
       <svg class="mark" viewBox="0 0 40 40"><path d="M20 2l16 9v18l-16 9L4 29V11z" fill="none" stroke="#f5c84a" stroke-width="2"/><path d="M20 11l8 4.5v9L20 29l-8-4.5v-9z" fill="#f5c84a" opacity=".22"/><circle cx="20" cy="20" r="3.4" fill="#f5c84a"/></svg>
-      <div><b>HIVESENSE</b><div class="sub">APIARY COMMAND · v0.4</div></div>
+      <div><b>HIVESENSE</b><div class="sub">YOUR FRIENDLY SURVELLIER (v1.0)</div></div>
     </div>
     <div class="tabs">
       <button class="tab on" data-view="map">SITE MAP</button>
@@ -46,6 +46,7 @@
           <div class="maplive"><span class="d"></span><span id="map-live">LIVE</span> · <span id="map-time"></span></div>
         </div>
         <div class="plot"><svg id="sitemap" viewBox="0 0 900 560" preserveAspectRatio="xMidYMid meet"></svg><div id="leaflet"></div>
+          <div class="mapzoom"><button id="mz-in" title="Zoom in">+</button><button id="mz-out" title="Zoom out">&minus;</button></div>
           <div id="mapsearch">
             <input id="map-q" placeholder="search a place or paste lat,lng to map a different yard" autocomplete="off">
             <button id="map-home" title="Back to the demo apiary">⌂</button>
@@ -55,13 +56,6 @@
             <div class="sp-hint"><b>To map a sensor:</b> click <b>draw</b> on a row, then drag a box on the map — it auto-maps to that sensor. Or use the draw tools (top-right) and pick the sensor in the popup. Saved locally.</div>
             <div id="sensorlist"></div>
           </div>
-        </div>
-        <div class="mapscrub">
-          <button id="scrub-play">❚❚</button>
-          <span>LIVE</span>
-          <div class="track"><i></i><span class="pin"></span></div>
-          <span id="scrub-time">now</span>
-          <button id="scrub-arch">Archived</button>
         </div>
         <div class="legend">
           <span style="color:var(--ok)"><i></i><span style="color:var(--muted)">Healthy</span></span>
@@ -87,7 +81,7 @@
           <div class="filterbar" id="filterbar"></div>
           <div class="logmeta" id="logmeta"></div>
           <div class="explainbox" id="explainbox" style="display:none"></div>
-          <div class="loghead"><span>Time</span><span>Agent</span><span>Hive</span><span>Event (click any line to explain)</span><span>Conf</span></div>
+          <div class="loghead"><span>Time</span><span>Source</span><span>Hive</span><span>What happened (click any line to explain)</span><span>Conf</span></div>
           <div class="log" id="log"></div>
         </div>
       </section>
@@ -104,7 +98,7 @@
   </main>
 
   <div class="ticker">
-    <div class="tk-lab">APIARY INTEL · LIVE</div>
+    <div class="tk-lab">LIVE APIARY FEED</div>
     <div class="run" id="ticker"></div>
   </div>
 </div>

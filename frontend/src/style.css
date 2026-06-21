@@ -139,7 +139,7 @@ main{flex:1; min-height:0; display:grid; grid-template-columns:1fr 430px; gap:14
 .dhead .code{font-family:var(--mono); font-size:24px; letter-spacing:2px; line-height:1}
 .dhead .name{color:var(--muted); font-size:12.5px}
 .dhead .coord{font-family:var(--mono); font-size:10px; color:var(--faint); margin-top:3px; letter-spacing:.5px}
-.chip{margin-left:auto; font-family:var(--mono); font-size:10.5px; letter-spacing:1.5px; padding:5px 11px; border-radius:20px; text-transform:uppercase; font-weight:700}
+.chip{margin-left:auto; align-self:center; white-space:nowrap; font-family:var(--mono); font-size:10px; letter-spacing:1.2px; padding:5px 12px; border-radius:6px; text-transform:uppercase; font-weight:700}
 .chip.ok{background:rgba(68,209,138,.14); color:var(--ok); border:1px solid rgba(68,209,138,.4)}
 .chip.watch{background:rgba(255,159,67,.14); color:var(--watch); border:1px solid rgba(255,159,67,.4)}
 .chip.crit{background:rgba(255,84,104,.16); color:var(--crit); border:1px solid rgba(255,84,104,.45)}
@@ -168,6 +168,8 @@ main{flex:1; min-height:0; display:grid; grid-template-columns:1fr 430px; gap:14
 .audiorow{display:flex; align-items:center; gap:10px; padding:8px 9px; border-top:1px solid var(--line)}
 .aulbl{font-family:var(--mono); font-size:10px; letter-spacing:.5px; color:var(--faint); white-space:nowrap}
 .hiveaud{height:30px; flex:1; min-width:0}
+.aulive{width:fit-content; margin-left:auto; display:flex; align-items:center; gap:6px; font-family:var(--mono); padding:6px 9px; font-size:10px; letter-spacing:1px; color:var(--ok); text-transform:uppercase}
+.aulive .d{width:6px; height:6px; border-radius:50%; background:var(--ok); box-shadow:0 0 7px var(--ok); animation:beat 1.4s infinite}
 .media-off{flex:none; border:1px dashed var(--line2); border-radius:10px; background:rgba(214,90,82,.06);
   padding:16px; display:flex; flex-direction:column; gap:4px; text-align:center}
 .media-off b{color:var(--crit); font-size:12px; letter-spacing:.4px}
@@ -267,7 +269,7 @@ main{flex:1; min-height:0; display:grid; grid-template-columns:1fr 430px; gap:14
 
 /* ticker (markets-intel style) */
 .ticker{border-top:1px solid var(--line); background:rgba(8,11,16,.9); overflow:hidden; height:34px; display:flex; align-items:center}
-.ticker .tk-lab{font-family:var(--mono); font-size:10px; letter-spacing:1.5px; color:var(--honey); padding:0 14px; border-right:1px solid var(--line); height:100%; display:flex; align-items:center; flex:none}
+.ticker .tk-lab{font-family:var(--mono); font-size:10px; letter-spacing:1.5px; color:var(--honey); padding:0 14px; border-right:1px solid var(--line); height:100%; display:flex; align-items:center; flex:none; background:#0b0e13; position:relative; z-index:2}
 .ticker .run{display:flex; gap:38px; white-space:nowrap; font-family:var(--mono); font-size:11px; color:var(--muted); animation:run 38s linear infinite; padding-left:30px}
 .ticker .run b{color:var(--ink)} .ticker .run .up{color:var(--ok)} .ticker .run .dn{color:var(--crit)}
 @keyframes run{from{transform:translateX(0)}to{transform:translateX(-50%)}}
@@ -414,11 +416,11 @@ body.command .corner{display:block}
 .sclear{font-family:var(--mono); font-size:10px; cursor:pointer; border:1px solid var(--line2);
   background:transparent; color:var(--crit); border-radius:5px; padding:2px 6px; line-height:1}
 /* ---- beekeeper-friendly additions (explain box, needs/glance panels) ---- */
-.explainbox{background:rgba(245,200,74,.08);border:1px solid var(--honey,#f5c84a);border-radius:8px;padding:10px 12px;margin:8px 0;font-size:13px;position:relative}
-.explainbox .exp-head{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--honey,#f5c84a);margin-bottom:4px}
-.explainbox .exp-line{font-family:var(--mono,monospace);font-size:11px;color:var(--muted,#9aa);margin-bottom:6px}
-.explainbox .exp-ans{color:var(--ink,#eee);line-height:1.5}
-.explainbox .exp-close{margin-top:8px;background:transparent;border:1px solid var(--line,#333);color:var(--muted,#9aa);border-radius:5px;padding:3px 10px;cursor:pointer;font-size:11px}
+.explainbox{background:rgba(245,200,74,.10);border:1px solid var(--honey,#f5c84a);border-left:4px solid var(--honey,#f5c84a);border-radius:10px;padding:16px 18px;margin:10px 0;position:relative}
+.explainbox .exp-head{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--honey,#f5c84a);margin-bottom:8px;font-weight:600}
+.explainbox .exp-line{font-family:var(--mono,monospace);font-size:12px;color:var(--muted,#9aa);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,.08)}
+.explainbox .exp-ans{color:var(--ink,#eee);line-height:1.7;font-size:16px}
+.explainbox .exp-close{margin-top:12px;background:transparent;border:1px solid var(--line,#333);color:var(--muted,#9aa);border-radius:6px;padding:5px 14px;cursor:pointer;font-size:12px}
 .clickrow{cursor:pointer}
 .clickrow:hover{background:rgba(245,200,74,.06)}
 .flabel{font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint,#667);align-self:center;margin-right:2px}
@@ -440,3 +442,22 @@ body.command .corner{display:block}
 .glname{flex:1;color:var(--ink,#eee)}
 .glst{font-size:11px;color:var(--muted,#9aa)}
 .glst.watch{color:var(--watch,#d9913f)} .glst.crit{color:var(--crit,#d65a52)}
+
+/* ---- recommended-plan + agentic advisor block ---- */
+.planbox{margin:2px 0 4px}
+.planwhat{font-size:13.5px;line-height:1.6;color:var(--ink,#eee);margin-bottom:10px}
+.planrow{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.planrow .approve{background:var(--honey,#f5c84a);color:#1a1407;border:none;border-radius:6px;padding:6px 13px;cursor:pointer;font-size:12px;font-weight:600}
+.askadvisor{background:transparent;border:1px solid var(--honey,#f5c84a);color:var(--honey,#f5c84a);border-radius:6px;padding:6px 13px;cursor:pointer;font-size:12px}
+.askadvisor:hover{background:rgba(245,200,74,.10)}
+.advisorout:not(:empty){margin-top:10px;background:rgba(245,200,74,.06);border-left:3px solid var(--honey,#f5c84a);padding:10px 12px;border-radius:6px;font-size:13px;line-height:1.65;color:var(--ink,#eee)}
+
+/* ---- drawn (non-geographic) yard surroundings + zoom ---- */
+.m-bg{fill:#080b0f}
+.m-field{fill:rgba(120,150,120,.035); stroke:rgba(150,170,200,.10); stroke-width:1}
+.m-road{fill:none; stroke:rgba(150,170,200,.13); stroke-width:15; stroke-linecap:round}
+.m-roadline{fill:none; stroke:rgba(150,170,200,.22); stroke-width:1.4; stroke-dasharray:11 15}
+.mapzoom{position:absolute; right:12px; bottom:12px; display:flex; flex-direction:column; gap:6px; z-index:5}
+.mapzoom button{width:30px; height:30px; border:1px solid var(--line2); background:rgba(12,16,22,.92); color:var(--ink);
+  font-family:var(--mono); font-size:17px; line-height:1; border-radius:7px; cursor:pointer; display:flex; align-items:center; justify-content:center}
+.mapzoom button:hover{border-color:var(--comb); color:var(--honey)}
