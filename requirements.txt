@@ -13,3 +13,7 @@ openai>=1.0.0
 python-dotenv>=1.0.0
 uagents>=0.11.0
 uagents-core>=0.4.7
+# Redis Stack integration (RedisJSON + TimeSeries + RediSearch vectors + Pub/Sub).
+# Only needed when running with USE_REDIS=1; the file-store demo path needs none of these.
+redis>=5.0.0
+Pillow>=10.0.0   # LSB steganography carrier (unimodal packing)

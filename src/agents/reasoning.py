@@ -80,19 +80,26 @@ def should_run_vision(acoustic, history):
 # --------------------------------------------------------------------------- #
 # 2. reconcile acoustic vs vision (the clash -> human path)
 # --------------------------------------------------------------------------- #
-def reconcile(acoustic, vision, feedback=None):
+def reconcile(acoustic, vision, feedback=None, similar=None):
     """Return {varroa_status, needs_human, reason}.
 
     acoustic is colony-level stress; vision is per-bee mite presence. They corroborate,
     they do not confirm the same physical event - so a disagreement is informative, not a
     failure, and is the trigger to ask a human.
+
+    `similar` is an optional recall of this hive's most similar past states (from the
+    Redis vector memory) - retrieval-augmented context the brain can weigh, e.g. a prior
+    look-alike reading that a beekeeper later confirmed was a false alarm.
     """
     sys = ("You fuse two INDEPENDENT estimators of a bee colony's Varroa state: acoustic "
            "colony stress and per-bee vision mite rate. If both indicate a problem -> alert. "
            "If both look fine -> clear. If they DISAGREE, do not guess: set needs_human true "
-           "so a beekeeper inspects. Consider any prior human feedback. Reply JSON only: "
+           "so a beekeeper inspects. Consider any prior human feedback and any recalled "
+           "similar past states. Reply JSON only: "
            '{"varroa_status": "clear|watch|alert", "needs_human": true|false, "reason": "<short, for a beekeeper>"}.')
     usr = f"acoustic={acoustic}; vision={vision}; prior_human_feedback={feedback or 'none'}"
+    if similar:
+        usr += f"; recalled_similar_past_states={similar}"
     out = _extract_json(_chat(sys, usr))
     if out is not None and "varroa_status" in out:
         return {"varroa_status": out["varroa_status"],

@@ -21,8 +21,25 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import hive_state
 import godfather
 import explain as explain_mod
+from src.store import get_store
 
 PORT = int(os.getenv("PORT", "8000"))
+
+
+def _query_embedding(verdict: dict):
+    """Build an 86-d query vector from a hive's latest verdict so /api/similar can find
+    look-alike past readings across the apiary. Reconstructs a sample-like dict from the
+    verdict fields and reuses the same embedding the fleet stores."""
+    from src import embedding
+    sample = {
+        "acoustic_stress": float(verdict.get("acoustic_stress", 0.0) or 0.0),
+        "vision_mite_rate": float(verdict.get("vision_mite_rate", 0.0) or 0.0),
+        "net_traffic": float(verdict.get("traffic", 0.0) or 0.0),
+        "queenless_score": 1.0 if verdict.get("queenless_alert") else 0.0,
+        "swarm_band_hz": 150.0 if verdict.get("swarm_alert") else 400.0,
+        "swarm_rising": bool(verdict.get("swarm_alert")),
+    }
+    return embedding.embed_sample(sample)[0]
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -49,8 +66,50 @@ class Handler(BaseHTTPRequestHandler):
             qs = parse_qs(parsed.query)
             p = {k: (qs.get(k) or [""])[0] for k in ("hive", "name", "status", "mite", "stress", "queen", "traffic")}
             self._send(200, {"hive": p["hive"], "advice": explain_mod.advise(p)})
+        elif path == "/api/similar":  # Redis vector k-NN: past states like this hive's now
+            self._handle_similar(parse_qs(parsed.query))
+        elif path == "/api/events":   # Redis Pub/Sub -> SSE stream of live updates
+            self._handle_events()
         else:
             self._send(404, {"error": "not found", "try": "/api/status, /api/apiary, /api/explain?q=..."})
+
+    def _handle_similar(self, qs):
+        """GET /api/similar?hive=A3&k=5 -> readings most similar to that hive's latest."""
+        store = get_store()
+        hive = (qs.get("hive") or [""])[0]
+        try:
+            k = int((qs.get("k") or ["5"])[0])
+        except ValueError:
+            k = 5
+        if not store.available():
+            self._send(200, {"hive": hive, "similar": [],
+                             "note": "vector search needs Redis (run with USE_REDIS=1)"})
+            return
+        latest = store.latest(hive) if hive else None
+        if not latest:
+            self._send(200, {"hive": hive, "similar": [], "note": "no readings for that hive yet"})
+            return
+        emb = _query_embedding(latest)
+        self._send(200, {"hive": hive, "similar": store.search_similar(emb, k=k)})
+
+    def _handle_events(self):
+        """GET /api/events -> Server-Sent Events bridged from the Redis Pub/Sub channel."""
+        store = get_store()
+        if not store.available() or not hasattr(store, "subscribe"):
+            self._send(501, {"error": "live events need Redis (run with USE_REDIS=1)"})
+            return
+        self.send_response(200)
+        self.send_header("Content-Type", "text/event-stream")
+        self.send_header("Cache-Control", "no-cache")
+        self.send_header("Connection", "keep-alive")
+        self.send_header("Access-Control-Allow-Origin", "*")
+        self.end_headers()
+        try:
+            for data in store.subscribe():
+                self.wfile.write(f"data: {data}\n\n".encode("utf-8"))
+                self.wfile.flush()
+        except Exception:
+            pass  # client disconnected
 
     def log_message(self, *args):
         pass  # quiet

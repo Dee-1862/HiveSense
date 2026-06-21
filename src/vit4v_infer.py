@@ -66,6 +66,35 @@ def predict_clip(model, clip, device="cpu"):
     return torch.sigmoid(logits).squeeze(-1).cpu()
 
 
+# Fixed seeded random projection 768 -> EMBED_DIM. A Johnson-Lindenstrauss map: it
+# preserves cosine geometry without any trained weights, so the "vision embedding" is
+# an honest compression of the real ViViT CLS token, not a new learned head.
+EMBED_DIM = 64
+_PROJ = None
+
+
+def _projection(in_dim=768, out_dim=EMBED_DIM, seed=0):
+    global _PROJ
+    if _PROJ is None:
+        import numpy as np
+        rng = np.random.default_rng(seed)
+        _PROJ = (rng.standard_normal((in_dim, out_dim)) / (in_dim ** 0.5)).astype("float32")
+    return _PROJ
+
+
+@torch.no_grad()
+def embed_clip(model, clip, device="cpu", out_dim=EMBED_DIM):
+    """Real vision embedding: pool the ViViT encoder CLS token (768-d) over the clip and
+    project to out_dim. clip: (num_frames,3,H,W) or (B,...). Returns a numpy float32 vector."""
+    import numpy as np
+    if clip.dim() == 4:
+        clip = clip.unsqueeze(0)
+    enc = model.vivit(pixel_values=clip.to(device))      # encoder only, no classifier head
+    cls = enc.last_hidden_state[:, 0]                     # (B, 768)
+    pooled = cls.mean(0).cpu().numpy().astype("float32")  # (768,)
+    return (pooled @ _projection(pooled.shape[-1], out_dim)).astype(np.float32)
+
+
 def main():
     print("loading Vit4V checkpoint...")
     model = load_model()

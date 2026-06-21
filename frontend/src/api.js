@@ -9,6 +9,30 @@
  *
  * `latency` is the round-trip in ms, surfaced in the header data-link readout.
  */
+/**
+ * Subscribe to live verdict pushes over Server-Sent Events (Redis Pub/Sub bridge at
+ * /api/events). This is an ADDITIVE enhancement: when Redis is running, the dashboard
+ * refreshes the instant a verdict lands instead of waiting for the 2s poll. If the
+ * endpoint is unavailable (file-store mode returns 501), EventSource errors and we
+ * simply close it - the poll keeps the dashboard fully functional on its own.
+ * Returns a cleanup function.
+ */
+export function subscribeEvents(onEvent) {
+  let es;
+  try {
+    es = new EventSource('/api/events');
+  } catch {
+    return () => {};
+  }
+  es.onmessage = (e) => {
+    let data = null;
+    try { data = JSON.parse(e.data); } catch { /* ignore keep-alives */ }
+    onEvent(data);
+  };
+  es.onerror = () => es.close();   // no SSE backend (file mode) -> rely on polling
+  return () => es.close();
+}
+
 export async function pollCoordinator() {
   const t0 = performance.now();
   try {

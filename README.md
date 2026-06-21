@@ -247,6 +247,55 @@ python -m src.agents.run_fleet        # the 7 hive reasoning agents
 cd frontend && npm install && npm run dev
 ```
 
+## Redis Stack - the apiary's multimodal memory (optional, `USE_REDIS=1`)
+
+By default the fleet shares state through a single JSON file (`data/verdicts.json`). That file
+is **rewritten in full on every append** and read back in full on every request - fine for a
+demo, but it cannot do similarity search and the write cost grows with history. Setting
+`USE_REDIS=1` swaps in a Redis Stack backend that uses four of its modules, each for a concrete
+need. **Nothing else changes**: every component goes through `hive_state.py`, which delegates to
+the selected backend (`src/store/`). If `USE_REDIS=1` but Redis is unreachable (or is a plain
+Redis without the Stack modules), it logs a warning and **falls back to the file store** - the
+demo never breaks.
+
+| Capability | Module | Keys | Why it beats the file |
+| :--- | :--- | :--- | :--- |
+| Live verdict state | RedisJSON | `hs:hive:{id}` (latest), `hs:hive:{id}:hist` (history) | `JSON.ARRAPPEND` + `ARRTRIM` append **one** doc instead of rewriting the whole store |
+| Per-hive metrics | RedisTimeSeries | `hs:ts:{id}:{acoustic_stress\|traffic\|mite_rate}` | `RETENTION 24h` enforces the rolling window; `TS.MRANGE` reads every hive in one call |
+| Similarity search | RediSearch (HNSW) | `hs:reading:{id}:{ts}` + index `hs:idx` | filtered vector k-NN ("find past states like this hive's now") - the file store simply cannot |
+| Live push | Pub/Sub | channel `hs:events` | dashboard refreshes the instant a verdict lands (SSE), not on the 2s poll |
+
+**Multimodal embedding (86-d).** Each reading fuses a 22-d acoustic vector (the existing
+MFCC/spectral feature set) with a 64-d vision vector (the ViViT encoder's CLS token through a
+fixed seeded random projection - real ViViT, no new trained weights; a handcrafted fallback is
+used and **labelled `vision_source`** when no clip is on hand). This vector feeds
+**retrieval-augmented reasoning**: before the brain reconciles acoustic-vs-vision, it recalls the
+hive's most similar past states (`reasoning.reconcile(..., similar=...)`), e.g. a look-alike
+reading a beekeeper later confirmed was a false alarm.
+
+**"Unimodal packing" (steganography).** `stego.py` hides the acoustic feature bytes in the LSBs of
+a vision frame, so **one PNG carries both modalities** and Redis stores **one key per reading**
+instead of two. Be honest about the win: steganography does **not** make Redis itself faster - it
+gives 1 key + 1 round-trip + 1 allocation + lower aggregate `MEMORY USAGE` than 2 keys, and an
+**atomic** multimodal read (you can never fetch the image without its audio). `bench/redis_bench.py`
+measures exactly this and reports the small stego-decode CPU cost too.
+
+**Run it:**
+```bash
+docker run -d --name redis-stack -p 6379:6379 -p 8001:8001 redis/redis-stack:latest  # RedisInsight on :8001
+USE_REDIS=1 python scripts/redis_smoke.py        # verify the live path (PASS/FAIL per capability)
+USE_REDIS=1 python -m src.agents.run_fleet       # fleet writes JSON + TS + vectors + blobs
+USE_REDIS=1 python api_server.py                 # serves /api/similar + /api/events (SSE)
+python bench/redis_bench.py --n 1000             # Redis vs file numbers (runs file-only w/o Redis)
+```
+
+**Honest claims vs marketing.** Defensible: appending one doc vs rewriting the whole JSON (the
+gap grows with history); built-in 24h retention; filtered vector k-NN enabling RAG; one packed key
+vs two. Do **not** overclaim: stego is a key/round-trip reduction, not a Redis speedup; the ViViT
+embedding is an honest CLS projection, not a trained multimodal head; at a few thousand vectors a
+numpy scan can match single-shot HNSW - Redis wins on scale, concurrency and **filtered** k-NN; and
+the apiary feed is still simulated.
+
 ## Dashboard API (for the frontend session)
 
 `api_server.py` exposes two read-only JSON endpoints on `:8000`; the Vite dev server already
@@ -260,6 +309,11 @@ proxies `/api` to it. Run ONE thing on 8000 (this server, not the old mock).
 - `GET /api/apiary` -> the Godfather's apiary-wide read, for a top-level panel:
   `{ headline, healthy, alerts[], watches[], needs_human[], queenless[], swarming[],
   emergent[], priorities[ {hive, action, why} ] }`.
+- `GET /api/similar?hive=<HIVE>&k=5` -> Redis vector k-NN: readings most similar to that hive's
+  current state, `{ hive, similar: [{key, hive, ts, varroa_status, needs_human, score}] }`.
+  Returns an empty list with a `note` when running on the file store (no `USE_REDIS`).
+- `GET /api/events` -> Server-Sent Events stream bridged from the Redis `hs:events` channel
+  (instant push). Returns `501` on the file store; the frontend keeps its 2s poll regardless.
 
 Suggested additions: a **Godfather panel** bound to `/api/apiary` (headline + prioritised
 actions + emergent patterns like regional Varroa / robbing), and per-hive cards that show the
@@ -292,10 +346,16 @@ badge when `needs_human` is true.
 - `src/`
   - `mspb_loader.py`, `tobee_loader.py` - dataset loaders (features + labels + hive id).
   - `train_population.py`, `train_varroa_acoustic.py`, `train_gate_queenless.py` - acoustic training.
-  - `vit4v_infer.py` - load the Vit4V checkpoint; `run_demo.py` - classify a clip / annotate a video.
+  - `vit4v_infer.py` - load the Vit4V checkpoint (+ `embed_clip` for the vision embedding);
+    `run_demo.py` - classify a clip / annotate a video.
+  - `embedding.py` - fuse acoustic + vision into the 86-d multimodal vector for Redis k-NN.
+  - `store/` - pluggable backend: `base.py` (contract), `file_store.py` (JSON file, default),
+    `redis_store.py` (Redis Stack), `__init__.py` (`get_store()` factory + `USE_REDIS` fallback).
   - `agents/` - uAgent fleet: `hive_agent.py` + `reasoning.py` + `tools.py` (the 7 hive brains),
     `run_fleet.py` (launch them), `coordinator.py` + `run_coordinator.py` (the Godfather),
     `connect_mailbox.py` (mailbox helper), `schema.py`.
+- `stego.py` - LSB steganography (unimodal packing); `scripts/redis_smoke.py` - Redis path check;
+  `bench/redis_bench.py` - Redis-vs-file benchmark.
 - Root agent/data layer: `asi1_agent.py` (ASI:One chat), `asi1_agent_hosted.py` (hosted backup),
   `asi1_client.py` (local test), `hive_state.py` (shared store), `godfather.py` (apiary analysis),
   `seed_apiary.py` (24h data), `live_feed.py` (live continuation), `api_server.py` (dashboard API).
