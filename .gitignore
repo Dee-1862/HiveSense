@@ -34,5 +34,3 @@ eda/cache/
 # Frontend build artifacts / deps
 frontend/node_modules/
 frontend/dist/
-
-src/agents/

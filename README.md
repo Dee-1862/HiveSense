@@ -83,33 +83,35 @@ fleet-level coordinator that speaks the official ASI:One chat protocol.
 
 ```mermaid
 flowchart TD
-    subgraph Hive Bureau
-        W1[Vision Mite Agent]
-        W2[Acoustic Mite Agent]
-        W3[Queenless Agent]
-        W4[Swarm Agent]
-        W5[Traffic Agent]
-        S[Hive Supervisor Agent]
-        S -- "DetectorRequest" --> W1 & W2 & W3 & W4 & W5
-        W1 & W2 & W3 & W4 & W5 -- "DetectorResult" --> S
+    Feed["Apiary feed (simulated, 24h+ continuous)"]
+    subgraph Hives ["7 hive reasoning agents (hive_agent.py)"]
+        H["each hive: acoustic (always-on) -> decide vision -> reconcile -> Verdict"]
     end
-
-    C{Fleet Coordinator Agent}
-    S -- "Verdict" --> C
-    User((User)) -- "ChatMessage via ASI:One" --> C
-    C -- "REST /api/status" --> Dashboard[Live Dashboard]
+    Feed --> Hives
+    Hives -- "Verdict per hive" --> GF{"Godfather: coordinator.py + godfather.py"}
+    GF -- "cross-hive: regional varroa, robbing, priorities" --> Store[("data/verdicts.json (shared store)")]
+    Store --> API["api_server.py: /api/status + /api/apiary"]
+    API --> Dash["Dashboard (frontend)"]
+    Store --> Chat["asi1_agent.py: ASI:One chat protocol"]
+    User((Beekeeper)) -- "how are my bees?" --> Chat
+    Chat -- "answer + godfather summary" --> User
 ```
 
 ### Agent roles
-1. **Worker agents** - each detector (vision mite, acoustic mite, queenless, swarm, entrance traffic)
-   runs behind its own micro-agent, so models scale/update/fail independently.
-2. **Hive supervisor** - queries its workers, fuses the results into a single `Verdict` (now carrying
-   `varroa_status`, `queenless_alert`, `swarm_alert`, `traffic`, and `position`), and forwards it.
-3. **Fleet coordinator** - ingests verdicts from all hives to detect apiary-wide patterns (regional
-   varroa outbreak, drift-driven spread, neighbour robbing via traffic + position). It connects to
-   Agentverse via `mailbox=True` and publishes the **official ASI:One chat protocol**
-   (`uagents_core.contrib.protocols.chat`) so it is discoverable in ASI:One. It also serves the
-   dashboard's `GET /api/status`.
+1. **Hive reasoning agents (7, one per hive)** - [`hive_agent.py`](src/agents/hive_agent.py) +
+   [`reasoning.py`](src/agents/reasoning.py) + [`tools.py`](src/agents/tools.py). Each runs the cheap
+   acoustic detector every cycle, then *decides* (ASI:One asi1, with a deterministic fallback) whether
+   the reading is ambiguous enough to spend the expensive tunnel-vision test. It reconciles the two:
+   acoustic and vision agree -> confident verdict; they clash -> it does not guess, it sets
+   `needs_human` and asks a beekeeper. Models are called as tools; it emits a `Verdict`.
+2. **The Godfather (fleet coordinator)** - [`coordinator.py`](src/agents/coordinator.py) +
+   [`godfather.py`](godfather.py). Looks across all 7 hives for what no single hive can see: regional
+   Varroa pressure, neighbour robbing (influx at one hive vs outflux next door, by position), and a
+   prioritised beekeeper action list. It writes the shared verdict store and serves `GET /api/status`.
+3. **ASI:One chat agent** - [`asi1_agent.py`](asi1_agent.py). Publishes the official chat protocol
+   (`uagents_core.contrib.protocols.chat`) so the apiary is queryable from ASI:One ("how are my bees?"),
+   answering from the live verdicts plus the Godfather's summary. Its LLM brain is switchable
+   (ASI:One / Gemini / Claude) and degrades to a deterministic, data-only answer if no key is set.
 
 ## Datasets
 
@@ -231,14 +233,37 @@ python src/train_population.py        # MSPB colony strength
 python src/train_gate_queenless.py    # To-bee gate + queenless (caches features first)
 python src/train_varroa_acoustic.py   # MSPB varroa -> flags single-class, saves nothing
 
-# Run the agent fleet:
-python -m src.agents.run_coordinator  # prints an Agentverse Inspector link (mailbox)
-python -m src.agents.run_hive3
-python -m src.agents.run_hive5
+# --- Live demo (no uAgents / no mailbox needed - the reliable path) ---
+python seed_apiary.py                 # lay down 24h of data for all 7 hives (run once)
+python api_server.py                  # serve /api/status + /api/apiary on :8000
+python live_feed.py                   # (optional, own terminal) keep extending the timeline live
+python asi1_agent.py                  # ASI:One chat agent (answers from the live data)
 
-# Dashboard (proxies /api/status to the coordinator on :8000):
+# --- Full uAgent fleet (optional - needs the system clock in sync for the mailbox) ---
+python -m src.agents.run_coordinator  # the Godfather; prints an Agentverse Inspector link
+python -m src.agents.run_fleet        # the 7 hive reasoning agents
+
+# Dashboard (Vite proxies /api -> :8000; run ONE thing on :8000):
 cd frontend && npm install && npm run dev
 ```
+
+## Limitations (read before demoing)
+
+- **The apiary feed is simulated; the agents and models are not.** We do not have 7 live instrumented
+  hives, so `seed_apiary.py` lays down a realistic 24-hour history and `live_feed.py` keeps extending it
+  into an ever-growing 24h+ timeline. The per-hive storylines are synthetic, but the decision logic
+  (acoustic -> decide vision -> reconcile -> escalate), the Godfather's cross-hive analysis, and the
+  trained ML models are all real. Present it as "real agents and models reacting to a simulated apiary
+  feed," never as live sensor data.
+- **Acoustic Varroa is not learnable from the data we have** (0 MSPB hives reach the 3% threshold), so
+  mites are a vision task; the acoustic side covers colony strength, the bee/noBee gate, and queenless.
+- **Queenless does not generalise across hives** on the To-bee data (~0.18 cross-hive); reported
+  honestly, not shipped as a confident detector.
+- **The Vit4V vision figure is the paper's** (0.986) plus our local sanity check on a few VD2 clips, not
+  a full re-run of their benchmark.
+- **Mailbox connectivity is finicky** - it needs the system clock in sync with Agentverse or the token
+  is rejected (401). The hosted agent (`asi1_agent_hosted.py`) and the `api_server.py` path avoid the
+  mailbox entirely.
 
 ## Directory structure
 
@@ -249,7 +274,13 @@ cd frontend && npm install && npm run dev
   - `mspb_loader.py`, `tobee_loader.py` - dataset loaders (features + labels + hive id).
   - `train_population.py`, `train_varroa_acoustic.py`, `train_gate_queenless.py` - acoustic training.
   - `vit4v_infer.py` - load the Vit4V checkpoint; `run_demo.py` - classify a clip / annotate a video.
-  - `agents/` - the Fetch.ai uAgent fleet (workers, supervisor, coordinator, schema).
+  - `agents/` - uAgent fleet: `hive_agent.py` + `reasoning.py` + `tools.py` (the 7 hive brains),
+    `run_fleet.py` (launch them), `coordinator.py` + `run_coordinator.py` (the Godfather),
+    `connect_mailbox.py` (mailbox helper), `schema.py`.
+- Root agent/data layer: `asi1_agent.py` (ASI:One chat), `asi1_agent_hosted.py` (hosted backup),
+  `asi1_client.py` (local test), `hive_state.py` (shared store), `godfather.py` (apiary analysis),
+  `seed_apiary.py` (24h data), `live_feed.py` (live continuation), `api_server.py` (dashboard API).
+- `data/` (git-ignored) - `verdicts.json`: the shared 24h+ store read by the agent, API, and dashboard.
 - `models/` (git-ignored) - `rf_population.pkl`, `rf_gate.pkl`, `rf_queenless.pkl`, `Vit4V_model.pth`.
 - `github/vit4v/` - cloned upstream repo; `run_demo.py` imports its `VideoSegmenter`.
 - `frontend/` - Vite dashboard that renders live hive verdicts (`src/`, `index.html`, `vite.config.js`).

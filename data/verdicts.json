@@ -1,0 +1,5728 @@
+{
+  "A1": [
+    {
+      "hive_id": "A1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 5,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T03:02:24.062647"
+    },
+    {
+      "hive_id": "A1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 7,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T03:32:24.062647"
+    },
+    {
+      "hive_id": "A1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 10,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T04:02:24.062647"
+    },
+    {
+      "hive_id": "A1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 12,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T04:32:24.062647"
+    },
+    {
+      "hive_id": "A1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 15,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T05:02:24.062647"
+    },
+    {
+      "hive_id": "A1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 18,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T05:32:24.062647"
+    },
+    {
+      "hive_id": "A1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 20,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T06:02:24.062647"
+    },
+    {
+      "hive_id": "A1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 23,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T06:32:24.062647"
+    },
+    {
+      "hive_id": "A1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 25,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T07:02:24.062647"
+    },
+    {
+      "hive_id": "A1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 27,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T07:32:24.062647"
+    },
+    {
+      "hive_id": "A1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 29,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T08:02:24.062647"
+    },
+    {
+      "hive_id": "A1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 31,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T08:32:24.062647"
+    },
+    {
+      "hive_id": "A1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 33,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T09:02:24.062647"
+    },
+    {
+      "hive_id": "A1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 35,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T09:32:24.062647"
+    },
+    {
+      "hive_id": "A1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 37,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T10:02:24.062647"
+    },
+    {
+      "hive_id": "A1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 38,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T10:32:24.062647"
+    },
+    {
+      "hive_id": "A1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 40,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T11:02:24.062647"
+    },
+    {
+      "hive_id": "A1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 41,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T11:32:24.062647"
+    },
+    {
+      "hive_id": "A1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 42,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T12:02:24.062647"
+    },
+    {
+      "hive_id": "A1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 43,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T12:32:24.062647"
+    },
+    {
+      "hive_id": "A1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 43,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T13:02:24.062647"
+    },
+    {
+      "hive_id": "A1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 44,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T13:32:24.062647"
+    },
+    {
+      "hive_id": "A1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 44,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T14:02:24.062647"
+    },
+    {
+      "hive_id": "A1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 44,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T14:32:24.062647"
+    },
+    {
+      "hive_id": "A1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 44,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T15:02:24.062647"
+    },
+    {
+      "hive_id": "A1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 44,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T15:32:24.062647"
+    },
+    {
+      "hive_id": "A1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 44,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T16:02:24.062647"
+    },
+    {
+      "hive_id": "A1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 43,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T16:32:24.062647"
+    },
+    {
+      "hive_id": "A1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 43,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T17:02:24.062647"
+    },
+    {
+      "hive_id": "A1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 42,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T17:32:24.062647"
+    },
+    {
+      "hive_id": "A1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 41,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T18:02:24.062647"
+    },
+    {
+      "hive_id": "A1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 40,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T18:32:24.062647"
+    },
+    {
+      "hive_id": "A1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 38,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T19:02:24.062647"
+    },
+    {
+      "hive_id": "A1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 37,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T19:32:24.062647"
+    },
+    {
+      "hive_id": "A1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 35,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T20:02:24.062647"
+    },
+    {
+      "hive_id": "A1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 33,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T20:32:24.062647"
+    },
+    {
+      "hive_id": "A1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 31,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T21:02:24.062647"
+    },
+    {
+      "hive_id": "A1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 29,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T21:32:24.062647"
+    },
+    {
+      "hive_id": "A1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 27,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T22:02:24.062647"
+    },
+    {
+      "hive_id": "A1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 25,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T22:32:24.062647"
+    },
+    {
+      "hive_id": "A1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 23,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T23:02:24.062647"
+    },
+    {
+      "hive_id": "A1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 20,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T23:32:24.062647"
+    },
+    {
+      "hive_id": "A1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 18,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-21T00:02:24.062647"
+    },
+    {
+      "hive_id": "A1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 15,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-21T00:32:24.062647"
+    },
+    {
+      "hive_id": "A1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 12,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-21T01:02:24.062647"
+    },
+    {
+      "hive_id": "A1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 10,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-21T01:32:24.062647"
+    },
+    {
+      "hive_id": "A1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 7,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-21T02:02:24.062647"
+    },
+    {
+      "hive_id": "A1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 5,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-21T02:32:24.062647"
+    }
+  ],
+  "A2": [
+    {
+      "hive_id": "A2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": -5,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T03:02:24.062647"
+    },
+    {
+      "hive_id": "A2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": -3,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T03:32:24.062647"
+    },
+    {
+      "hive_id": "A2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 0,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T04:02:24.062647"
+    },
+    {
+      "hive_id": "A2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 2,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T04:32:24.062647"
+    },
+    {
+      "hive_id": "A2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 5,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T05:02:24.062647"
+    },
+    {
+      "hive_id": "A2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 8,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T05:32:24.062647"
+    },
+    {
+      "hive_id": "A2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 10,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T06:02:24.062647"
+    },
+    {
+      "hive_id": "A2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 13,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T06:32:24.062647"
+    },
+    {
+      "hive_id": "A2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 15,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T07:02:24.062647"
+    },
+    {
+      "hive_id": "A2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 17,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T07:32:24.062647"
+    },
+    {
+      "hive_id": "A2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 19,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T08:02:24.062647"
+    },
+    {
+      "hive_id": "A2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 21,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T08:32:24.062647"
+    },
+    {
+      "hive_id": "A2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 23,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T09:02:24.062647"
+    },
+    {
+      "hive_id": "A2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 25,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T09:32:24.062647"
+    },
+    {
+      "hive_id": "A2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 27,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T10:02:24.062647"
+    },
+    {
+      "hive_id": "A2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 28,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T10:32:24.062647"
+    },
+    {
+      "hive_id": "A2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 30,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T11:02:24.062647"
+    },
+    {
+      "hive_id": "A2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 31,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T11:32:24.062647"
+    },
+    {
+      "hive_id": "A2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 32,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T12:02:24.062647"
+    },
+    {
+      "hive_id": "A2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 33,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T12:32:24.062647"
+    },
+    {
+      "hive_id": "A2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 33,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T13:02:24.062647"
+    },
+    {
+      "hive_id": "A2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 34,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T13:32:24.062647"
+    },
+    {
+      "hive_id": "A2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 34,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T14:02:24.062647"
+    },
+    {
+      "hive_id": "A2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 34,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T14:32:24.062647"
+    },
+    {
+      "hive_id": "A2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 34,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T15:02:24.062647"
+    },
+    {
+      "hive_id": "A2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 34,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T15:32:24.062647"
+    },
+    {
+      "hive_id": "A2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 34,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T16:02:24.062647"
+    },
+    {
+      "hive_id": "A2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 33,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T16:32:24.062647"
+    },
+    {
+      "hive_id": "A2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 33,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T17:02:24.062647"
+    },
+    {
+      "hive_id": "A2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 32,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T17:32:24.062647"
+    },
+    {
+      "hive_id": "A2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 31,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T18:02:24.062647"
+    },
+    {
+      "hive_id": "A2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 30,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T18:32:24.062647"
+    },
+    {
+      "hive_id": "A2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 28,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T19:02:24.062647"
+    },
+    {
+      "hive_id": "A2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 27,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T19:32:24.062647"
+    },
+    {
+      "hive_id": "A2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 25,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T20:02:24.062647"
+    },
+    {
+      "hive_id": "A2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 23,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T20:32:24.062647"
+    },
+    {
+      "hive_id": "A2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 21,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T21:02:24.062647"
+    },
+    {
+      "hive_id": "A2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 19,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T21:32:24.062647"
+    },
+    {
+      "hive_id": "A2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 17,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T22:02:24.062647"
+    },
+    {
+      "hive_id": "A2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 15,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T22:32:24.062647"
+    },
+    {
+      "hive_id": "A2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 13,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T23:02:24.062647"
+    },
+    {
+      "hive_id": "A2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 10,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T23:32:24.062647"
+    },
+    {
+      "hive_id": "A2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 8,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-21T00:02:24.062647"
+    },
+    {
+      "hive_id": "A2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 5,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-21T00:32:24.062647"
+    },
+    {
+      "hive_id": "A2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 2,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-21T01:02:24.062647"
+    },
+    {
+      "hive_id": "A2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 0,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-21T01:32:24.062647"
+    },
+    {
+      "hive_id": "A2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": -3,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-21T02:02:24.062647"
+    },
+    {
+      "hive_id": "A2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": -5,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-21T02:32:24.062647"
+    }
+  ],
+  "A3": [
+    {
+      "hive_id": "A3",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 0,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T03:02:24.062647"
+    },
+    {
+      "hive_id": "A3",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 2,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T03:32:24.062647"
+    },
+    {
+      "hive_id": "A3",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 5,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T04:02:24.062647"
+    },
+    {
+      "hive_id": "A3",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 7,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T04:32:24.062647"
+    },
+    {
+      "hive_id": "A3",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 10,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T05:02:24.062647"
+    },
+    {
+      "hive_id": "A3",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 13,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T05:32:24.062647"
+    },
+    {
+      "hive_id": "A3",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 15,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T06:02:24.062647"
+    },
+    {
+      "hive_id": "A3",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 18,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T06:32:24.062647"
+    },
+    {
+      "hive_id": "A3",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 20,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T07:02:24.062647"
+    },
+    {
+      "hive_id": "A3",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 22,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T07:32:24.062647"
+    },
+    {
+      "hive_id": "A3",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 24,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T08:02:24.062647"
+    },
+    {
+      "hive_id": "A3",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 26,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T08:32:24.062647"
+    },
+    {
+      "hive_id": "A3",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 28,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T09:02:24.062647"
+    },
+    {
+      "hive_id": "A3",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 30,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T09:32:24.062647"
+    },
+    {
+      "hive_id": "A3",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 32,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T10:02:24.062647"
+    },
+    {
+      "hive_id": "A3",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 33,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T10:32:24.062647"
+    },
+    {
+      "hive_id": "A3",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 35,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T11:02:24.062647"
+    },
+    {
+      "hive_id": "A3",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 36,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T11:32:24.062647"
+    },
+    {
+      "hive_id": "A3",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 37,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        0
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T12:02:24.062647"
+    },
+    {
+      "hive_id": "A3",
+      "varroa_status": "watch",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 38,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        0
+      ],
+      "acoustic_stress": 0.5,
+      "vision_mite_rate": 0.02,
+      "vision_ran": true,
+      "timestamp": "2026-06-20T12:32:24.062647"
+    },
+    {
+      "hive_id": "A3",
+      "varroa_status": "watch",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 38,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        0
+      ],
+      "acoustic_stress": 0.5,
+      "vision_mite_rate": 0.02,
+      "vision_ran": true,
+      "timestamp": "2026-06-20T13:02:24.062647"
+    },
+    {
+      "hive_id": "A3",
+      "varroa_status": "watch",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 39,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        0
+      ],
+      "acoustic_stress": 0.5,
+      "vision_mite_rate": 0.02,
+      "vision_ran": true,
+      "timestamp": "2026-06-20T13:32:24.062647"
+    },
+    {
+      "hive_id": "A3",
+      "varroa_status": "watch",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 39,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        0
+      ],
+      "acoustic_stress": 0.5,
+      "vision_mite_rate": 0.02,
+      "vision_ran": true,
+      "timestamp": "2026-06-20T14:02:24.062647"
+    },
+    {
+      "hive_id": "A3",
+      "varroa_status": "watch",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 39,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        0
+      ],
+      "acoustic_stress": 0.5,
+      "vision_mite_rate": 0.02,
+      "vision_ran": true,
+      "timestamp": "2026-06-20T14:32:24.062647"
+    },
+    {
+      "hive_id": "A3",
+      "varroa_status": "watch",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 39,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        0
+      ],
+      "acoustic_stress": 0.5,
+      "vision_mite_rate": 0.02,
+      "vision_ran": true,
+      "timestamp": "2026-06-20T15:02:24.062647"
+    },
+    {
+      "hive_id": "A3",
+      "varroa_status": "watch",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 39,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        0
+      ],
+      "acoustic_stress": 0.5,
+      "vision_mite_rate": 0.02,
+      "vision_ran": true,
+      "timestamp": "2026-06-20T15:32:24.062647"
+    },
+    {
+      "hive_id": "A3",
+      "varroa_status": "watch",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 39,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        0
+      ],
+      "acoustic_stress": 0.5,
+      "vision_mite_rate": 0.02,
+      "vision_ran": true,
+      "timestamp": "2026-06-20T16:02:24.062647"
+    },
+    {
+      "hive_id": "A3",
+      "varroa_status": "watch",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 38,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        0
+      ],
+      "acoustic_stress": 0.5,
+      "vision_mite_rate": 0.02,
+      "vision_ran": true,
+      "timestamp": "2026-06-20T16:32:24.062647"
+    },
+    {
+      "hive_id": "A3",
+      "varroa_status": "watch",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 38,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        0
+      ],
+      "acoustic_stress": 0.5,
+      "vision_mite_rate": 0.02,
+      "vision_ran": true,
+      "timestamp": "2026-06-20T17:02:24.062647"
+    },
+    {
+      "hive_id": "A3",
+      "varroa_status": "watch",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 37,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        0
+      ],
+      "acoustic_stress": 0.5,
+      "vision_mite_rate": 0.02,
+      "vision_ran": true,
+      "timestamp": "2026-06-20T17:32:24.062647"
+    },
+    {
+      "hive_id": "A3",
+      "varroa_status": "watch",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 36,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        0
+      ],
+      "acoustic_stress": 0.5,
+      "vision_mite_rate": 0.02,
+      "vision_ran": true,
+      "timestamp": "2026-06-20T18:02:24.062647"
+    },
+    {
+      "hive_id": "A3",
+      "varroa_status": "watch",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 35,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        0
+      ],
+      "acoustic_stress": 0.5,
+      "vision_mite_rate": 0.02,
+      "vision_ran": true,
+      "timestamp": "2026-06-20T18:32:24.062647"
+    },
+    {
+      "hive_id": "A3",
+      "varroa_status": "watch",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 33,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        0
+      ],
+      "acoustic_stress": 0.5,
+      "vision_mite_rate": 0.02,
+      "vision_ran": true,
+      "timestamp": "2026-06-20T19:02:24.062647"
+    },
+    {
+      "hive_id": "A3",
+      "varroa_status": "watch",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 32,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        0
+      ],
+      "acoustic_stress": 0.5,
+      "vision_mite_rate": 0.02,
+      "vision_ran": true,
+      "timestamp": "2026-06-20T19:32:24.062647"
+    },
+    {
+      "hive_id": "A3",
+      "varroa_status": "watch",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 30,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        0
+      ],
+      "acoustic_stress": 0.5,
+      "vision_mite_rate": 0.02,
+      "vision_ran": true,
+      "timestamp": "2026-06-20T20:02:24.062647"
+    },
+    {
+      "hive_id": "A3",
+      "varroa_status": "watch",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 28,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        0
+      ],
+      "acoustic_stress": 0.5,
+      "vision_mite_rate": 0.02,
+      "vision_ran": true,
+      "timestamp": "2026-06-20T20:32:24.062647"
+    },
+    {
+      "hive_id": "A3",
+      "varroa_status": "watch",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 26,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        0
+      ],
+      "acoustic_stress": 0.5,
+      "vision_mite_rate": 0.02,
+      "vision_ran": true,
+      "timestamp": "2026-06-20T21:02:24.062647"
+    },
+    {
+      "hive_id": "A3",
+      "varroa_status": "watch",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 24,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        0
+      ],
+      "acoustic_stress": 0.5,
+      "vision_mite_rate": 0.02,
+      "vision_ran": true,
+      "timestamp": "2026-06-20T21:32:24.062647"
+    },
+    {
+      "hive_id": "A3",
+      "varroa_status": "alert",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 22,
+      "needs_human": false,
+      "reason": "Acoustic stress and visible mites agree: treat this week.",
+      "position": [
+        6,
+        0
+      ],
+      "acoustic_stress": 0.8,
+      "vision_mite_rate": 0.05,
+      "vision_ran": true,
+      "timestamp": "2026-06-20T22:02:24.062647"
+    },
+    {
+      "hive_id": "A3",
+      "varroa_status": "alert",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 20,
+      "needs_human": false,
+      "reason": "Acoustic stress and visible mites agree: treat this week.",
+      "position": [
+        6,
+        0
+      ],
+      "acoustic_stress": 0.8,
+      "vision_mite_rate": 0.05,
+      "vision_ran": true,
+      "timestamp": "2026-06-20T22:32:24.062647"
+    },
+    {
+      "hive_id": "A3",
+      "varroa_status": "alert",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 18,
+      "needs_human": false,
+      "reason": "Acoustic stress and visible mites agree: treat this week.",
+      "position": [
+        6,
+        0
+      ],
+      "acoustic_stress": 0.8,
+      "vision_mite_rate": 0.05,
+      "vision_ran": true,
+      "timestamp": "2026-06-20T23:02:24.062647"
+    },
+    {
+      "hive_id": "A3",
+      "varroa_status": "alert",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 15,
+      "needs_human": false,
+      "reason": "Acoustic stress and visible mites agree: treat this week.",
+      "position": [
+        6,
+        0
+      ],
+      "acoustic_stress": 0.8,
+      "vision_mite_rate": 0.05,
+      "vision_ran": true,
+      "timestamp": "2026-06-20T23:32:24.062647"
+    },
+    {
+      "hive_id": "A3",
+      "varroa_status": "alert",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 13,
+      "needs_human": false,
+      "reason": "Acoustic stress and visible mites agree: treat this week.",
+      "position": [
+        6,
+        0
+      ],
+      "acoustic_stress": 0.8,
+      "vision_mite_rate": 0.05,
+      "vision_ran": true,
+      "timestamp": "2026-06-21T00:02:24.062647"
+    },
+    {
+      "hive_id": "A3",
+      "varroa_status": "alert",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 10,
+      "needs_human": false,
+      "reason": "Acoustic stress and visible mites agree: treat this week.",
+      "position": [
+        6,
+        0
+      ],
+      "acoustic_stress": 0.8,
+      "vision_mite_rate": 0.05,
+      "vision_ran": true,
+      "timestamp": "2026-06-21T00:32:24.062647"
+    },
+    {
+      "hive_id": "A3",
+      "varroa_status": "alert",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 7,
+      "needs_human": false,
+      "reason": "Acoustic stress and visible mites agree: treat this week.",
+      "position": [
+        6,
+        0
+      ],
+      "acoustic_stress": 0.8,
+      "vision_mite_rate": 0.05,
+      "vision_ran": true,
+      "timestamp": "2026-06-21T01:02:24.062647"
+    },
+    {
+      "hive_id": "A3",
+      "varroa_status": "alert",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 5,
+      "needs_human": false,
+      "reason": "Acoustic stress and visible mites agree: treat this week.",
+      "position": [
+        6,
+        0
+      ],
+      "acoustic_stress": 0.8,
+      "vision_mite_rate": 0.05,
+      "vision_ran": true,
+      "timestamp": "2026-06-21T01:32:24.062647"
+    },
+    {
+      "hive_id": "A3",
+      "varroa_status": "alert",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 2,
+      "needs_human": false,
+      "reason": "Acoustic stress and visible mites agree: treat this week.",
+      "position": [
+        6,
+        0
+      ],
+      "acoustic_stress": 0.8,
+      "vision_mite_rate": 0.05,
+      "vision_ran": true,
+      "timestamp": "2026-06-21T02:02:24.062647"
+    },
+    {
+      "hive_id": "A3",
+      "varroa_status": "alert",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 0,
+      "needs_human": false,
+      "reason": "Acoustic stress and visible mites agree: treat this week.",
+      "position": [
+        6,
+        0
+      ],
+      "acoustic_stress": 0.8,
+      "vision_mite_rate": 0.05,
+      "vision_ran": true,
+      "timestamp": "2026-06-21T02:32:24.062647"
+    }
+  ],
+  "B1": [
+    {
+      "hive_id": "B1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 0,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T03:02:24.062647"
+    },
+    {
+      "hive_id": "B1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 2,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T03:32:24.062647"
+    },
+    {
+      "hive_id": "B1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 5,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T04:02:24.062647"
+    },
+    {
+      "hive_id": "B1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 7,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T04:32:24.062647"
+    },
+    {
+      "hive_id": "B1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 10,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T05:02:24.062647"
+    },
+    {
+      "hive_id": "B1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 13,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T05:32:24.062647"
+    },
+    {
+      "hive_id": "B1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 15,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T06:02:24.062647"
+    },
+    {
+      "hive_id": "B1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 18,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T06:32:24.062647"
+    },
+    {
+      "hive_id": "B1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 20,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T07:02:24.062647"
+    },
+    {
+      "hive_id": "B1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 22,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T07:32:24.062647"
+    },
+    {
+      "hive_id": "B1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 24,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T08:02:24.062647"
+    },
+    {
+      "hive_id": "B1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 26,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T08:32:24.062647"
+    },
+    {
+      "hive_id": "B1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 28,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T09:02:24.062647"
+    },
+    {
+      "hive_id": "B1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 30,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T09:32:24.062647"
+    },
+    {
+      "hive_id": "B1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 32,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T10:02:24.062647"
+    },
+    {
+      "hive_id": "B1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 33,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T10:32:24.062647"
+    },
+    {
+      "hive_id": "B1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 35,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T11:02:24.062647"
+    },
+    {
+      "hive_id": "B1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 36,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T11:32:24.062647"
+    },
+    {
+      "hive_id": "B1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 37,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T12:02:24.062647"
+    },
+    {
+      "hive_id": "B1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 38,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T12:32:24.062647"
+    },
+    {
+      "hive_id": "B1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 38,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T13:02:24.062647"
+    },
+    {
+      "hive_id": "B1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 39,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T13:32:24.062647"
+    },
+    {
+      "hive_id": "B1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 39,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T14:02:24.062647"
+    },
+    {
+      "hive_id": "B1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 39,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T14:32:24.062647"
+    },
+    {
+      "hive_id": "B1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 39,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T15:02:24.062647"
+    },
+    {
+      "hive_id": "B1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 39,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T15:32:24.062647"
+    },
+    {
+      "hive_id": "B1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 39,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T16:02:24.062647"
+    },
+    {
+      "hive_id": "B1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 38,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T16:32:24.062647"
+    },
+    {
+      "hive_id": "B1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 38,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T17:02:24.062647"
+    },
+    {
+      "hive_id": "B1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 37,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T17:32:24.062647"
+    },
+    {
+      "hive_id": "B1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 36,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T18:02:24.062647"
+    },
+    {
+      "hive_id": "B1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 35,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T18:32:24.062647"
+    },
+    {
+      "hive_id": "B1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 33,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T19:02:24.062647"
+    },
+    {
+      "hive_id": "B1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 32,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T19:32:24.062647"
+    },
+    {
+      "hive_id": "B1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 30,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T20:02:24.062647"
+    },
+    {
+      "hive_id": "B1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 28,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T20:32:24.062647"
+    },
+    {
+      "hive_id": "B1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 26,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T21:02:24.062647"
+    },
+    {
+      "hive_id": "B1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 24,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T21:32:24.062647"
+    },
+    {
+      "hive_id": "B1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 22,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T22:02:24.062647"
+    },
+    {
+      "hive_id": "B1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 20,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T22:32:24.062647"
+    },
+    {
+      "hive_id": "B1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 18,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T23:02:24.062647"
+    },
+    {
+      "hive_id": "B1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 15,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T23:32:24.062647"
+    },
+    {
+      "hive_id": "B1",
+      "varroa_status": "watch",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 73,
+      "needs_human": true,
+      "reason": "Signals disagree: acoustic=stressed but vision=clear. Please inspect and confirm.",
+      "position": [
+        0,
+        3
+      ],
+      "acoustic_stress": 0.7,
+      "vision_mite_rate": 0.0,
+      "vision_ran": true,
+      "timestamp": "2026-06-21T00:02:24.062647"
+    },
+    {
+      "hive_id": "B1",
+      "varroa_status": "watch",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 70,
+      "needs_human": true,
+      "reason": "Signals disagree: acoustic=stressed but vision=clear. Please inspect and confirm.",
+      "position": [
+        0,
+        3
+      ],
+      "acoustic_stress": 0.7,
+      "vision_mite_rate": 0.0,
+      "vision_ran": true,
+      "timestamp": "2026-06-21T00:32:24.062647"
+    },
+    {
+      "hive_id": "B1",
+      "varroa_status": "watch",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 67,
+      "needs_human": true,
+      "reason": "Signals disagree: acoustic=stressed but vision=clear. Please inspect and confirm.",
+      "position": [
+        0,
+        3
+      ],
+      "acoustic_stress": 0.7,
+      "vision_mite_rate": 0.0,
+      "vision_ran": true,
+      "timestamp": "2026-06-21T01:02:24.062647"
+    },
+    {
+      "hive_id": "B1",
+      "varroa_status": "watch",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 65,
+      "needs_human": true,
+      "reason": "Signals disagree: acoustic=stressed but vision=clear. Please inspect and confirm.",
+      "position": [
+        0,
+        3
+      ],
+      "acoustic_stress": 0.7,
+      "vision_mite_rate": 0.0,
+      "vision_ran": true,
+      "timestamp": "2026-06-21T01:32:24.062647"
+    },
+    {
+      "hive_id": "B1",
+      "varroa_status": "watch",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 62,
+      "needs_human": true,
+      "reason": "Signals disagree: acoustic=stressed but vision=clear. Please inspect and confirm.",
+      "position": [
+        0,
+        3
+      ],
+      "acoustic_stress": 0.7,
+      "vision_mite_rate": 0.0,
+      "vision_ran": true,
+      "timestamp": "2026-06-21T02:02:24.062647"
+    },
+    {
+      "hive_id": "B1",
+      "varroa_status": "watch",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 60,
+      "needs_human": true,
+      "reason": "Signals disagree: acoustic=stressed but vision=clear. Please inspect and confirm.",
+      "position": [
+        0,
+        3
+      ],
+      "acoustic_stress": 0.7,
+      "vision_mite_rate": 0.0,
+      "vision_ran": true,
+      "timestamp": "2026-06-21T02:32:24.062647"
+    }
+  ],
+  "B2": [
+    {
+      "hive_id": "B2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 0,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T03:02:24.062647"
+    },
+    {
+      "hive_id": "B2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 2,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T03:32:24.062647"
+    },
+    {
+      "hive_id": "B2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 5,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T04:02:24.062647"
+    },
+    {
+      "hive_id": "B2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 7,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T04:32:24.062647"
+    },
+    {
+      "hive_id": "B2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 10,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T05:02:24.062647"
+    },
+    {
+      "hive_id": "B2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 13,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T05:32:24.062647"
+    },
+    {
+      "hive_id": "B2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 15,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T06:02:24.062647"
+    },
+    {
+      "hive_id": "B2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 18,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T06:32:24.062647"
+    },
+    {
+      "hive_id": "B2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 20,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T07:02:24.062647"
+    },
+    {
+      "hive_id": "B2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 22,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T07:32:24.062647"
+    },
+    {
+      "hive_id": "B2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 24,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T08:02:24.062647"
+    },
+    {
+      "hive_id": "B2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 26,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T08:32:24.062647"
+    },
+    {
+      "hive_id": "B2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 28,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T09:02:24.062647"
+    },
+    {
+      "hive_id": "B2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 30,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T09:32:24.062647"
+    },
+    {
+      "hive_id": "B2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 32,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T10:02:24.062647"
+    },
+    {
+      "hive_id": "B2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 33,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T10:32:24.062647"
+    },
+    {
+      "hive_id": "B2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 35,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T11:02:24.062647"
+    },
+    {
+      "hive_id": "B2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 36,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T11:32:24.062647"
+    },
+    {
+      "hive_id": "B2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 37,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T12:02:24.062647"
+    },
+    {
+      "hive_id": "B2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 38,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T12:32:24.062647"
+    },
+    {
+      "hive_id": "B2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 38,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T13:02:24.062647"
+    },
+    {
+      "hive_id": "B2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 39,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T13:32:24.062647"
+    },
+    {
+      "hive_id": "B2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 39,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T14:02:24.062647"
+    },
+    {
+      "hive_id": "B2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 39,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T14:32:24.062647"
+    },
+    {
+      "hive_id": "B2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 39,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T15:02:24.062647"
+    },
+    {
+      "hive_id": "B2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 39,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T15:32:24.062647"
+    },
+    {
+      "hive_id": "B2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 39,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T16:02:24.062647"
+    },
+    {
+      "hive_id": "B2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 38,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T16:32:24.062647"
+    },
+    {
+      "hive_id": "B2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 38,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T17:02:24.062647"
+    },
+    {
+      "hive_id": "B2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 37,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T17:32:24.062647"
+    },
+    {
+      "hive_id": "B2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 36,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T18:02:24.062647"
+    },
+    {
+      "hive_id": "B2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 35,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T18:32:24.062647"
+    },
+    {
+      "hive_id": "B2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 33,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T19:02:24.062647"
+    },
+    {
+      "hive_id": "B2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 32,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T19:32:24.062647"
+    },
+    {
+      "hive_id": "B2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 30,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T20:02:24.062647"
+    },
+    {
+      "hive_id": "B2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 28,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T20:32:24.062647"
+    },
+    {
+      "hive_id": "B2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 26,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T21:02:24.062647"
+    },
+    {
+      "hive_id": "B2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 24,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T21:32:24.062647"
+    },
+    {
+      "hive_id": "B2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 22,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        3,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T22:02:24.062647"
+    },
+    {
+      "hive_id": "B2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": true,
+      "traffic": -75,
+      "needs_human": false,
+      "reason": "Swarm spike detected; heads-up to the yard.",
+      "position": [
+        3,
+        3
+      ],
+      "acoustic_stress": 0.55,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T22:32:24.062647"
+    },
+    {
+      "hive_id": "B2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": true,
+      "traffic": -75,
+      "needs_human": false,
+      "reason": "Swarm spike detected; heads-up to the yard.",
+      "position": [
+        3,
+        3
+      ],
+      "acoustic_stress": 0.55,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T23:02:24.062647"
+    },
+    {
+      "hive_id": "B2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": true,
+      "traffic": -75,
+      "needs_human": false,
+      "reason": "Swarm spike detected; heads-up to the yard.",
+      "position": [
+        3,
+        3
+      ],
+      "acoustic_stress": 0.55,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T23:32:24.062647"
+    },
+    {
+      "hive_id": "B2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": true,
+      "traffic": -75,
+      "needs_human": false,
+      "reason": "Swarm spike detected; heads-up to the yard.",
+      "position": [
+        3,
+        3
+      ],
+      "acoustic_stress": 0.55,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-21T00:02:24.062647"
+    },
+    {
+      "hive_id": "B2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": true,
+      "traffic": -75,
+      "needs_human": false,
+      "reason": "Swarm spike detected; heads-up to the yard.",
+      "position": [
+        3,
+        3
+      ],
+      "acoustic_stress": 0.55,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-21T00:32:24.062647"
+    },
+    {
+      "hive_id": "B2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": true,
+      "traffic": -75,
+      "needs_human": false,
+      "reason": "Swarm spike detected; heads-up to the yard.",
+      "position": [
+        3,
+        3
+      ],
+      "acoustic_stress": 0.55,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-21T01:02:24.062647"
+    },
+    {
+      "hive_id": "B2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": true,
+      "traffic": -75,
+      "needs_human": false,
+      "reason": "Swarm spike detected; heads-up to the yard.",
+      "position": [
+        3,
+        3
+      ],
+      "acoustic_stress": 0.55,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-21T01:32:24.062647"
+    },
+    {
+      "hive_id": "B2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": true,
+      "traffic": -75,
+      "needs_human": false,
+      "reason": "Swarm spike detected; heads-up to the yard.",
+      "position": [
+        3,
+        3
+      ],
+      "acoustic_stress": 0.55,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-21T02:02:24.062647"
+    },
+    {
+      "hive_id": "B2",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": true,
+      "traffic": -75,
+      "needs_human": false,
+      "reason": "Swarm spike detected; heads-up to the yard.",
+      "position": [
+        3,
+        3
+      ],
+      "acoustic_stress": 0.55,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-21T02:32:24.062647"
+    }
+  ],
+  "B3": [
+    {
+      "hive_id": "B3",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": -10,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T03:02:24.062647"
+    },
+    {
+      "hive_id": "B3",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": -8,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T03:32:24.062647"
+    },
+    {
+      "hive_id": "B3",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": -5,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T04:02:24.062647"
+    },
+    {
+      "hive_id": "B3",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": -3,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T04:32:24.062647"
+    },
+    {
+      "hive_id": "B3",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 0,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T05:02:24.062647"
+    },
+    {
+      "hive_id": "B3",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 3,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T05:32:24.062647"
+    },
+    {
+      "hive_id": "B3",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 5,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T06:02:24.062647"
+    },
+    {
+      "hive_id": "B3",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 8,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T06:32:24.062647"
+    },
+    {
+      "hive_id": "B3",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 10,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T07:02:24.062647"
+    },
+    {
+      "hive_id": "B3",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 12,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T07:32:24.062647"
+    },
+    {
+      "hive_id": "B3",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 14,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T08:02:24.062647"
+    },
+    {
+      "hive_id": "B3",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 16,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T08:32:24.062647"
+    },
+    {
+      "hive_id": "B3",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 18,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T09:02:24.062647"
+    },
+    {
+      "hive_id": "B3",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 20,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T09:32:24.062647"
+    },
+    {
+      "hive_id": "B3",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 22,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T10:02:24.062647"
+    },
+    {
+      "hive_id": "B3",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 23,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T10:32:24.062647"
+    },
+    {
+      "hive_id": "B3",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 25,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T11:02:24.062647"
+    },
+    {
+      "hive_id": "B3",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 26,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T11:32:24.062647"
+    },
+    {
+      "hive_id": "B3",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 27,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T12:02:24.062647"
+    },
+    {
+      "hive_id": "B3",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 28,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T12:32:24.062647"
+    },
+    {
+      "hive_id": "B3",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 28,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T13:02:24.062647"
+    },
+    {
+      "hive_id": "B3",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 29,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T13:32:24.062647"
+    },
+    {
+      "hive_id": "B3",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 29,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T14:02:24.062647"
+    },
+    {
+      "hive_id": "B3",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 29,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T14:32:24.062647"
+    },
+    {
+      "hive_id": "B3",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 29,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T15:02:24.062647"
+    },
+    {
+      "hive_id": "B3",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 29,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        6,
+        3
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T15:32:24.062647"
+    },
+    {
+      "hive_id": "B3",
+      "varroa_status": "clear",
+      "queenless_alert": true,
+      "swarm_alert": false,
+      "traffic": 29,
+      "needs_human": false,
+      "reason": "Queenless roar detected.",
+      "position": [
+        6,
+        3
+      ],
+      "acoustic_stress": 0.55,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T16:02:24.062647"
+    },
+    {
+      "hive_id": "B3",
+      "varroa_status": "clear",
+      "queenless_alert": true,
+      "swarm_alert": false,
+      "traffic": 28,
+      "needs_human": false,
+      "reason": "Queenless roar detected.",
+      "position": [
+        6,
+        3
+      ],
+      "acoustic_stress": 0.55,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T16:32:24.062647"
+    },
+    {
+      "hive_id": "B3",
+      "varroa_status": "clear",
+      "queenless_alert": true,
+      "swarm_alert": false,
+      "traffic": 28,
+      "needs_human": false,
+      "reason": "Queenless roar detected.",
+      "position": [
+        6,
+        3
+      ],
+      "acoustic_stress": 0.55,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T17:02:24.062647"
+    },
+    {
+      "hive_id": "B3",
+      "varroa_status": "clear",
+      "queenless_alert": true,
+      "swarm_alert": false,
+      "traffic": 27,
+      "needs_human": false,
+      "reason": "Queenless roar detected.",
+      "position": [
+        6,
+        3
+      ],
+      "acoustic_stress": 0.55,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T17:32:24.062647"
+    },
+    {
+      "hive_id": "B3",
+      "varroa_status": "clear",
+      "queenless_alert": true,
+      "swarm_alert": false,
+      "traffic": 26,
+      "needs_human": false,
+      "reason": "Queenless roar detected.",
+      "position": [
+        6,
+        3
+      ],
+      "acoustic_stress": 0.55,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T18:02:24.062647"
+    },
+    {
+      "hive_id": "B3",
+      "varroa_status": "clear",
+      "queenless_alert": true,
+      "swarm_alert": false,
+      "traffic": 25,
+      "needs_human": false,
+      "reason": "Queenless roar detected.",
+      "position": [
+        6,
+        3
+      ],
+      "acoustic_stress": 0.55,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T18:32:24.062647"
+    },
+    {
+      "hive_id": "B3",
+      "varroa_status": "clear",
+      "queenless_alert": true,
+      "swarm_alert": false,
+      "traffic": 23,
+      "needs_human": false,
+      "reason": "Queenless roar detected.",
+      "position": [
+        6,
+        3
+      ],
+      "acoustic_stress": 0.55,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T19:02:24.062647"
+    },
+    {
+      "hive_id": "B3",
+      "varroa_status": "clear",
+      "queenless_alert": true,
+      "swarm_alert": false,
+      "traffic": 22,
+      "needs_human": false,
+      "reason": "Queenless roar detected.",
+      "position": [
+        6,
+        3
+      ],
+      "acoustic_stress": 0.55,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T19:32:24.062647"
+    },
+    {
+      "hive_id": "B3",
+      "varroa_status": "clear",
+      "queenless_alert": true,
+      "swarm_alert": false,
+      "traffic": 20,
+      "needs_human": false,
+      "reason": "Queenless roar detected.",
+      "position": [
+        6,
+        3
+      ],
+      "acoustic_stress": 0.55,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T20:02:24.062647"
+    },
+    {
+      "hive_id": "B3",
+      "varroa_status": "clear",
+      "queenless_alert": true,
+      "swarm_alert": false,
+      "traffic": 18,
+      "needs_human": false,
+      "reason": "Queenless roar detected.",
+      "position": [
+        6,
+        3
+      ],
+      "acoustic_stress": 0.55,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T20:32:24.062647"
+    },
+    {
+      "hive_id": "B3",
+      "varroa_status": "clear",
+      "queenless_alert": true,
+      "swarm_alert": false,
+      "traffic": 16,
+      "needs_human": false,
+      "reason": "Queenless roar detected.",
+      "position": [
+        6,
+        3
+      ],
+      "acoustic_stress": 0.55,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T21:02:24.062647"
+    },
+    {
+      "hive_id": "B3",
+      "varroa_status": "clear",
+      "queenless_alert": true,
+      "swarm_alert": false,
+      "traffic": 14,
+      "needs_human": false,
+      "reason": "Queenless roar detected.",
+      "position": [
+        6,
+        3
+      ],
+      "acoustic_stress": 0.55,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T21:32:24.062647"
+    },
+    {
+      "hive_id": "B3",
+      "varroa_status": "clear",
+      "queenless_alert": true,
+      "swarm_alert": false,
+      "traffic": 12,
+      "needs_human": false,
+      "reason": "Queenless roar detected.",
+      "position": [
+        6,
+        3
+      ],
+      "acoustic_stress": 0.55,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T22:02:24.062647"
+    },
+    {
+      "hive_id": "B3",
+      "varroa_status": "clear",
+      "queenless_alert": true,
+      "swarm_alert": false,
+      "traffic": 10,
+      "needs_human": false,
+      "reason": "Queenless roar detected.",
+      "position": [
+        6,
+        3
+      ],
+      "acoustic_stress": 0.55,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T22:32:24.062647"
+    },
+    {
+      "hive_id": "B3",
+      "varroa_status": "clear",
+      "queenless_alert": true,
+      "swarm_alert": false,
+      "traffic": 8,
+      "needs_human": false,
+      "reason": "Queenless roar detected.",
+      "position": [
+        6,
+        3
+      ],
+      "acoustic_stress": 0.55,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T23:02:24.062647"
+    },
+    {
+      "hive_id": "B3",
+      "varroa_status": "clear",
+      "queenless_alert": true,
+      "swarm_alert": false,
+      "traffic": 5,
+      "needs_human": false,
+      "reason": "Queenless roar detected.",
+      "position": [
+        6,
+        3
+      ],
+      "acoustic_stress": 0.55,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T23:32:24.062647"
+    },
+    {
+      "hive_id": "B3",
+      "varroa_status": "clear",
+      "queenless_alert": true,
+      "swarm_alert": false,
+      "traffic": 3,
+      "needs_human": false,
+      "reason": "Queenless roar detected.",
+      "position": [
+        6,
+        3
+      ],
+      "acoustic_stress": 0.55,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-21T00:02:24.062647"
+    },
+    {
+      "hive_id": "B3",
+      "varroa_status": "clear",
+      "queenless_alert": true,
+      "swarm_alert": false,
+      "traffic": 0,
+      "needs_human": false,
+      "reason": "Queenless roar detected.",
+      "position": [
+        6,
+        3
+      ],
+      "acoustic_stress": 0.55,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-21T00:32:24.062647"
+    },
+    {
+      "hive_id": "B3",
+      "varroa_status": "clear",
+      "queenless_alert": true,
+      "swarm_alert": false,
+      "traffic": -3,
+      "needs_human": false,
+      "reason": "Queenless roar detected.",
+      "position": [
+        6,
+        3
+      ],
+      "acoustic_stress": 0.55,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-21T01:02:24.062647"
+    },
+    {
+      "hive_id": "B3",
+      "varroa_status": "clear",
+      "queenless_alert": true,
+      "swarm_alert": false,
+      "traffic": -5,
+      "needs_human": false,
+      "reason": "Queenless roar detected.",
+      "position": [
+        6,
+        3
+      ],
+      "acoustic_stress": 0.55,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-21T01:32:24.062647"
+    },
+    {
+      "hive_id": "B3",
+      "varroa_status": "clear",
+      "queenless_alert": true,
+      "swarm_alert": false,
+      "traffic": -8,
+      "needs_human": false,
+      "reason": "Queenless roar detected.",
+      "position": [
+        6,
+        3
+      ],
+      "acoustic_stress": 0.55,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-21T02:02:24.062647"
+    },
+    {
+      "hive_id": "B3",
+      "varroa_status": "clear",
+      "queenless_alert": true,
+      "swarm_alert": false,
+      "traffic": -10,
+      "needs_human": false,
+      "reason": "Queenless roar detected.",
+      "position": [
+        6,
+        3
+      ],
+      "acoustic_stress": 0.55,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-21T02:32:24.062647"
+    }
+  ],
+  "C1": [
+    {
+      "hive_id": "C1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": -5,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        6
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T03:02:24.062647"
+    },
+    {
+      "hive_id": "C1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": -3,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        6
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T03:32:24.062647"
+    },
+    {
+      "hive_id": "C1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 0,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        6
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T04:02:24.062647"
+    },
+    {
+      "hive_id": "C1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 2,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        6
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T04:32:24.062647"
+    },
+    {
+      "hive_id": "C1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 5,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        6
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T05:02:24.062647"
+    },
+    {
+      "hive_id": "C1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 8,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        6
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T05:32:24.062647"
+    },
+    {
+      "hive_id": "C1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 10,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        6
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T06:02:24.062647"
+    },
+    {
+      "hive_id": "C1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 13,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        6
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T06:32:24.062647"
+    },
+    {
+      "hive_id": "C1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 15,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        6
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T07:02:24.062647"
+    },
+    {
+      "hive_id": "C1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 17,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        6
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T07:32:24.062647"
+    },
+    {
+      "hive_id": "C1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 19,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        6
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T08:02:24.062647"
+    },
+    {
+      "hive_id": "C1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 21,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        6
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T08:32:24.062647"
+    },
+    {
+      "hive_id": "C1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 23,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        6
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T09:02:24.062647"
+    },
+    {
+      "hive_id": "C1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 25,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        6
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T09:32:24.062647"
+    },
+    {
+      "hive_id": "C1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 27,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        6
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T10:02:24.062647"
+    },
+    {
+      "hive_id": "C1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 28,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        6
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T10:32:24.062647"
+    },
+    {
+      "hive_id": "C1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 30,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        6
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T11:02:24.062647"
+    },
+    {
+      "hive_id": "C1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 31,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        6
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T11:32:24.062647"
+    },
+    {
+      "hive_id": "C1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 32,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        6
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T12:02:24.062647"
+    },
+    {
+      "hive_id": "C1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 33,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        6
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T12:32:24.062647"
+    },
+    {
+      "hive_id": "C1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 33,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        6
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T13:02:24.062647"
+    },
+    {
+      "hive_id": "C1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 34,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        6
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T13:32:24.062647"
+    },
+    {
+      "hive_id": "C1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 34,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        6
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T14:02:24.062647"
+    },
+    {
+      "hive_id": "C1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 34,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        6
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T14:32:24.062647"
+    },
+    {
+      "hive_id": "C1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 34,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        6
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T15:02:24.062647"
+    },
+    {
+      "hive_id": "C1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 34,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        6
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T15:32:24.062647"
+    },
+    {
+      "hive_id": "C1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 34,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        6
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T16:02:24.062647"
+    },
+    {
+      "hive_id": "C1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 33,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        6
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T16:32:24.062647"
+    },
+    {
+      "hive_id": "C1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 33,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        6
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T17:02:24.062647"
+    },
+    {
+      "hive_id": "C1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 32,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        6
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T17:32:24.062647"
+    },
+    {
+      "hive_id": "C1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 31,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        6
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T18:02:24.062647"
+    },
+    {
+      "hive_id": "C1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 30,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        6
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T18:32:24.062647"
+    },
+    {
+      "hive_id": "C1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 28,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        6
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T19:02:24.062647"
+    },
+    {
+      "hive_id": "C1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 27,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        6
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T19:32:24.062647"
+    },
+    {
+      "hive_id": "C1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 25,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        6
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T20:02:24.062647"
+    },
+    {
+      "hive_id": "C1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 23,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        6
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T20:32:24.062647"
+    },
+    {
+      "hive_id": "C1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 21,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        6
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T21:02:24.062647"
+    },
+    {
+      "hive_id": "C1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 19,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        6
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T21:32:24.062647"
+    },
+    {
+      "hive_id": "C1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 17,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        6
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T22:02:24.062647"
+    },
+    {
+      "hive_id": "C1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 15,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        6
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T22:32:24.062647"
+    },
+    {
+      "hive_id": "C1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 13,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        6
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T23:02:24.062647"
+    },
+    {
+      "hive_id": "C1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 10,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        6
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-20T23:32:24.062647"
+    },
+    {
+      "hive_id": "C1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 8,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        6
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-21T00:02:24.062647"
+    },
+    {
+      "hive_id": "C1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 5,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        6
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-21T00:32:24.062647"
+    },
+    {
+      "hive_id": "C1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 2,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        6
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-21T01:02:24.062647"
+    },
+    {
+      "hive_id": "C1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": 0,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        6
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-21T01:32:24.062647"
+    },
+    {
+      "hive_id": "C1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": -3,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        6
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-21T02:02:24.062647"
+    },
+    {
+      "hive_id": "C1",
+      "varroa_status": "clear",
+      "queenless_alert": false,
+      "swarm_alert": false,
+      "traffic": -5,
+      "needs_human": false,
+      "reason": "",
+      "position": [
+        0,
+        6
+      ],
+      "acoustic_stress": 0.15,
+      "vision_mite_rate": 0.0,
+      "vision_ran": false,
+      "timestamp": "2026-06-21T02:32:24.062647"
+    }
+  ]
+}

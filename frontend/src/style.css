@@ -159,18 +159,20 @@ main{flex:1; min-height:0; display:grid; grid-template-columns:1fr 430px; gap:14
 .rlegend i{width:11px;height:11px;border-radius:2px;flex:none}
 .rlegend i.ln{height:0;width:13px;border-top:1.5px solid;border-radius:0}
 
-/* cam */
-.cam{position:relative; border:1px solid var(--line2); border-radius:10px; overflow:hidden; background:#05070a}
-.cam canvas{display:block; width:100%; height:auto}
-.cam .hud{position:absolute; inset:0; pointer-events:none; font-family:var(--mono); font-size:10px; letter-spacing:.5px}
-.cam .tl{position:absolute; top:8px; left:9px; color:var(--link); text-shadow:0 0 6px rgba(0,0,0,.9)}
-.cam .tr{position:absolute; top:8px; right:9px; text-align:right; color:var(--muted); text-shadow:0 0 6px rgba(0,0,0,.9)}
-.cam .live{display:flex; align-items:center; gap:6px; color:var(--crit); justify-content:flex-end}
-.cam .live i{width:7px;height:7px;border-radius:50%;background:var(--crit);box-shadow:0 0 8px var(--crit);animation:beat 1.2s infinite}
-.cam .bl{position:absolute; bottom:8px; left:9px; color:var(--faint)}
-body.command .cam .scan{position:absolute; left:0; right:0; height:2px; background:linear-gradient(90deg,transparent,var(--link),transparent); opacity:.5; animation:scan 3.4s linear infinite}
+/* entrance tunnel video + audio (real clips) */
+.media{flex:none; border:1px solid var(--line2); border-radius:10px; overflow:hidden; background:#05070a}
+.mediatag{display:flex; align-items:center; gap:6px; padding:6px 9px; font-family:var(--mono);
+  font-size:10px; letter-spacing:.6px; color:var(--muted); border-bottom:1px solid var(--line)}
+.mediatag .d{width:7px;height:7px;border-radius:50%;background:var(--crit);box-shadow:0 0 8px var(--crit);animation:beat 1.2s infinite}
+.tunnelvid{display:block; width:100%; height:150px; background:#05070a; object-fit:cover}
+.audiorow{display:flex; align-items:center; gap:10px; padding:8px 9px; border-top:1px solid var(--line)}
+.aulbl{font-family:var(--mono); font-size:10px; letter-spacing:.5px; color:var(--faint); white-space:nowrap}
+.hiveaud{height:30px; flex:1; min-width:0}
+.media-off{flex:none; border:1px dashed var(--line2); border-radius:10px; background:rgba(214,90,82,.06);
+  padding:16px; display:flex; flex-direction:column; gap:4px; text-align:center}
+.media-off b{color:var(--crit); font-size:12px; letter-spacing:.4px}
+.media-off span{color:var(--muted); font-size:11px}
 @keyframes scan{0%{top:0}100%{top:100%}}
-body:not(.command) .cam .scan{display:none}
 
 /* action -> flat left-accent strip */
 .action{border:1px solid var(--line); border-left:3px solid var(--comb); background:rgba(245,200,74,.035); border-radius:6px; padding:10px 13px}
@@ -334,6 +336,20 @@ body.command .corner{display:block}
   border:1px solid rgba(0,0,0,.35); cursor:pointer}
 .hivechip.ok{background:var(--ok)} .hivechip.watch{background:var(--watch)} .hivechip.crit{background:var(--crit)}
 .hivechip.sel{outline:1.5px solid #fff; outline-offset:1px}
+/* Large, legible colony marker (the thing judges actually read) */
+.hivemark{display:flex; align-items:center; gap:5px; padding:5px 9px 5px 7px; border-radius:9px;
+  background:rgba(10,13,18,.9); border:1.5px solid var(--line2); position:relative;
+  box-shadow:0 4px 12px rgba(0,0,0,.55); font-family:var(--mono); white-space:nowrap; cursor:pointer}
+.hivemark::after{content:""; position:absolute; left:50%; bottom:-7px; transform:translateX(-50%);
+  border-left:7px solid transparent; border-right:7px solid transparent; border-top:7px solid currentColor}
+.hivemark .hx{width:16px; height:16px; display:block; flex:none}
+.hivemark .hm-code{font-size:13px; font-weight:700; color:#fff; letter-spacing:.6px}
+.hivemark.ok{border-color:var(--ok); color:rgba(10,13,18,.9)} .hivemark.ok .hx path{fill:var(--ok)}
+.hivemark.watch{border-color:var(--watch); color:rgba(10,13,18,.9)} .hivemark.watch .hx path{fill:var(--watch)}
+.hivemark.crit{border-color:var(--crit); color:rgba(10,13,18,.9)} .hivemark.crit .hx path{fill:var(--crit)}
+.hivemark.crit{box-shadow:0 0 0 1px var(--crit),0 4px 14px rgba(214,90,82,.5); animation:beat 1.7s infinite}
+.hivemark.sel{border-width:2px; box-shadow:0 0 0 2px rgba(255,255,255,.5),0 5px 16px rgba(0,0,0,.6)}
+.hivemark.sel .hm-code{text-decoration:none}
 .sensor-tip{background:rgba(8,11,16,.82); border:1px solid var(--line2); color:var(--ink);
   font:700 9px var(--mono); letter-spacing:.5px; padding:1px 5px; box-shadow:none}
 .sensor-tip::before{display:none}
@@ -353,10 +369,6 @@ body.command .corner{display:block}
 #map-q:focus{border-color:var(--comb)}
 #map-q.loading{border-color:var(--honey); animation:beat 1s infinite}
 #map-q.err{border-color:var(--crit)}
-.bmseg{display:flex; border:1px solid var(--line2); border-radius:7px; overflow:hidden}
-.bmseg button{font-family:var(--mono); font-size:10px; letter-spacing:.5px; color:var(--muted);
-  background:transparent; border:none; padding:6px 10px; cursor:pointer}
-.bmseg button.on{background:var(--comb); color:#0a0d12; font-weight:700}
 #map-home{font-size:13px; color:var(--muted); background:var(--panel2); border:1px solid var(--line2);
   border-radius:7px; width:30px; height:30px; cursor:pointer}
 #map-home:hover{color:var(--honey); border-color:var(--comb)}
