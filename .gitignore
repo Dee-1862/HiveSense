@@ -46,3 +46,6 @@ Thumbs.db
 *.tmp
 *.svg
 docs/
+# ---- keep brand assets (the *.svg rule above would otherwise ignore these) ----
+!frontend/public/favicon.svg
+!frontend/public/logo.svg

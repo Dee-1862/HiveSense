@@ -9,6 +9,17 @@ The guiding principle of this project is **honest evaluation**: every model is v
 
 ![HiveSense dashboard overview](images/dashboard-overview.png)
 
+## The entrance tunnel (hardware prototype)
+
+HiveSense is *non-invasive*: instead of opening the hive, bees are filmed and recorded as they walk
+through a clear entrance tunnel, which is where the vision model reads Varroa load and the entrance
+mic captures traffic and sound. Below are the 3D-printed tunnel prototype and a field test with bees
+actually passing through it.
+
+| Tunnel prototype | Field testing |
+| :---: | :---: |
+| ![Entrance tunnel prototype](images/tunnel_prototype.png) | ![Tunnel field testing with live bees](images/tunnel_testing.png) |
+
 ## What actually works (honest results)
 
 All acoustic models are RandomForests on handcrafted features (13 MFCC + 9 spectral-shape
