@@ -247,6 +247,25 @@ python -m src.agents.run_fleet        # the 7 hive reasoning agents
 cd frontend && npm install && npm run dev
 ```
 
+## Dashboard API (for the frontend session)
+
+`api_server.py` exposes two read-only JSON endpoints on `:8000`; the Vite dev server already
+proxies `/api` to it. Run ONE thing on 8000 (this server, not the old mock).
+
+- `GET /api/status` -> `{ "hives": { "<HIVE>": [verdict, ...] } }`, up to 24h+ of history per
+  hive. Each verdict carries: `varroa_status` (clear|watch|alert), `queenless_alert`,
+  `swarm_alert`, `traffic` (signed net flow), `position` `[x, y]`, `needs_human`, `reason`,
+  `timestamp`, plus the per-detector signals `acoustic_stress` (0..1), `vision_mite_rate`,
+  `vision_ran`.
+- `GET /api/apiary` -> the Godfather's apiary-wide read, for a top-level panel:
+  `{ headline, healthy, alerts[], watches[], needs_human[], queenless[], swarming[],
+  emergent[], priorities[ {hive, action, why} ] }`.
+
+Suggested additions: a **Godfather panel** bound to `/api/apiary` (headline + prioritised
+actions + emergent patterns like regional Varroa / robbing), and per-hive cards that show the
+**acoustic-vs-vision reasoning** (`acoustic_stress` vs `vision_mite_rate`) with an "inspect"
+badge when `needs_human` is true.
+
 ## Limitations (read before demoing)
 
 - **The apiary feed is simulated; the agents and models are not.** We do not have 7 live instrumented

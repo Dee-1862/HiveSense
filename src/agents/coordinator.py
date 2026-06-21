@@ -25,6 +25,10 @@ try:
     import hive_state
 except Exception:
     hive_state = None
+try:
+    import godfather as _godfather
+except Exception:
+    _godfather = None
 
 
 def _apiary_answer(verdicts: dict, question: str) -> str:
@@ -148,6 +152,32 @@ def create_coordinator(agent_name: str, seed: str, port: int = 8000,
 
     coordinator.include(chat, publish_manifest=True)  # <-- publishes chat-compat to Agentverse
     return coordinator
+
+
+def create_godfather(agent_name: str = "hivesense_godfather",
+                     seed: str = "hivesense_godfather_seed") -> Agent:
+    """Local in-fleet Godfather (no mailbox / no REST / no chat). It receives every
+    hive's Verdict, writes the shared store, and runs the apiary-wide analysis in turn -
+    so the orchestration is real and visible in the terminal. Put this in the same Bureau
+    as the hive agents (see run_fleet.py); serving and chat are handled by api_server.py
+    and asi1_agent.py respectively."""
+    gf = Agent(name=agent_name, seed=seed)
+
+    @gf.on_message(model=Verdict)
+    async def handle(ctx: Context, sender: str, msg: Verdict):
+        if hive_state:
+            try:
+                hive_state.append_verdict(msg.model_dump())
+            except Exception:
+                ctx.logger.exception("godfather: could not append to store")
+        if _godfather is not None and hive_state is not None:
+            a = _godfather.apiary_analysis(hive_state.load_verdicts())
+            if a["emergent"] or a["needs_human"]:   # only shout when there's something to say
+                ctx.logger.warning(f"[godfather] {a['headline']}")
+                for e in a["emergent"]:
+                    ctx.logger.warning(f"[godfather] {e}")
+
+    return gf
 
 
 # A hive closer than this (metres) to a neighbour can rob / be robbed by it.

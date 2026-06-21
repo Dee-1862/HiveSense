@@ -18,33 +18,11 @@ import datetime
 from uagents import Agent, Context
 
 from .schema import Verdict, HumanFeedback
-from . import tools, reasoning
-
-
-def _sample(rng):
-    """One cycle of raw signals - a stand-in for live mic / tunnel / entrance sensors.
-    Deliberately produces occasional acoustic/vision CLASHES so the human path fires."""
-    roll = rng.random()
-    if roll < 0.12:        # clash: colony sounds stressed but no visible mites
-        ac, vis = 0.75, 0.0
-    elif roll < 0.20:      # clash: colony calm but camera sees mites
-        ac, vis = 0.20, 0.06
-    elif roll < 0.30:      # genuine infestation: both agree
-        ac, vis = 0.80, 0.07
-    else:                  # healthy
-        ac, vis = rng.uniform(0.0, 0.4), rng.uniform(0.0, 0.02)
-    return {
-        "acoustic_stress": ac,
-        "vision_mite_rate": vis,
-        "queenless_score": 0.95 if rng.random() < 0.04 else rng.uniform(0.0, 0.5),
-        "swarm_band_hz": rng.uniform(90, 300) if rng.random() < 0.05 else rng.uniform(300, 500),
-        "swarm_rising": rng.random() < 0.05,
-        "net_traffic": int(rng.gauss(0, 60)),
-    }
+from . import tools, reasoning, feed
 
 
 def create_hive_agent(hive_id, seed, coordinator_address, position=None,
-                      clip_path=None, period=20.0):
+                      clip_path=None, period=8.0):
     """clip_path: optional VD2 .mkv so the vision tool runs the REAL Vit4V model."""
     position = position or [0.0, 0.0]
     agent = Agent(name=f"hive_{hive_id}", seed=seed)
@@ -52,16 +30,18 @@ def create_hive_agent(hive_id, seed, coordinator_address, position=None,
 
     @agent.on_interval(period=period)
     async def cycle(ctx: Context):
-        sample = _sample(rng)
+        sample = feed.hive_sample(hive_id, datetime.datetime.now(), rng)
         history = ctx.storage.get("history") or []
         feedback = (ctx.storage.get("feedback") or [])[-1:] or None
 
-        # 1. cheap, always-on
+        # 1. cheap, always-on acoustic
         acoustic = tools.acoustic_mite(sample)
-        # 2. brain decides whether to spend the vision test
+        # 2. brain decides whether to spend the expensive vision test
         run_vision, why = reasoning.should_run_vision(acoustic, history)
+        vision_rate = 0.0
         if run_vision:
             vision = tools.vision_varroa(sample, clip_path=clip_path)
+            vision_rate = float(vision["score"])
             rec = reasoning.reconcile(acoustic, vision, feedback=feedback)
             ctx.logger.info(
                 f"[{hive_id}] vision triggered ({why}); acoustic={acoustic['label']} "
@@ -72,7 +52,7 @@ def create_hive_agent(hive_id, seed, coordinator_address, position=None,
                    "needs_human": False, "reason": why}
             ctx.logger.info(f"[{hive_id}] acoustic={acoustic['label']} ({why}); vision skipped")
 
-        # 3. the other detectors are deterministic, fold into the Verdict
+        # 3. the other detectors fold into the Verdict (with the per-detector signals)
         q, sw, tr = tools.queenless(sample), tools.swarm(sample), tools.traffic(sample)
         verdict = Verdict(
             hive_id=hive_id,
@@ -81,6 +61,9 @@ def create_hive_agent(hive_id, seed, coordinator_address, position=None,
             swarm_alert=(sw["label"] == "swarming"),
             traffic=int(tr["score"]),
             position=position,
+            acoustic_stress=float(sample["acoustic_stress"]),
+            vision_mite_rate=vision_rate,
+            vision_ran=run_vision,
             needs_human=rec["needs_human"],
             reason=rec["reason"],
             timestamp=datetime.datetime.now().isoformat(),

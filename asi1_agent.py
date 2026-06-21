@@ -89,6 +89,19 @@ def _deterministic(status: str) -> str:
     return status + note
 
 
+# Common status questions are answered INSTANTLY from the data (no LLM round-trip);
+# the LLM is reserved for open-ended questions. This keeps the demoed query snappy.
+_STATUS_WORDS = ("status", "how are", "how's", "hows", "how is", "doing", "summary",
+                 "overview", "alert", "inspect", "inspection", "need", "which hive",
+                 "all hive", "apiary", "update", "report", "condition", "okay", "ok",
+                 "fine", "worry", "bees")
+
+
+def _is_status_query(q: str) -> bool:
+    ql = q.lower()
+    return any(w in ql for w in _STATUS_WORDS)
+
+
 def generate_reply(question: str, logger=None) -> str:
     verdicts = hive_state.load_verdicts()
     status = hive_state.apiary_summary(verdicts)
@@ -96,6 +109,11 @@ def generate_reply(question: str, logger=None) -> str:
         headline = godfather.apiary_analysis(verdicts)["headline"]
     except Exception:
         headline = ""
+
+    # HYBRID FAST PATH: instant, deterministic answer for status questions (no LLM).
+    if _is_status_query(question):
+        return f"{headline}\n\n{status}"
+
     system = f"{BASE_PROMPT}\n\nGODFATHER SUMMARY: {headline}\n\n{status}"
     try:
         if _provider in ("asi1", "gemini"):  # both use the OpenAI-compatible API
